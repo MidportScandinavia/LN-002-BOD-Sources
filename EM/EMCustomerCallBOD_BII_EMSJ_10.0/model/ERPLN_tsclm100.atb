@@ -1,0 +1,2183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table id="atbtsclm100-ERPLN" schemaVersion="1.3.020">
+  <application idref="associations_lib.bi#apsERPLN">ERPLN</application>
+  <name>tsclm100</name>
+  <description>Calls</description>
+  <type>table</type>
+  <isReadOnly>false</isReadOnly>
+  <Column id="atbtsclm100-ERPLN-colacct">
+    <name>acct</name>
+    <description>Accepted Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>1</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colactt">
+    <name>actt</name>
+    <description>Activity Taken</description>
+    <datatype idref="tsacm.cact.bdt#bdttsacm.cact">tsacm.cact</datatype>
+    <position>2</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coladtm">
+    <name>adtm</name>
+    <description>Actual Down Time</description>
+    <datatype idref="tsmdm.tm99.bdt#bdttsmdm.tm99">tsmdm.tm99</datatype>
+    <position>3</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coladur">
+    <name>adur</name>
+    <description>Duration</description>
+    <datatype idref="tsmdm.tmdu.bdt#bdttsmdm.tmdu">tsmdm.tmdu</datatype>
+    <position>4</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colappo">
+    <name>appo</name>
+    <description>Appointment</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>5</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colarct">
+    <name>arct</name>
+    <description>Actual Reaction Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>6</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colasct">
+    <name>asct</name>
+    <description>Assessment Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>7</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colatml">
+    <name>atml</name>
+    <description>Actual Time Left</description>
+    <datatype idref="tsclm.tmd1.bdt#bdttsclm.tmd1">tsclm.tmd1</datatype>
+    <position>8</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colbdfx">
+    <name>bdfx</name>
+    <description>Bad Fix</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>9</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colbfbp">
+    <name>bfbp</name>
+    <description>Buy-from Business Partner</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>10</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colbldt">
+    <name>bldt</name>
+    <description>Last Unblocked Date</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>11</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colblyn">
+    <name>blyn</name>
+    <description>Blocked</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>12</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcact">
+    <name>cact</name>
+    <description>Obsolete</description>
+    <datatype idref="tsacm.cact.bdt#bdttsacm.cact">tsacm.cact</datatype>
+    <position>13</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcamr">
+    <name>camr</name>
+    <description>Master Routing</description>
+    <datatype idref="tsacm.cact.bdt#bdttsacm.cact">tsacm.cact</datatype>
+    <position>14</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colccll">
+    <name>ccll</name>
+    <description>Call</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>15</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>true</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colccln">
+    <name>ccln</name>
+    <description>BP Call Number</description>
+    <datatype idref="tsmdm.dsca.bdt#bdttsmdm.dsca">tsmdm.dsca</datatype>
+    <position>16</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcctp">
+    <name>cctp</name>
+    <description>Coverage Type</description>
+    <datatype idref="tsmdm.cctp.bdt#bdttsmdm.cctp">tsmdm.cctp</datatype>
+    <position>17</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colccty">
+    <name>ccty</name>
+    <description>Country</description>
+    <datatype idref="associations_lib.bi#bdttcccty">tcccty</datatype>
+    <position>18</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colccur">
+    <name>ccur</name>
+    <description>Currency</description>
+    <datatype idref="associations_lib.bi#bdttcccur">tcccur</datatype>
+    <position>19</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acc1">
+    <name>cdf_acc1</name>
+    <description>Error Reason Code Action</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>20</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acc2">
+    <name>cdf_acc2</name>
+    <description>Reported Problem Action</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>21</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acc3">
+    <name>cdf_acc3</name>
+    <description>Object Part Code Action</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>22</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acc4">
+    <name>cdf_acc4</name>
+    <description>Actual Problem Action</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>23</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acc5">
+    <name>cdf_acc5</name>
+    <description>Action Code Value Action</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>24</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acov">
+    <name>cdf_acov</name>
+    <description>Action Code Value</description>
+    <datatype idref="tsopcv.c.bdt#bdttsopcv.c">tsopcv.c</datatype>
+    <position>25</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_acsa">
+    <name>cdf_acsa</name>
+    <description>Action Code Serach Argument</description>
+    <datatype idref="tcmcs.str8m.bdt#bdttcmcs.str8m">tcmcs.str8m</datatype>
+    <position>26</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_actx">
+    <name>cdf_actx</name>
+    <description>Activity Text</description>
+    <datatype idref="tcmcs.st40m.bdt#bdttcmcs.st40m">tcmcs.st40m</datatype>
+    <position>27</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_apsa">
+    <name>cdf_apsa</name>
+    <description>Actual Problem Serach Argument</description>
+    <datatype idref="tcmcs.str8m.bdt#bdttcmcs.str8m">tcmcs.str8m</datatype>
+    <position>28</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_asta">
+    <name>cdf_asta</name>
+    <description>Activity Line Status</description>
+    <datatype idref="tssoc.osta_mandatory.bdt#bdttssoc.osta_mandatory">tssoc.osta_mandatory</datatype>
+    <position>29</position>
+    <defaultValue>free</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_bodr">
+    <name>cdf_bodr</name>
+    <description>BOD Router</description>
+    <datatype idref="tcmcs.str4.bdt#bdttcmcs.str4">tcmcs.str4</datatype>
+    <position>30</position>
+    <defaultValue>    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_caco">
+    <name>cdf_caco</name>
+    <description>Cause Code</description>
+    <datatype idref="tsclm.caco.c.bdt#bdttsclm.caco.c">tsclm.caco.c</datatype>
+    <position>31</position>
+    <defaultValue>                    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_cade">
+    <name>cdf_cade</name>
+    <description>Cause Description</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>32</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_caso">
+    <name>cdf_caso</name>
+    <description>Call Solver</description>
+    <datatype idref="tsmdm.user.bdt#bdttsmdm.user">tsmdm.user</datatype>
+    <position>33</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_cdes">
+    <name>cdf_cdes</name>
+    <description>Call Description 2</description>
+    <datatype idref="tsclm330.desc2.bdt#bdttsclm330.desc2">tsclm330.desc2</datatype>
+    <position>34</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ceop">
+    <name>cdf_ceop</name>
+    <description>Closed By External Operator</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>35</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_cllm">
+    <name>cdf_cllm</name>
+    <description>Call Measure</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>36</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_coco">
+    <name>cdf_coco</name>
+    <description>Counter Code</description>
+    <datatype idref="tcmcs.str2.bdt#bdttcmcs.str2">tcmcs.str2</datatype>
+    <position>37</position>
+    <defaultValue>  </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_comf">
+    <name>cdf_comf</name>
+    <description>Comfort</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>38</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_conc">
+    <name>cdf_conc</name>
+    <description>Consequence Code</description>
+    <datatype idref="tsclm.conc.c.bdt#bdttsclm.conc.c">tsclm.conc.c</datatype>
+    <position>39</position>
+    <defaultValue>        </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_conf">
+    <name>cdf_conf</name>
+    <description>Confirmed</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>40</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_cpid">
+    <name>cdf_cpid</name>
+    <description>Component ID</description>
+    <datatype idref="associations_lib.bi#bdttcitem">tcitem</datatype>
+    <position>41</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_cpsn">
+    <name>cdf_cpsn</name>
+    <description>Component Serial Number</description>
+    <datatype idref="tcibd.sern.bdt#bdttcibd.sern">tcibd.sern</datatype>
+    <position>42</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_crde">
+    <name>cdf_crde</name>
+    <description>Closing Report Depot</description>
+    <datatype idref="tsclm.crde.c.bdt#bdttsclm.crde.c">tsclm.crde.c</datatype>
+    <position>43</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_csid">
+    <name>cdf_csid</name>
+    <description>Change State ID</description>
+    <datatype idref="tcmcs.st40m.bdt#bdttcmcs.st40m">tcmcs.st40m</datatype>
+    <position>44</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_dedt">
+    <name>cdf_dedt</name>
+    <description>Defect Date and Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>45</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_denu">
+    <name>cdf_denu</name>
+    <description>Defect Number</description>
+    <datatype idref="tcmcs.st12m.bdt#bdttcmcs.st12m">tcmcs.st12m</datatype>
+    <position>46</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_deop">
+    <name>cdf_deop</name>
+    <description>Deleted By External Operator</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>47</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_dmin">
+    <name>cdf_dmin</name>
+    <description>Delay Minutes</description>
+    <datatype idref="tcmcs.int.bdt#bdttcmcs.int">tcmcs.int</datatype>
+    <position>48</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_down">
+    <name>cdf_down</name>
+    <description>Breakdown</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>49</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_drde">
+    <name>cdf_drde</name>
+    <description>Defect Registration Depot</description>
+    <datatype idref="tsclm.crde.c.bdt#bdttsclm.crde.c">tsclm.crde.c</datatype>
+    <position>50</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_eind">
+    <name>cdf_eind</name>
+    <description>Event Indicator</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>51</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_emcl">
+    <name>cdf_emcl</name>
+    <description>Emergency Closed</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>52</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_eqch">
+    <name>cdf_eqch</name>
+    <description>Equipment Check</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>53</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_eqpm">
+    <name>cdf_eqpm</name>
+    <description>Equipment</description>
+    <datatype idref="tcmcs.str20m.bdt#bdttcmcs.str20m">tcmcs.str20m</datatype>
+    <position>54</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ercc">
+    <name>cdf_ercc</name>
+    <description>ErrorReason Code Search Catalog</description>
+    <datatype idref="tcmcs.str10m.bdt#bdttcmcs.str10m">tcmcs.str10m</datatype>
+    <position>55</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_erco">
+    <name>cdf_erco</name>
+    <description>Error Reason Code</description>
+    <datatype idref="tserco.c.bdt#bdttserco.c">tserco.c</datatype>
+    <position>56</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_erde">
+    <name>cdf_erde</name>
+    <description>Error Reason Description</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>57</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ernu">
+    <name>cdf_ernu</name>
+    <description>Errant Number</description>
+    <datatype idref="tcmcs.str20m.bdt#bdttcmcs.str20m">tcmcs.str20m</datatype>
+    <position>58</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_errd">
+    <name>cdf_errd</name>
+    <description>Message</description>
+    <datatype idref="tcmcs.str80m.bdt#bdttcmcs.str80m">tcmcs.str80m</datatype>
+    <position>59</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_erry">
+    <name>cdf_erry</name>
+    <description>Error</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>60</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_fcod">
+    <name>cdf_fcod</name>
+    <description>Fault Indication Code Serach Arguement</description>
+    <datatype idref="tcmcs.str8m.bdt#bdttcmcs.str8m">tcmcs.str8m</datatype>
+    <position>61</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_fico">
+    <name>cdf_fico</name>
+    <description>Fault Indication Code</description>
+    <datatype idref="tsfico.c.bdt#bdttsfico.c">tsfico.c</datatype>
+    <position>62</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_fitu">
+    <name>cdf_fitu</name>
+    <description>Field Check Fault</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>63</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_fsta">
+    <name>cdf_fsta</name>
+    <description>From Station</description>
+    <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+    <position>64</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_geol">
+    <name>cdf_geol</name>
+    <description>Geographical Location</description>
+    <datatype idref="tcmcs.st20m.bdt#bdttcmcs.st20m">tcmcs.st20m</datatype>
+    <position>65</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_hfdl">
+    <name>cdf_hfdl</name>
+    <description>Hide in Fordonslista</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>66</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_intf">
+    <name>cdf_intf</name>
+    <description>Interface</description>
+    <datatype idref="tcmcs.str6.bdt#bdttcmcs.str6">tcmcs.str6</datatype>
+    <position>67</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_irid">
+    <name>cdf_irid</name>
+    <description>Internal Reference Id</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>68</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_lati">
+    <name>cdf_lati</name>
+    <description>Latitude</description>
+    <datatype idref="tcglat.bdt#bdttcglat">tcglat</datatype>
+    <position>69</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_llol">
+    <name>cdf_llol</name>
+    <description>Last Linked Order Line</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>70</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_llor">
+    <name>cdf_llor</name>
+    <description>Last Linked Order</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>71</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_long">
+    <name>cdf_long</name>
+    <description>Longitude</description>
+    <datatype idref="tcglon.bdt#bdttcglon">tcglon</datatype>
+    <position>72</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_lveh">
+    <name>cdf_lveh</name>
+    <description>Lead Vehicle</description>
+    <datatype idref="tcmcs.str10m.bdt#bdttcmcs.str10m">tcmcs.str10m</datatype>
+    <position>73</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_mfid">
+    <name>cdf_mfid</name>
+    <description>Insurance Indicator</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>74</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_mrid">
+    <name>cdf_mrid</name>
+    <description>Maintanance Reference ID</description>
+    <datatype idref="tsclm.mrid.c.bdt#bdttsclm.mrid.c">tsclm.mrid.c</datatype>
+    <position>75</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_nobi">
+    <name>cdf_nobi</name>
+    <description>Not Billable</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>76</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_npts">
+    <name>cdf_npts</name>
+    <description>Damage Point</description>
+    <datatype idref="tcmcs.int.bdt#bdttcmcs.int">tcmcs.int</datatype>
+    <position>77</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ntyp">
+    <name>cdf_ntyp</name>
+    <description>Notification Type</description>
+    <datatype idref="tcmcs.str2m.c.bdt#bdttcmcs.str2m.c">tcmcs.str2m.c</datatype>
+    <position>78</position>
+    <defaultValue>        </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_obpc">
+    <name>cdf_obpc</name>
+    <description>Object Part Catalog</description>
+    <datatype idref="tcmcs.str8m.bdt#bdttcmcs.str8m">tcmcs.str8m</datatype>
+    <position>79</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ocod">
+    <name>cdf_ocod</name>
+    <description>Objcect Part Code</description>
+    <datatype idref="tsmcs.str4m.c.bdt#bdttsmcs.str4m.c">tsmcs.str4m.c</datatype>
+    <position>80</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_osev">
+    <name>cdf_osev</name>
+    <description>Out of Service</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>81</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_parc">
+    <name>cdf_parc</name>
+    <description>Partially Completed</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>82</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_pbfl">
+    <name>cdf_pbfl</name>
+    <description>Physical Breakdown Flag Material Lines</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>83</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_pbup">
+    <name>cdf_pbup</name>
+    <description>Physical Breakdown Flag</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>84</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_poit">
+    <name>cdf_poit</name>
+    <description>Position in Train</description>
+    <datatype idref="tcmcs.str3m.bdt#bdttcmcs.str3m">tcmcs.str3m</datatype>
+    <position>85</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_poiu">
+    <name>cdf_poiu</name>
+    <description>Position In Unit</description>
+    <datatype idref="tsclm.conc.c.bdt#bdttsclm.conc.c">tsclm.conc.c</datatype>
+    <position>86</position>
+    <defaultValue>        </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_poiv">
+    <name>cdf_poiv</name>
+    <description>Position in Vehicle</description>
+    <datatype idref="tsclm.caco.c.bdt#bdttsclm.caco.c">tsclm.caco.c</datatype>
+    <position>87</position>
+    <defaultValue>                    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_posi">
+    <name>cdf_posi</name>
+    <description>Position</description>
+    <datatype idref="tcmcs.str9m.bdt#bdttcmcs.str9m">tcmcs.str9m</datatype>
+    <position>88</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rbod">
+    <name>cdf_rbod</name>
+    <description>Sent</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>89</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rdat">
+    <name>cdf_rdat</name>
+    <description>Sent Date/Time</description>
+    <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+    <position>90</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_redt">
+    <name>cdf_redt</name>
+    <description>Restriction End Date and Time</description>
+    <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+    <position>91</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_refn">
+    <name>cdf_refn</name>
+    <description>Reference Notification</description>
+    <datatype idref="tcmcs.st12m.bdt#bdttcmcs.st12m">tcmcs.st12m</datatype>
+    <position>92</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rerf">
+    <name>cdf_rerf</name>
+    <description>Restriction Error</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>93</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rerm">
+    <name>cdf_rerm</name>
+    <description>Restriction Error Message</description>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <position>94</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rfdn">
+    <name>cdf_rfdn</name>
+    <description>Reference Defect Number</description>
+    <datatype idref="tcmcs.st12m.bdt#bdttcmcs.st12m">tcmcs.st12m</datatype>
+    <position>95</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rout">
+    <name>cdf_rout</name>
+    <description>Route</description>
+    <datatype idref="tcmcs.str10m.bdt#bdttcmcs.str10m">tcmcs.str10m</datatype>
+    <position>96</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rpby">
+    <name>cdf_rpby</name>
+    <description>Reported By</description>
+    <datatype idref="tcmcs.str28m.bdt#bdttcmcs.str28m">tcmcs.str28m</datatype>
+    <position>97</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rpes">
+    <name>cdf_rpes</name>
+    <description>Reported in External System</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>98</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rpph">
+    <name>cdf_rpph</name>
+    <description>Repair Prohibited</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>99</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rpsa">
+    <name>cdf_rpsa</name>
+    <description>Reported Problem Search Argument</description>
+    <datatype idref="tcmcs.str8m.bdt#bdttcmcs.str8m">tcmcs.str8m</datatype>
+    <position>100</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rsdt">
+    <name>cdf_rsdt</name>
+    <description>Restriction Start Date and Tim</description>
+    <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+    <position>101</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_rstr">
+    <name>cdf_rstr</name>
+    <description>Restriction Code</description>
+    <datatype idref="tcmcs.str9m.bdt#bdttcmcs.str9m">tcmcs.str9m</datatype>
+    <position>102</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sfty">
+    <name>cdf_sfty</name>
+    <description>Safety</description>
+    <datatype idref="associations_lib.bi#bdttcynna_mandatory">tcynna_mandatory</datatype>
+    <position>103</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sjfl">
+    <name>cdf_sjfl</name>
+    <description>SJ Updated Flag</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>104</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sjst">
+    <name>cdf_sjst</name>
+    <description>Status Code</description>
+    <datatype idref="tcmcs.str5m.bdt#bdttcmcs.str5m">tcmcs.str5m</datatype>
+    <position>105</position>
+    <defaultValue>                    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sjus">
+    <name>cdf_sjus</name>
+    <description>SJ I014 User</description>
+    <datatype idref="tsmdm.user.bdt#bdttsmdm.user">tsmdm.user</datatype>
+    <position>106</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sodt">
+    <name>cdf_sodt</name>
+    <description>Solution Date</description>
+    <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+    <position>107</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ster">
+    <name>cdf_ster</name>
+    <description>Standby Error</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>108</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_sumt">
+    <name>cdf_sumt</name>
+    <description>Subordinate Maintenance Task</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>109</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tfdb">
+    <name>cdf_tfdb</name>
+    <description>Traffic Disturbance</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>110</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tkdt">
+    <name>cdf_tkdt</name>
+    <description>Track Detector</description>
+    <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+    <position>111</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tost">
+    <name>cdf_tost</name>
+    <description>To Station</description>
+    <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+    <position>112</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tpqt">
+    <name>cdf_tpqt</name>
+    <description>Total Performance Quantity</description>
+    <datatype idref="tsclm.long.bdt#bdttsclm.long">tsclm.long</datatype>
+    <position>113</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tpun">
+    <name>cdf_tpun</name>
+    <description>Total Performance Unit</description>
+    <datatype idref="tcmcs.str3m.bdt#bdttcmcs.str3m">tcmcs.str3m</datatype>
+    <position>114</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_trai">
+    <name>cdf_trai</name>
+    <description>Train</description>
+    <datatype idref="tcmcs.str6.bdt#bdttcmcs.str6">tcmcs.str6</datatype>
+    <position>115</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tran">
+    <name>cdf_tran</name>
+    <description>Train Number</description>
+    <datatype idref="tcmcs.st12m.bdt#bdttcmcs.st12m">tcmcs.st12m</datatype>
+    <position>116</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tset">
+    <name>cdf_tset</name>
+    <description>Train Set</description>
+    <datatype idref="tcmcs.str9.bdt#bdttcmcs.str9">tcmcs.str9</datatype>
+    <position>117</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tsoc">
+    <name>cdf_tsoc</name>
+    <description>Timestamp of Creation</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>118</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_tsta">
+    <name>cdf_tsta</name>
+    <description>Tested Stationary</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>119</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_ttdr">
+    <name>cdf_ttdr</name>
+    <description>Tested Test Drive</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>120</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_twre">
+    <name>cdf_twre</name>
+    <description>Tested Without Remark</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>121</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_uuid">
+    <name>cdf_uuid</name>
+    <description>Unique Identifier</description>
+    <datatype idref="tcguid.extend.bdt#bdttcguid.extend">tcguid.extend</datatype>
+    <position>122</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_vuid">
+    <name>cdf_vuid</name>
+    <description>Vehicle Unique ID</description>
+    <datatype idref="tcmcs.str5m.bdt#bdttcmcs.str5m">tcmcs.str5m</datatype>
+    <position>123</position>
+    <defaultValue>                    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_wcno">
+    <name>cdf_wcno</name>
+    <description>Warranty Claim Number</description>
+    <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+    <position>124</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_wcst">
+    <name>cdf_wcst</name>
+    <description>Warranty Claim Status</description>
+    <datatype idref="tcmcs.str10m.bdt#bdttcmcs.str10m">tcmcs.str10m</datatype>
+    <position>125</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_wenv">
+    <name>cdf_wenv</name>
+    <description>Work Environment</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>126</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_wnty">
+    <name>cdf_wnty</name>
+    <description>Warranty</description>
+    <datatype idref="tcem.yn_mandatory.bdt#bdttcem.yn_mandatory">tcem.yn_mandatory</datatype>
+    <position>127</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcdf_word">
+    <name>cdf_word</name>
+    <description>Work Order</description>
+    <datatype idref="tcmcs.st12m.bdt#bdttcmcs.st12m">tcmcs.st12m</datatype>
+    <position>128</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcgrp">
+    <name>cgrp</name>
+    <description>Call Group1</description>
+    <datatype idref="tsclm.cgrp.bdt#bdttsclm.cgrp">tsclm.cgrp</datatype>
+    <position>129</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcinv">
+    <name>cinv</name>
+    <description>Invoice Interval</description>
+    <datatype idref="tsclm.cinv.bdt#bdttsclm.cinv">tsclm.cinv</datatype>
+    <position>130</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcitm">
+    <name>citm</name>
+    <description>Search Item</description>
+    <datatype idref="associations_lib.bi#bdttcitem">tcitem</datatype>
+    <position>131</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colclan">
+    <name>clan</name>
+    <description>Language</description>
+    <datatype idref="associations_lib.bi#bdttcclan">tcclan</datatype>
+    <position>132</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcllo">
+    <name>cllo</name>
+    <description>Origin</description>
+    <datatype idref="tsclm.cllo_mandatory.bdt#bdttsclm.cllo_mandatory">tsclm.cllo_mandatory</datatype>
+    <position>133</position>
+    <defaultValue>telep</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colclna">
+    <name>clna</name>
+    <description>Sold-to business partner Call Number</description>
+    <datatype idref="associations_lib.bi#bdttcnama">tcnama</datatype>
+    <position>134</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colclst">
+    <name>clst</name>
+    <description>Installation Group</description>
+    <datatype idref="tsbsc.clst.bdt#bdttsbsc.clst">tsbsc.clst</datatype>
+    <position>135</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcprj">
+    <name>cprj</name>
+    <description>Project</description>
+    <datatype idref="associations_lib.bi#bdttccprj">tccprj</datatype>
+    <position>136</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcrdt">
+    <name>crdt</name>
+    <description>Creation Date</description>
+    <datatype idref="tsmdm.date_mandatory.bdt#bdttsmdm.date_mandatory">tsmdm.date_mandatory</datatype>
+    <position>137</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcrtc">
+    <name>crtc</name>
+    <description>Response Type</description>
+    <datatype idref="tsclm.crtc_mandatory.bdt#bdttsclm.crtc_mandatory">tsclm.crtc_mandatory</datatype>
+    <position>138</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcsco">
+    <name>csco</name>
+    <description>Coverage Contract</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>139</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcser">
+    <name>cser</name>
+    <description>Search Item Serial Number</description>
+    <datatype idref="tcibd.sern.bdt#bdttcibd.sern">tcibd.sern</datatype>
+    <position>140</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcsgr">
+    <name>csgr</name>
+    <description>Service Item Group</description>
+    <datatype idref="tsmdm.csgr.bdt#bdttsmdm.csgr">tsmdm.csgr</datatype>
+    <position>141</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcspa">
+    <name>cspa</name>
+    <description>Element</description>
+    <datatype idref="tccspa.bdt#bdttccspa">tccspa</datatype>
+    <position>142</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcspc">
+    <name>cspc</name>
+    <description>Support Center [logged]</description>
+    <datatype idref="tccwoc_mandatory.bdt#bdttccwoc_mandatory">tccwoc_mandatory</datatype>
+    <position>143</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcsqu">
+    <name>csqu</name>
+    <description>Related Service Order Quote</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>144</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colctik">
+    <name>ctik</name>
+    <description>Obsolete</description>
+    <datatype idref="tsmdm.ctik.bdt#bdttsmdm.ctik">tsmdm.ctik</datatype>
+    <position>145</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcupr">
+    <name>cupr</name>
+    <description>Business Partner Priority</description>
+    <datatype idref="tcprio.bdt#bdttcprio">tcprio</datatype>
+    <position>146</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcvtm">
+    <name>cvtm</name>
+    <description>Coverage Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>147</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcwoc">
+    <name>cwoc</name>
+    <description>Support Department</description>
+    <datatype idref="associations_lib.bi#bdttccwoc">tccwoc</datatype>
+    <position>148</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colcxsc">
+    <name>cxsc</name>
+    <description>Service Office</description>
+    <datatype idref="associations_lib.bi#bdttccwoc">tccwoc</datatype>
+    <position>149</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coldocn">
+    <name>docn</name>
+    <description>Turnaround Time Document</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>150</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colegct">
+    <name>egct</name>
+    <description>Latest Solution Start Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>151</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colemer">
+    <name>emer</name>
+    <description>Emergency Call</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>152</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colemno">
+    <name>emno</name>
+    <description>Support Engineer</description>
+    <datatype idref="associations_lib.bi#bdttcemno">tcemno</datatype>
+    <position>153</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colencl">
+    <name>encl</name>
+    <description>Number of Enclosures</description>
+    <datatype idref="tsclm.long.bdt#bdttsclm.long">tsclm.long</datatype>
+    <position>154</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colespr">
+    <name>espr</name>
+    <description>Actual Problem</description>
+    <datatype idref="tsclm.cprl.bdt#bdttsclm.cprl">tsclm.cprl</datatype>
+    <position>155</position>
+    <defaultValue>          </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colexpr">
+    <name>expr</name>
+    <description>Expected Problem</description>
+    <datatype idref="tsclm.cprl.bdt#bdttsclm.cprl">tsclm.cprl</datatype>
+    <position>156</position>
+    <defaultValue>          </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colexsl">
+    <name>exsl</name>
+    <description>Expected Solution</description>
+    <datatype idref="tsclm.cstn.bdt#bdttsclm.cstn">tsclm.cstn</datatype>
+    <position>157</position>
+    <defaultValue>          </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colfcll">
+    <name>fcll</name>
+    <description>Follow-up Call</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>158</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colimag">
+    <name>imag</name>
+    <description>Picture</description>
+    <datatype idref="associations_lib.bi#bdttcguid">tcguid</datatype>
+    <position>159</position>
+    <defaultValue>                      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colinrt">
+    <name>inrt</name>
+    <description>Initial Time Left</description>
+    <datatype idref="tsclm.tmdu.bdt#bdttsclm.tmdu">tsclm.tmdu</datatype>
+    <position>160</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colinyn">
+    <name>inyn</name>
+    <description>Invoice Created</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>161</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colitad">
+    <name>itad</name>
+    <description>Invoice-to Address</description>
+    <datatype idref="associations_lib.bi#bdttccom.cadr">tccom.cadr</datatype>
+    <position>162</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colitbp">
+    <name>itbp</name>
+    <description>Invoice-to Business Partner</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>163</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colitcn">
+    <name>itcn</name>
+    <description>Invoice-to Contact</description>
+    <datatype idref="associations_lib.bi#bdttccom.ccnt">tccom.ccnt</datatype>
+    <position>164</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colitem">
+    <name>item</name>
+    <description>Item</description>
+    <datatype idref="associations_lib.bi#bdttcitem">tcitem</datatype>
+    <position>165</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colminu">
+    <name>minu</name>
+    <description>Obsolete</description>
+    <datatype idref="tsmdm.minu.bdt#bdttsmdm.minu">tsmdm.minu</datatype>
+    <position>166</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colobpr">
+    <name>obpr</name>
+    <description>Serialized Item Priority</description>
+    <datatype idref="tcprio.bdt#bdttcprio">tcprio</datatype>
+    <position>167</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coloemn">
+    <name>oemn</name>
+    <description>Service Engineer</description>
+    <datatype idref="associations_lib.bi#bdttcemno">tcemno</datatype>
+    <position>168</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colofad">
+    <name>ofad</name>
+    <description>Location Address</description>
+    <datatype idref="associations_lib.bi#bdttccom.cadr">tccom.cadr</datatype>
+    <position>169</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colofbp">
+    <name>ofbp</name>
+    <description>Sold-to BP</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>170</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colofcn">
+    <name>ofcn</name>
+    <description>Location Contact</description>
+    <datatype idref="associations_lib.bi#bdttccom.ccnt">tccom.ccnt</datatype>
+    <position>171</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpbsm">
+    <name>pbsm</name>
+    <description>Problem Solving Method</description>
+    <datatype idref="tcmcs.pbsm_mandatory.bdt#bdttcmcs.pbsm_mandatory">tcmcs.pbsm_mandatory</datatype>
+    <position>172</position>
+    <defaultValue>na</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpcac">
+    <name>pcac</name>
+    <description>Activity</description>
+    <datatype idref="tccact.bdt#bdttccact">tccact</datatype>
+    <position>173</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpcch">
+    <name>pcch</name>
+    <description>Pricing Contract Change</description>
+    <datatype idref="tsctm.cchn.bdt#bdttsctm.cchn">tsctm.cchn</datatype>
+    <position>174</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpcll">
+    <name>pcll</name>
+    <description>Parent Call</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>175</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpcln">
+    <name>pcln</name>
+    <description>Pricing Contract Line</description>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <position>176</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpcon">
+    <name>pcon</name>
+    <description>Pricing Contract</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>177</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpect">
+    <name>pect</name>
+    <description>Execution Start Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>178</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpfad">
+    <name>pfad</name>
+    <description>Pay-by Address</description>
+    <datatype idref="associations_lib.bi#bdttccom.cadr">tccom.cadr</datatype>
+    <position>179</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpfbp">
+    <name>pfbp</name>
+    <description>Pay-by Business Partner</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>180</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpfcn">
+    <name>pfcn</name>
+    <description>Pay-by Contact</description>
+    <datatype idref="associations_lib.bi#bdttccom.ccnt">tccom.ccnt</datatype>
+    <position>181</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colpfct">
+    <name>pfct</name>
+    <description>Actual Finish Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>182</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colprpr">
+    <name>prpr</name>
+    <description>Problem Priority</description>
+    <datatype idref="tcprio.bdt#bdttcprio">tcprio</datatype>
+    <position>183</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrfcl">
+    <name>rfcl</name>
+    <description>Related Field Change Order Line</description>
+    <datatype idref="tsmdm.lino.bdt#bdttsmdm.lino">tsmdm.lino</datatype>
+    <position>184</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrfco">
+    <name>rfco</name>
+    <description>Related Field Change Order</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>185</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrlct">
+    <name>rlct</name>
+    <description>Obsolete</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>186</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrmso">
+    <name>rmso</name>
+    <description>Related Maintenance Sales Order</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>187</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrpct">
+    <name>rpct</name>
+    <description>Reported Time</description>
+    <datatype idref="tsmdm.utct_mandatory.bdt#bdttsmdm.utct_mandatory">tsmdm.utct_mandatory</datatype>
+    <position>188</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrprl">
+    <name>rprl</name>
+    <description>Reported Problem</description>
+    <datatype idref="tsclm.cprl.bdt#bdttsclm.cprl">tsclm.cprl</datatype>
+    <position>189</position>
+    <defaultValue>          </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrqct">
+    <name>rqct</name>
+    <description>Required Activity</description>
+    <datatype idref="tsacm.cact.bdt#bdttsacm.cact">tsacm.cact</datatype>
+    <position>190</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrsvo">
+    <name>rsvo</name>
+    <description>Related Service Order</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>191</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colrtct">
+    <name>rtct</name>
+    <description>Reaction Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>192</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsbct">
+    <name>sbct</name>
+    <description>Subcontractor Agreement</description>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <position>193</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colscgr">
+    <name>scgr</name>
+    <description>Call Group2</description>
+    <datatype idref="tsclm.cgrp.bdt#bdttsclm.cgrp">tsclm.cgrp</datatype>
+    <position>194</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsern">
+    <name>sern</name>
+    <description>Serial Number</description>
+    <datatype idref="tcibd.sern.bdt#bdttcibd.sern">tcibd.sern</datatype>
+    <position>195</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsfad">
+    <name>sfad</name>
+    <description>Ship-from Address</description>
+    <datatype idref="associations_lib.bi#bdttccom.cadr">tccom.cadr</datatype>
+    <position>196</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsfbp">
+    <name>sfbp</name>
+    <description>Ship-from BP</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>197</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colshdp">
+    <name>shdp</name>
+    <description>Solution Description</description>
+    <datatype idref="tsclm.desc.bdt#bdttsclm.desc">tsclm.desc</datatype>
+    <position>198</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colshpd">
+    <name>shpd</name>
+    <description>Call Description</description>
+    <datatype idref="tsclm.desc_mandatory.bdt#bdttsclm.desc_mandatory">tsclm.desc_mandatory</datatype>
+    <position>199</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colslct">
+    <name>slct</name>
+    <description>Solution Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>200</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsltn">
+    <name>sltn</name>
+    <description>Actual Solution</description>
+    <datatype idref="tsclm.cstn.bdt#bdttsclm.cstn">tsclm.cstn</datatype>
+    <position>201</position>
+    <defaultValue>          </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colstat">
+    <name>stat</name>
+    <description>Status</description>
+    <datatype idref="tsclm.stat_mandatory.bdt#bdttsclm.stat_mandatory">tsclm.stat_mandatory</datatype>
+    <position>202</position>
+    <defaultValue>regist</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsusn">
+    <name>susn</name>
+    <description>Obsolete</description>
+    <datatype idref="tcibd.sern.bdt#bdttcibd.sern">tcibd.sern</datatype>
+    <position>203</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsusr">
+    <name>susr</name>
+    <description>Obsolete</description>
+    <datatype idref="associations_lib.bi#bdttcitem">tcitem</datatype>
+    <position>204</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colsvct">
+    <name>svct</name>
+    <description>Latest Solution Finish Time</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>205</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltelp">
+    <name>telp</name>
+    <description>Phone</description>
+    <datatype idref="associations_lib.bi#bdttctelp">tctelp</datatype>
+    <position>206</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxta">
+    <name>txta</name>
+    <description>Comment</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>207</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxtd">
+    <name>txtd</name>
+    <description>Invoice Text</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>208</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxte">
+    <name>txte</name>
+    <description>Solution Text</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>209</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxtf">
+    <name>txtf</name>
+    <description>Knowledge Base Solution</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>210</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxtg">
+    <name>txtg</name>
+    <description>Knowledge Base State</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>211</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxth">
+    <name>txth</name>
+    <description>Knowledge Base Cause</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>212</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coltxtk">
+    <name>txtk</name>
+    <description>Comment History</description>
+    <datatype idref="tsmdm.text.bdt#bdttsmdm.text">tsmdm.text</datatype>
+    <position>213</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colubad">
+    <name>ubad</name>
+    <description>In Use-by Business Partner Address</description>
+    <datatype idref="associations_lib.bi#bdttccom.cadr">tccom.cadr</datatype>
+    <position>214</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colubbp">
+    <name>ubbp</name>
+    <description>In Use-by Business Partner</description>
+    <datatype idref="associations_lib.bi#bdttccom.bpid">tccom.bpid</datatype>
+    <position>215</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colubcn">
+    <name>ubcn</name>
+    <description>In Use-by Business Partner Contact</description>
+    <datatype idref="associations_lib.bi#bdttccom.ccnt">tccom.ccnt</datatype>
+    <position>216</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colubop">
+    <name>ubop</name>
+    <description>In Use-by Operator Contact</description>
+    <datatype idref="associations_lib.bi#bdttccom.ccnt">tccom.ccnt</datatype>
+    <position>217</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-coluser">
+    <name>user</name>
+    <description>Call Taker</description>
+    <datatype idref="tsmdm.user.bdt#bdttsmdm.user">tsmdm.user</datatype>
+    <position>218</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colustm">
+    <name>ustm</name>
+    <description>Spent Time</description>
+    <datatype idref="tsmdm.tm99.bdt#bdttsmdm.tm99">tsmdm.tm99</datatype>
+    <position>219</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colwait">
+    <name>wait</name>
+    <description>Waiting</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>220</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm100-ERPLN-colwtds">
+    <name>wtds</name>
+    <description>Waiting Description</description>
+    <datatype idref="tsclm.desc.bdt#bdttsclm.desc">tsclm.desc</datatype>
+    <position>221</position>
+    <defaultValue>                              </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Index id="atbtsclm100-ERPLN-idxindex1">
+    <name>index1</name>
+    <description>Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>true</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex1-colccll">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex2">
+    <name>index2</name>
+    <description>Status, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex2-colstat">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colstat">stat</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex2-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex3">
+    <name>index3</name>
+    <description>Initial Time Left, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex3-colinrt">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colinrt">inrt</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex3-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex4">
+    <name>index4</name>
+    <description>Actual Time Left, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex4-colatml">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colatml">atml</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex4-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex5">
+    <name>index5</name>
+    <description>Reaction Time, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex5-colrtct">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colrtct">rtct</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex5-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex6">
+    <name>index6</name>
+    <description>Call Center, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex6-colcspc">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colcspc">cspc</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex6-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex7">
+    <name>index7</name>
+    <description>Required Activity, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex7-colrqct">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colrqct">rqct</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex7-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex8">
+    <name>index8</name>
+    <description>Support Department, Actual Time Left, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex8-colcwoc">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colcwoc">cwoc</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex8-colatml">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colatml">atml</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex8-colccll">
+      <position>3</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex9">
+    <name>index9</name>
+    <description>Sold-to BP, Project, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex9-colofbp">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colofbp">ofbp</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex9-colcprj">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colcprj">cprj</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex9-colccll">
+      <position>3</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex10">
+    <name>index10</name>
+    <description>Support Engineer, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex10-colemno">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colemno">emno</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex10-colccll">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+  <Index id="atbtsclm100-ERPLN-idxindex11">
+    <name>index11</name>
+    <description>Item, Serial Number, Call</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>false</isPrimaryKey>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex11-colitem">
+      <position>1</position>
+      <column idref="#atbtsclm100-ERPLN-colitem">item</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex11-colsern">
+      <position>2</position>
+      <column idref="#atbtsclm100-ERPLN-colsern">sern</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+    <IndexColumn id="atbtsclm100-ERPLN-idxindex11-colccll">
+      <position>3</position>
+      <column idref="#atbtsclm100-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+</Table>

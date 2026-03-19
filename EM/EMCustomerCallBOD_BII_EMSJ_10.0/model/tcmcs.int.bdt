@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttcmcs.int" schemaVersion="1.3.020">
+  <name>tcmcs.int</name>
+  <type>simple</type>
+  <primitiveDatatype>integer</primitiveDatatype>
+  <nativeDatatype>tcmcs.int</nativeDatatype>
+  <dbDatatype>db.integer</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <Facet>
+    <type>totalDigits</type>
+    <value>3</value>
+  </Facet>
+</Datatype>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>EMCustomerCallBOD_BII_EMSJ_10.0</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.infor.ln.studio.intg.core.modelvalidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.infor.ln.studio.intg.core.nature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>model/EMCustomerCallBOD_BID.bi</name>
+			<type>1</type>
+			<location>M:/BGU/BGU Training/ION/ION 12.x/BOD Sources/Custom BODs/EM/EMCustomerCallBOD_BID.bi</location>
+		</link>
+		<link>
+			<name>model/EMCustomerCallBOD_xsd.bi</name>
+			<type>1</type>
+			<location>M:/BGU/BGU Training/ION/ION 12.x/BOD Sources/Custom BODs/EM/EMCustomerCallBOD_xsd.bi</location>
+		</link>
+		<link>
+			<name>model/OAGIScluq.bi</name>
+			<type>1</type>
+			<location>M:/BGU/BGU Training/ION/ION 12.x/BOD Sources/latest/_Libraries/OAGIScluq.bi</location>
+		</link>
+		<link>
+			<name>model/associations_lib.bi</name>
+			<type>1</type>
+			<location>M:/BGU/BGU Training/ION/ION 12.x/BOD Sources/latest/_Libraries/associations_lib.bi</location>
+		</link>
+	</linkedResources>
+</projectDescription>

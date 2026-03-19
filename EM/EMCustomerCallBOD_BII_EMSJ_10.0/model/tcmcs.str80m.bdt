@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttcmcs.str80m" schemaVersion="1.3.020">
+  <name>tcmcs.str80m</name>
+  <type>simple</type>
+  <primitiveDatatype>string</primitiveDatatype>
+  <nativeDatatype>tcmcs.str80m</nativeDatatype>
+  <dbDatatype>db.multibyte</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <Facet>
+    <type>maxLength</type>
+    <value>320</value>
+  </Facet>
+</Datatype>

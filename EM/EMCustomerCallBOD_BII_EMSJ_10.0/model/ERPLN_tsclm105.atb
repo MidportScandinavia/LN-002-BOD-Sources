@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Table id="atbtsclm105-ERPLN" schemaVersion="1.3.020">
+  <application idref="associations_lib.bi#apsERPLN">ERPLN</application>
+  <name>tsclm105</name>
+  <description>Call Invoicing</description>
+  <type>table</type>
+  <isReadOnly>false</isReadOnly>
+  <Column id="atbtsclm105-ERPLN-colacco">
+    <name>acco</name>
+    <description>Cost Amount Service Contract</description>
+    <datatype idref="tcamnt_depth3.bdt#bdttcamnt_depth3">tcamnt_depth3</datatype>
+    <position>1</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colacin">
+    <name>acin</name>
+    <description>Cost Amount Call Invoicing</description>
+    <datatype idref="tcamnt_depth3.bdt#bdttcamnt_depth3">tcamnt_depth3</datatype>
+    <position>2</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colacoc">
+    <name>acoc</name>
+    <description>Cost Amount Goodwill</description>
+    <datatype idref="tcamnt_depth3.bdt#bdttcamnt_depth3">tcamnt_depth3</datatype>
+    <position>3</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colacpr">
+    <name>acpr</name>
+    <description>Unit Cost</description>
+    <datatype idref="tsmdm.pric_depth3.bdt#bdttsmdm.pric_depth3">tsmdm.pric_depth3</datatype>
+    <position>4</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colacwa">
+    <name>acwa</name>
+    <description>Cost Amount Warranty</description>
+    <datatype idref="tcamnt_depth3.bdt#bdttcamnt_depth3">tcamnt_depth3</datatype>
+    <position>5</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colasco">
+    <name>asco</name>
+    <description>Sales Amount Service Contract</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>6</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colasdi">
+    <name>asdi</name>
+    <description>Discount Amount</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>7</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colasin">
+    <name>asin</name>
+    <description>Sales Amount Call Invoicing</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>8</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colasoc">
+    <name>asoc</name>
+    <description>Sales Amount Goodwill</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>9</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colasto">
+    <name>asto</name>
+    <description>Total Sales Amount</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>10</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colaswa">
+    <name>aswa</name>
+    <description>Sales Amount Warranty</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>11</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colbpcl">
+    <name>bpcl</name>
+    <description>Tax Classification</description>
+    <datatype idref="tctax.bpcl.bdt#bdttctax.bpcl">tctax.bpcl</datatype>
+    <position>12</position>
+    <defaultValue>            </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colbptc">
+    <name>bptc</name>
+    <description>Business Partner Tax Country</description>
+    <datatype idref="associations_lib.bi#bdttcccty">tcccty</datatype>
+    <position>13</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colccll">
+    <name>ccll</name>
+    <description>Call</description>
+    <datatype idref="tcorno_mandatory.bdt#bdttcorno_mandatory">tcorno_mandatory</datatype>
+    <position>14</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>true</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colccmp">
+    <name>ccmp</name>
+    <description>Cost Component</description>
+    <datatype idref="tccpcp_mandatory.bdt#bdttccpcp_mandatory">tccpcp_mandatory</datatype>
+    <position>15</position>
+    <defaultValue>        </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colccty">
+    <name>ccty</name>
+    <description>Country</description>
+    <datatype idref="associations_lib.bi#bdttcccty">tcccty</datatype>
+    <position>16</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colceno">
+    <name>ceno</name>
+    <description>Tax Exemption Certificate</description>
+    <datatype idref="associations_lib.bi#bdttcfovn">tcfovn</datatype>
+    <position>17</position>
+    <defaultValue>                    </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colclin">
+    <name>clin</name>
+    <description>Call Costed</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>18</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colcncv">
+    <name>cncv</name>
+    <description>Cover by Contract</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>19</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colcuni">
+    <name>cuni</name>
+    <description>Time Unit</description>
+    <datatype idref="associations_lib.bi#bdttccuni">tccuni</datatype>
+    <position>20</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colcvat">
+    <name>cvat</name>
+    <description>Tax Code</description>
+    <datatype idref="associations_lib.bi#bdttccvat">tccvat</datatype>
+    <position>21</position>
+    <defaultValue>         </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colcvtm">
+    <name>cvtm</name>
+    <description>Coverage Time</description>
+    <datatype idref="tsmdm.trdt.bdt#bdttsmdm.trdt">tsmdm.trdt</datatype>
+    <position>22</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-coldisc">
+    <name>disc</name>
+    <description>Discount</description>
+    <datatype idref="tcdisc.bdt#bdttcdisc">tcdisc</datatype>
+    <position>23</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colexmt">
+    <name>exmt</name>
+    <description>Exempt</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>24</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colexrs">
+    <name>exrs</name>
+    <description>Tax Exemption Reason</description>
+    <datatype idref="tccdis.bdt#bdttccdis">tccdis</datatype>
+    <position>25</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colicmp">
+    <name>icmp</name>
+    <description>Sales Invoice Company</description>
+    <datatype idref="associations_lib.bi#bdttcncmp">tcncmp</datatype>
+    <position>26</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colidoc">
+    <name>idoc</name>
+    <description>Sales Invoice Document Number</description>
+    <datatype idref="tcinvn.bdt#bdttcinvn">tcinvn</datatype>
+    <position>27</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colinam">
+    <name>inam</name>
+    <description>Sales Invoice Amount</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>28</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colinvd">
+    <name>invd</name>
+    <description>Sales Invoice Date</description>
+    <datatype idref="tsmdm.date.bdt#bdttsmdm.date">tsmdm.date</datatype>
+    <position>29</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colityp">
+    <name>ityp</name>
+    <description>Sales Invoice Transaction Type</description>
+    <datatype idref="tfgld.ttyp.bdt#bdttfgld.ttyp">tfgld.ttyp</datatype>
+    <position>30</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colporg">
+    <name>porg</name>
+    <description>Price Origin</description>
+    <datatype idref="tstdm.porg_mandatory.bdt#bdttstdm.porg_mandatory">tstdm.porg_mandatory</datatype>
+    <position>31</position>
+    <defaultValue>other</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colpris">
+    <name>pris</name>
+    <description>Sales Price</description>
+    <datatype idref="associations_lib.bi#bdttcpric">tcpric</datatype>
+    <position>32</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colprnt">
+    <name>prnt</name>
+    <description>Print on Invoice</description>
+    <datatype idref="tsmdm.prnt_mandatory.bdt#bdttsmdm.prnt_mandatory">tsmdm.prnt_mandatory</datatype>
+    <position>33</position>
+    <defaultValue>not.app</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colpsdt">
+    <name>psdt</name>
+    <description>Sales Invoice Posting Date</description>
+    <datatype idref="tsmdm.date.bdt#bdttsmdm.date">tsmdm.date</datatype>
+    <position>34</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colratf">
+    <name>ratf</name>
+    <description>Rate Factor</description>
+    <datatype idref="tcratf_depth3.bdt#bdttcratf_depth3">tcratf_depth3</datatype>
+    <position>35</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colrats">
+    <name>rats</name>
+    <description>Currency Rate Sales</description>
+    <datatype idref="tcratc_depth3.bdt#bdttcratc_depth3">tcratc_depth3</datatype>
+    <position>36</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colrtdt">
+    <name>rtdt</name>
+    <description>Rate Date</description>
+    <datatype idref="tsmdm.utct.bdt#bdttsmdm.utct">tsmdm.utct</datatype>
+    <position>37</position>
+    <defaultValue>0</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colrtyp">
+    <name>rtyp</name>
+    <description>Rate Type</description>
+    <datatype idref="tcrtyp.bdt#bdttcrtyp">tcrtyp</datatype>
+    <position>38</position>
+    <defaultValue>   </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colstyp">
+    <name>styp</name>
+    <description>Sales Type</description>
+    <datatype idref="tcpsty.bdt#bdttcpsty">tcpsty</datatype>
+    <position>39</position>
+    <defaultValue>      </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-coltmun">
+    <name>tmun</name>
+    <description>Number of Time Units</description>
+    <datatype idref="tsmdm.qaaa.bdt#bdttsmdm.qaaa">tsmdm.qaaa</datatype>
+    <position>40</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-coltxam">
+    <name>txam</name>
+    <description>Sales Invoice Tax Amount</description>
+    <datatype idref="tcamnt.bdt#bdttcamnt">tcamnt</datatype>
+    <position>41</position>
+    <defaultValue>0.000000</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-coltxyn">
+    <name>txyn</name>
+    <description>Tax</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>42</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colwrcv">
+    <name>wrcv</name>
+    <description>Cover by Warranty</description>
+    <datatype idref="associations_lib.bi#bdttcyesno_mandatory">tcyesno_mandatory</datatype>
+    <position>43</position>
+    <defaultValue>no</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colwrtp">
+    <name>wrtp</name>
+    <description>Warranty Type</description>
+    <datatype idref="tstdm.wrtp_mandatory.bdt#bdttstdm.wrtp_mandatory">tstdm.wrtp_mandatory</datatype>
+    <position>44</position>
+    <defaultValue>no.warranty</defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>true</isMandatory>
+  </Column>
+  <Column id="atbtsclm105-ERPLN-colwrty">
+    <name>wrty</name>
+    <description>Warranty</description>
+    <datatype idref="tscfg.cwte.bdt#bdttscfg.cwte">tscfg.cwte</datatype>
+    <position>45</position>
+    <defaultValue>                </defaultValue>
+    <isPrimaryKey>false</isPrimaryKey>
+    <isMandatory>false</isMandatory>
+  </Column>
+  <Index id="atbtsclm105-ERPLN-idxindex1">
+    <name>index1</name>
+    <description>Index on Call No.</description>
+    <isUnique>true</isUnique>
+    <isPrimaryKey>true</isPrimaryKey>
+    <IndexColumn id="atbtsclm105-ERPLN-idxindex1-colccll">
+      <position>1</position>
+      <column idref="#atbtsclm105-ERPLN-colccll">ccll</column>
+      <sortingOrder>asc</sortingOrder>
+    </IndexColumn>
+  </Index>
+</Table>

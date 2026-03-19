@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttsclm.desc_mandatory" schemaVersion="1.3.020">
+  <name>tsclm.desc_mandatory</name>
+  <type>simple</type>
+  <primitiveDatatype>string</primitiveDatatype>
+  <nativeDatatype>tsclm.desc</nativeDatatype>
+  <dbDatatype>db.multibyte</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <Facet>
+    <type>maxLength</type>
+    <value>200</value>
+  </Facet>
+  <Facet>
+    <type>minLength</type>
+    <value>1</value>
+  </Facet>
+</Datatype>

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="ASCII"?>
+<DisplayInfoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Safety"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg82"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg160"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_UserArea"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg92"/>
+  <displayInfos coreID="atbtsclm100-ERPLN-colcdf_irid"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPItem"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg148"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg158"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg83"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg170"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg187"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_Duration__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallGroup1"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountContract__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AlternateSerial"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg60"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallGroupCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg170"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPDiscountAmount__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg37"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg99"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceContract"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_UUID"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm105__ColumnList"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActionCodeValue"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg157"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountTotal__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg47"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrainSet__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg145"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Item__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTakenByPerson_Name"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ClosedByExternalOperator__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg196"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg111"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountContract__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg75"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallCosted"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg144"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FollowUpDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_EndDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg161"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg140"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Train"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SiteLocation_Address__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg46"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusError__AttributeMapping"/>
+  <displayInfos xsi:type="HideInfo" coreID="maindiagram"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg114"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ServiceContract_DocumentID_ID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SubordinateMaintenance"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedSolutionCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPActualSolution"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg55"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg81"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CounterCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg1"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg127"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallDescription"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg80"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSerialNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedBy"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg189"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg59"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg154"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg51"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComponentSerialNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPParentCall"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RepairProhibited__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InstallationGroup__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrafficDisturbance__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSpentTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg26"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg132"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg129"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg109"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ObjectPartCodeCatalog__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg34"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg90"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_NotBillable"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg133"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPComment__AttributeMapping"/>
+  <displayInfos xsi:type="PositionCollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm105" xPos="1033" yPos="9" width="80" height="1031"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg65"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg180"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg5"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg3"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg16"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallTaker__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Route"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg54"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SoldtoBusinessPartner__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPExpectedProblem"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrainSet"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ProjectElement_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DelayMinutes"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Warranty"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_ReasonCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPExpectedSolution"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg77"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Interface"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg115"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_ArchiveIndicator__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPDiscountAmount"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPNumberOfTimeUnits"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg64"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FaultIndicationCodeSearchArgument__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WarrantyClaimNumber__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedDeliveryDateTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorReasonCodeSearchArgument"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg27"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg104"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPWarrantyType__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg78"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Position__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg38"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountInvoicing__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_lid__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectRegistrationDepot"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedStationary"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg169"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg11"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg165"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg65"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedWithOutMark__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg1"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerParty_PartyIDs_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSolutionText"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg8"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPUnitCost"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportEngineer__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg18"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg191"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LastModificationDateTime__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorReasonCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg79"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg29"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesInvoicingPostingDate__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg177"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg83"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg4"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_VehicleUniqueID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg112"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComOrPar"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPBlocked"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg27"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPExpectedSolution__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg116"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg179"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusErrorMessage__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg186"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallDescription__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AlternateDocumentID_ID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Description"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActivityText__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg153"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInUnit__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg164"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPInstallationGroup__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg47"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg52"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg108"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg166"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg20"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TotalPerformanceUnit__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ID"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg101"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Warranty__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg158"/>
+  <displayInfos xsi:type="PositionCollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm100" xPos="635" yPos="1" width="84" height="4903"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_BreakDown"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg30"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg169"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg82"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg43"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg94"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_HandlingUser__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg141"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FromStation"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg123"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSoldtoBP"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg186"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProblemComment"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActionCodeSearchArgument"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerParty_Name__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComponentSerialNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg30"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg45"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg52"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg139"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg173"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Comfort__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FaultIndicationCodeSearchArgument"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg105"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg116"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg6"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg115"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg95"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg55"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg64"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallMeasure__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPDiscount__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FieldCheckFault__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg151"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg117"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrackDetector__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg73"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg13"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPRateType"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg171"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountInvoice"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg108"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPActualProblem__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg124"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WarrantyClaimStatus__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Confirmed"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountGoodWill"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WorkOrder__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg147"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallDateTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg102"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg152"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg150"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTypeCode_listID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedProblemCode__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesInvoiceDate__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AppointmentIndicator"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Description__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg150"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg101"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WarrantyClaimStatus"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualProblemCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg63"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedProblemSearchArgument"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseDescription"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SiteLocation_Address"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg12"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FaultIndicationCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPProject"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg84"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerParty_PartyIDs_ID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg155"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallGroup1__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg143"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_NotBillable__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg159"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg96"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg38"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg25"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Lattitude__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCall__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPRateDate__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPExpectedProblem__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg32"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg91"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg39"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg84"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg16"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg17"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectDateandTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg154"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AppointmentIndicator__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Confirmed__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallGroupCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCall"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg138"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg110"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPComment"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg191"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_NotificationType"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountTotal"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg96"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg7"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg21"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg59"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg197"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg2"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusErrorMessage"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SolutionText"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg182"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReferenceNotification__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg67"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Note"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg149"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ProjectElement_ID"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionEndDate__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SerialNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_HandlingUser"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorReasonCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedTestDrive"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LastModificationDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentReference"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_ReasonCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_BODRouter__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SubordinateMaintenance__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_accountingEntity__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg51"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg113"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualSolutionCode__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Safety__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg19"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_OutOfService"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InstallationGroup"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg166"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg103"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallCosted__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountWarranty"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountGoodwill__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ServiceContract_DocumentID_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg130"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg122"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg164"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedStationary__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg67"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTakenByPerson_IDs_ID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg92"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg110"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg85"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg172"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg167"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg9"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg105"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FaultIndicationCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg53"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg107"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPLocationAddress"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_UUID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WorkEnvironmnet"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg183"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReferenceDefectNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg107"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceEngineer__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg14"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSolutionText__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg11"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall__MethodList"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg5"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg49"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg163"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg180"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg132"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInTrain__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg146"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg121"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg41"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualProblemCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg33"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg181"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg195"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg142"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrainNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TotalPerformanceUnit"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_ArchiveIndicator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPProblemPriority"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ObjectPartCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Note__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualProblemSearchArgument__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg36"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg111"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPProject__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg75"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg151"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg136"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountGoodwill"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_MaintenanceReferenceID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_BreakDown__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg87"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallDescription2__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EmergencyIndicator__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg31"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInVehicle__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg19"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg175"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FieldCheckFault"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountGoodWill__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg80"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg77"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg104"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg106"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg95"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg124"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Longitude__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPLanguage__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg136"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EVNorGIAI"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WorkOrder"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseDescription__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg31"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg188"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InternalReferenceID"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedProblemSearchArgument__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPWarranty"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg14"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg81"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActionCodeSearchArgument__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg139"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg58"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ConfiguredAsset__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSolutionDescription__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProblemComment__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountTax__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_location"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EventIndicator__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceDepartment__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg185"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg78"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportCenter__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg69"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg140"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg86"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_StartDateTime__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProblemPriorityCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DamagePoint__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg73"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesPrice__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallGroup2"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ObjectPartCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg117"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseCodeSearchArgument"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrainNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg50"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg129"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Lattitude"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Train__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg195"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPStatus__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountInvoicing"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_accountingEntity"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg137"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReferenceNotification"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedProblemCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg181"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg66"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg130"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedSolutionCode__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_GeographicalLocation__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RequiredActivity__AttributeMapping"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall__AttributeList"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg56"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg106"/>
+  <displayInfos xsi:type="PositionCollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall" xPos="43" yPos="13" width="446" height="4506"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPItem__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg79"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrackDetector"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPResponseType__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg37"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg178"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPDiscount"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WarrantyClaimNumber"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrantNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg88"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CounterCode__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SolutionText__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg24"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ChangeStateID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionEndDate"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedProblemCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Item"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg41"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg172"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg183"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ChangeStateID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CauseCodeSearchArgument__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg156"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EquipmentCheck"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPWarranty__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EmergencyIndicator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg178"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInUnit"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg12"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg131"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-methShow" collapsed="true"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPUnitCost__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg126"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg40"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_WorkEnvironmnet__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg184"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg72"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ConsequenceCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg168"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg71"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg128"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg33"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg193"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg10"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInTrain"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg9"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg197"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg97"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_UserArea__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrantNumber"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportCenter"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg145"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCurrency"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg134"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ClosingReportDepot"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallDescription2"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg89"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_MaintenanceReferenceID"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm100-detccll"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_OutOfService__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorDescription__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountWarranty__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg26"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceDepartment"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg138"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg144"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg29"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTakenByPerson_IDs_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg125"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPResponseType"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg146"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Longitude"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg71"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg141"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg42"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg0"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_BODRouter"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DisplayID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPReportedProblem"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectRegistrationDepot__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionStartDate__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountInvoice__AttributeMapping"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-methPublishEvent" collapsed="true"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorDescription"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ConsequenceCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg90"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCurrency__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedDeliveryDateTime"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InsuranceIndicator__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ObjectPartCodeCatalog"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg133"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg149"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPWarrantyType"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RequiredActivity"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg187"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg190"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg119"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg68"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentReference__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AlternateSerial__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StandByError__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPRateType__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg194"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg118"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountWarranty"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg53"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPRateDate"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg48"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg22"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg93"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg163"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ActivityID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg196"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallMeasure"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg127"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg109"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Route__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InternalReferenceID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg100"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StandByError"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg23"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComponentID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg162"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg148"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSpentTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg176"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg177"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg28"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountTax"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_NotificationType__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg89"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTypeCode__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm100__CompImplTableArrow"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesPrice"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg4"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LastModificationPerson__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg62"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg179"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_InsuranceIndicator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SoldtoBusinessPartner"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountInvoicing"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPLanguage"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComOrPar__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg103"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActionCodeValue__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg91"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSoldtoBP__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_Code__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPStatus"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg44"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSerialNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg57"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg185"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ToStations__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FromStation__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DefectDateandTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesAmountContract"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TrafficDisturbance"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg23"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg157"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProblemPriorityCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTypeCode_listID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg15"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg8"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LeadVehicle__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg128"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EventIndicator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg118"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusCode__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg119"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_GeographicalLocation"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg161"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ClosingReportDepot__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_lid"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg93"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_AlternateDocumentID_ID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_EffectiveDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualProblemSearchArgument"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg155"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg86"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg135"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActivityText"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg142"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg182"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg85"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TotalPerformanceQuantity"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg184"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg49"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg190"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_PositionInVehicle"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_EffectiveDateTime__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPProblemPriority__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg56"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg173"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg20"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg159"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg17"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ClosedByExternalOperator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg43"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg34"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg42"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReferenceDefectNumber__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RevisionID__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPInstallationGroup"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg174"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm100__ColumnList"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ExpectedProblemCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg88"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg120"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg35"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPBlocked__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg57"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg97"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg2"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg25"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_EndDateTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallDateTime"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPActualSolution__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedBy__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg32"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallTaker"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg39"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg28"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg24"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg113"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCallGroup2__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ConfiguredAsset"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg61"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSolutionDescription"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg36"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg94"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_FollowUpDateTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg168"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPReportedProblem__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportDepartment"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiEMCustomerCallBOD-methOnProcess" collapsed="true"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ErrorReasonCodeSearchArgument__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg122"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_StartDateTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg98"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportDepartment__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg114"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg176"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentDateTime__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg13"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg174"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg162"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ActualSolutionCode"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg76"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg0"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg156"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg160"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DisplayID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_SerialNumber__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg112"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg194"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg62"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg147"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg100"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg102"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg74"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DeltedByExternalOperator"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RevisionID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ReportedTime"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg171"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountInvoicing__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountWarranty__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg167"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Comfort"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerTimePeriod_Duration"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg15"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg7"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg40"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LeadVehicle"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ComponentID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ProjectReference_ActivityID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg134"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg45"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DeltedByExternalOperator__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPCostAmountContract"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg3"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceContract__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTakenByPerson_Name__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg126"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Interface__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg121"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg188"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg50"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg66"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg18"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Status_Code"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg21"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RestrictionStartDate"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg120"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg192"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg69"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg70"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg131"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_LastModificationPerson"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg165"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg61"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg70"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedWithOutMark"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg125"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DamagePoint"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPParentCall__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_ToStations"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg87"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg10"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg72"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg153"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg22"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TotalPerformanceQuantity__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg63"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg189"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg60"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CustomerParty_Name"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg192"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPActualProblem"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg152"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSupportEngineer"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPServiceEngineer"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_TestedTestDrive__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg68"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-tabtsclm105__CompImplTableArrow"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg46"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DelayMinutes__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesInvoiceDate"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg193"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg135"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPNumberOfTimeUnits__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg137"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_Position"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPSalesInvoicingPostingDate"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_CallTypeCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrERPLocationAddress__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg48"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_StatusError"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_DocumentID_ID_location__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg44"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg54"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg175"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg99"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EVNorGIAI__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_EquipmentCheck__AttributeMapping"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg35"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg123"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_VehicleUniqueID"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-compEMCustomerCall-attrCustomerCallHeader_RepairProhibited"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg76"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg6"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg58"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg143"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methPublishEvent-arg98"/>
+  <displayInfos coreID="biiEMCustomerCallBOD-methShow-arg74"/>
+</DisplayInfoList>
