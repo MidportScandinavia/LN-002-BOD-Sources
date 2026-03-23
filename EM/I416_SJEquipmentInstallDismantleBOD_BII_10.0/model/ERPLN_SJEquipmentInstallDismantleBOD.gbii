@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ASCII"?>
+<DisplayInfoList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg7"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg2"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg17"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg4"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg1"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSeverityCode"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg4"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg20"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMeasure__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg6"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg10"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg15"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg0"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBreakdownStatus__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg19"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg8"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg20"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg17"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUser__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrNote__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg12"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActionCode__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg14"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUUID"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle__MethodList"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg26"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUnitCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUnitCode__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg24"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg7"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg25"/>
+  <displayInfos xsi:type="HideInfo" coreID="maindiagram"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehiclePosition"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUser"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg22"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrValidFromDate"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg0"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMeasure"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg13"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg11"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUserArea"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBreakdownStatus"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg2"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg23"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrValidFromDate__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrErrorMessage"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrServiceOrder__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg6"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrWorkOrderID"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg15"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg19"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehilceStatus_Code__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrWorkOrderID__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg18"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrServiceOrder"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActivityNumber"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg22"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg14"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg21"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrError"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg11"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActionCode"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg5"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg8"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg26"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg27"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg16"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg25"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg27"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg18"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehilceStatus_Code"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg23"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg3"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle__AttributeList"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-methShow" collapsed="true"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg12"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg3"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMovementType__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrResultCode"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrError__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg1"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrResultCode__AttributeMapping"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200__ColumnList" collapsed="true"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg9"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg24"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUUID__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehiclePosition__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg16"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg10"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActivityNumber__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200__CompImplTableArrow"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMovementType"/>
+  <displayInfos xsi:type="PositionCollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200" xPos="558" width="78" height="43"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrLot__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrErrorMessage__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg5"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent" collapsed="true"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUserArea__AttributeMapping"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition__AttributeMapping"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg21"/>
+  <displayInfos xsi:type="BendpointsInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSeverityCode__AttributeMapping"/>
+  <displayInfos xsi:type="CollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-methOnProcess" collapsed="true"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methShow-arg13"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrLot"/>
+  <displayInfos xsi:type="PositionCollapseInfo" coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle" xPos="23" width="243" height="766"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrNote"/>
+  <displayInfos coreID="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg9"/>
+</DisplayInfoList>

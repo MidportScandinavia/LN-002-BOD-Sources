@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttsmdm.tmdu" schemaVersion="1.3.020">
+  <name>tsmdm.tmdu</name>
+  <type>simple</type>
+  <primitiveDatatype>decimal</primitiveDatatype>
+  <nativeDatatype>tsmdm.tmdu</nativeDatatype>
+  <dbDatatype>db.double</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <documentation>The divide factor = 1 The rounding mode = normal round (for example, 1.5 is rounded up to 2; 1.49 is rounded down to 1)</documentation>
+  <Facet>
+    <type>totalDigits</type>
+    <value>8</value>
+  </Facet>
+  <Facet>
+    <type>fractionDigits</type>
+    <value>2</value>
+  </Facet>
+</Datatype>

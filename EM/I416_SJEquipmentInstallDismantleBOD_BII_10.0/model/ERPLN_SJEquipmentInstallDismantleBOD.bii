@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BusinessInterfaceImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle" schemaVersion="1.3.020">
+  <businessInterfaceDefinition idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantle</businessInterfaceDefinition>
+  <component idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantle</component>
+  <implementationIdentifier>txcom952</implementationIdentifier>
+  <ComponentImplementationTable id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">
+    <name>tscfg200</name>
+    <table idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN">tscfg200</table>
+    <position>1</position>
+    <isRootTable>true</isRootTable>
+    <isReferentialIntegrityTable>false</isReferentialIntegrityTable>
+    <action>ENTER</action>
+    <isMandatory>true</isMandatory>
+  </ComponentImplementationTable>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID">
+    <name>BODID_ExternalReferenceID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID">BODID_ExternalReferenceID</attribute>
+    <type>column</type>
+    <isIdentifier>true</isIdentifier>
+    <isMandatory>true</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <componentImplementationTable idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">tscfg200</componentImplementationTable>
+    <column idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN-colcdf_giai">cdf_giai</column>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUUID">
+    <name>UUID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrUUID">UUID</attribute>
+    <type>calculated</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <onGetHookExpression>&#x9;o.UUID = uuid.format$(uuid.generate$())&#xD;&#xA;&#x9;io.UUID.isSet = true&#xD;&#xA;&#x9;return(0)</onGetHookExpression>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID">
+    <name>EquipmentID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrEquipmentID">EquipmentID</attribute>
+    <type>column</type>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <afterGetHookExpression>&#x9;select&#x9;tscfg210.*&#xD;&#xA;&#x9;from&#x9;tscfg210&#xD;&#xA;&#x9;where&#x9;tscfg210._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;and   &#x9;tscfg210.cdf_dism = {&quot;Dismantle&quot;}&#xD;&#xA;&#x9;order by tscfg210.sttm desc&#xD;&#xA;&#x9;as set with 1 rows&#xD;&#xA;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg210.stat&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg210.sttm&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Position = tscfg210.lcid&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg210.cdf_orno&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg210.cdf_acln&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg210.cdf_cloc&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SeverityCode = 0&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Note = &quot;&quot;&#xD;&#xA;&#x9;|&#x9;bl.SJEquipmentInstallDismantleBOD.ResultCode =&#x9;str$(tscfg215.cdf_lino)&#x9;&#x9;|#EMSJ_1012_002.n&#x9;|#EMSJ_1012_009.o&#x9;&#x9;|* Material Line&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg210.cdf_lino)&#x9;&#x9;|#EMSJ_1012_002.n&#x9;|#EMSJ_1012_009.n&#x9;&#x9;|* Material Line&#xD;&#xA;|#EMSJ_1012_004.sn&#xD;&#xA;&#x9;&#x9;if not isspace(tscfg210.pitm) and not isspace(tscfg210.pser) then&#xD;&#xA;&#x9;&#x9;&#x9;select&#x9;tscfg200.cdf_giai, tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;from&#x9;tscfg200&#xD;&#xA;&#x9;&#x9;&#x9;where&#x9;tscfg200._index1 = {:tscfg210.pitm, :tscfg210.pser}&#xD;&#xA;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_evne) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_giai) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_004.en&#xD;&#xA;|#EMSJ_1012_009.sn&#xD;&#xA;&#x9;&#x9;if not isspace(tscfg210.cdf_orno) and tscfg210.cdf_acln &lt;> 0 then&#xD;&#xA;&#x9;&#x9;&#x9;select&#x9;tssoc210.*&#xD;&#xA;&#x9;&#x9;&#x9;from&#x9;tssoc210&#xD;&#xA;&#x9;&#x9;&#x9;where&#x9;tssoc210._index1 = {:tscfg210.cdf_orno,:tscfg210.cdf_acln}&#xD;&#xA;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word&#xD;&#xA;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_009.en&#xD;&#xA;&#x9;selectempty&#xD;&#xA;&#x9;&#x9;select&#x9;tscfg215.*&#xD;&#xA;&#x9;&#x9;from&#x9;tscfg215&#xD;&#xA;&#x9;&#x9;where&#x9;tscfg215._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;order by tscfg215.lgtm desc&#xD;&#xA;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg215.stat&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg215.ettm&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Position = tscfg215.lcid&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg215.cdf_orno&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg215.cdf_acln&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SeverityCode = tscfg215.cdf_serv&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Note = tscfg215.cdf_note&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg215.cdf_cloc&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg215.cdf_lino)&#x9;&#x9;|#EMSJ_1012_002.n&#x9;&#x9;|* Material Line&#x9;&#x9;&#xD;&#xA;|#EMSJ_1012_004.sn&#xD;&#xA;&#x9;&#x9;&#x9;if not isspace(tscfg215.pitm) and not isspace(tscfg215.pser) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tscfg200.cdf_giai, tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tscfg200&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tscfg200._index1 = {:tscfg215.pitm, :tscfg215.pser}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_evne) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_giai) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_004.en&#xD;&#xA;|#EMSJ_1012_009.sn&#xD;&#xA;&#x9;&#x9;&#x9;if not isspace(tscfg215.cdf_orno) and tscfg215.cdf_acln &lt;> 0 then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tssoc210.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tssoc210&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tssoc210._index1 = {:tscfg215.cdf_orno,:tscfg215.cdf_acln}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word&#xD;&#xA;&#x9;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_009.en&#xD;&#xA;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;if ((tscfg215.cdf_serv = 1 or tscfg215.cdf_serv = 2) and etol(tscfg215.stat) = 20) or install_publish = &quot;9&quot;  then &#xD;&#xA;&#x9;&#x9;&#x9;select&#x9;tscfg215.*&#xD;&#xA;&#x9;&#x9;&#x9;from&#x9;tscfg215&#xD;&#xA;&#x9;&#x9;&#x9;where&#x9;tscfg215._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;&#x9;and&#x9;tscfg215.stat = 10&#xD;&#xA;&#x9;&#x9;&#x9;order by tscfg215.lgtm desc&#xD;&#xA;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg215.stat&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg215.ettm&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Position = tscfg215.lcid&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg215.cdf_orno&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg215.cdf_acln&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SeverityCode = tscfg215.cdf_serv&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Note = tscfg215.cdf_note&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg215.cdf_cloc&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg215.cdf_lino)&#x9;&#x9;|#EMSJ_1012_002.n&#x9;&#x9;|* Material Line&#x9;&#xD;&#xA;|#EMSJ_1012_004.sn&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg215.pitm) and not isspace(tscfg215.pser) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;select&#x9;tscfg200.cdf_giai, tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;tscfg200&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where&#x9;tscfg200._index1 = {:tscfg215.pitm, :tscfg215.pser}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_evne) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg200.cdf_giai) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_004.en&#x9;&#x9;&#xD;&#xA;|#EMSJ_1012_009.sn&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if not isspace(tscfg215.cdf_orno) and tscfg215.cdf_acln &lt;> 0 then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;select&#x9;tssoc210.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;tssoc210&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where&#x9;tssoc210._index1 = {:tscfg215.cdf_orno,:tscfg215.cdf_acln}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;|#EMSJ_1012_009.en&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;endif&#xD;&#xA;&#x9;endselect&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;return(0)</afterGetHookExpression>
+    <componentImplementationTable idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">tscfg200</componentImplementationTable>
+    <column idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN-colcdf_giai">cdf_giai</column>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID-relItem">
+      <position>1</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem">Item</attributeImplementation>
+    </AttributeImplementationRelationship>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID-relSerialNumber">
+      <position>2</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber">SerialNumber</attributeImplementation>
+    </AttributeImplementationRelationship>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActionCode">
+    <name>ActionCode</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrActionCode">ActionCode</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrValidFromDate">
+    <name>ValidFromDate</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrValidFromDate">ValidFromDate</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID">
+    <name>FunctionalLocationID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrFunctionalLocationID">FunctionalLocationID</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID">
+    <name>SuperiorEquipmentID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID">SuperiorEquipmentID</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem">
+    <name>Item</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrItem">Item</attribute>
+    <type>column</type>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <componentImplementationTable idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">tscfg200</componentImplementationTable>
+    <column idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN-colitem">item</column>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber">
+    <name>SerialNumber</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrSerialNumber">SerialNumber</attribute>
+    <type>column</type>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <componentImplementationTable idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">tscfg200</componentImplementationTable>
+    <column idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN-colsern">sern</column>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrServiceOrder">
+    <name>ServiceOrder</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrServiceOrder">ServiceOrder</attribute>
+    <type>notApplicable</type>
+    <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActivityNumber">
+    <name>ActivityNumber</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrActivityNumber">ActivityNumber</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUser">
+    <name>User</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrUser">User</attribute>
+    <type>calculated</type>
+    <datatype idref="associations_lib.bi#bdttcemno">tcemno</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <onGetHookExpression>&#x9;o.User = str$(logname$)&#xD;&#xA;&#x9;io.User.isSet = true&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;return(0)</onGetHookExpression>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBreakdownStatus">
+    <name>BreakdownStatus</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrBreakdownStatus">BreakdownStatus</attribute>
+    <type>notApplicable</type>
+    <datatype idref="tscfg.pb.stat_mandatory.bdt#bdttscfg.pb.stat_mandatory">tscfg.pb.stat_mandatory</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehilceStatus_Code">
+    <name>VehilceStatus_Code</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrVehilceStatus_Code">VehilceStatus_Code</attribute>
+    <type>column</type>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <componentImplementationTable idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-tabtscfg200">tscfg200</componentImplementationTable>
+    <column idref="ERPLN_tscfg200.atb#atbtscfg200-ERPLN-colstat">stat</column>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMovementType">
+    <name>MovementType</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrMovementType">MovementType</attribute>
+    <type>notApplicable</type>
+    <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation">
+    <name>StorageLocation</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrStorageLocation">StorageLocation</attribute>
+    <type>calculated</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.st10m">tcmcs.st10m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <onGetHookExpression>&#x9;o.StorageLocation = &quot;&quot;&#xD;&#xA;&#x9;select&#x9;tscfg210.*&#xD;&#xA;&#x9;from&#x9;tscfg210&#xD;&#xA;&#x9;where&#x9;tscfg210._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;and   &#x9;tscfg210.cdf_dism = {&quot;Dismantle&quot;}&#xD;&#xA;&#x9;order by tscfg210.sttm desc&#xD;&#xA;&#x9;as set with 1 rows&#xD;&#xA;&#x9;selectdo&#xD;&#xA;&#x9;|&#x9;select&#x9;tssoc220.awrh, tssoc220.lino&#xD;&#xA;&#x9;&#x9;select&#x9;tssoc220.*&#xD;&#xA;&#x9;&#x9;from&#x9;tssoc220&#xD;&#xA;&#x9;&#x9;where&#x9;tssoc220.orno = {:tscfg210.cdf_orno}&#xD;&#xA;&#x9;&#x9;and&#x9;tssoc220.acln = {:tscfg210.cdf_acln}&#xD;&#xA;&#x9;&#x9;and&#x9;tssoc220.item = {:i.Item}&#xD;&#xA;&#x9;&#x9;and&#x9;tssoc220.sern = {:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)&#xD;&#xA;&#x9;&#x9;if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then&#x9;&#x9;|#EMSJ_1012_003.sn&#xD;&#xA;&#x9;&#x9;&#x9;if not isspace(tssoc220.cdf_cwar) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.cdf_cwar}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;else&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.en&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;&#x9;if not isspace(tssoc220.awrh) then&#xD;&#xA;&#x9;&#x9;&#x9;|&#x9;select&#x9;tsmdm903.sjwh.c:o.StorageLocation&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.awrh}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;|&#x9;&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;endif&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.n&#xD;&#xA;&#x9;&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;|&#x9;endselect&#xD;&#xA;&#x9;selectempty&#xD;&#xA;&#x9;&#x9;select&#x9;tscfg215.*&#xD;&#xA;&#x9;&#x9;from&#x9;tscfg215&#xD;&#xA;&#x9;&#x9;where&#x9;tscfg215._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;order by tscfg215.lgtm desc&#xD;&#xA;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;|&#x9;select&#x9;tssoc220.awrh, tssoc220.lino&#xD;&#xA;&#x9;&#x9;&#x9;select&#x9;tssoc220.*&#xD;&#xA;&#x9;&#x9;&#x9;from&#x9;tssoc220&#xD;&#xA;&#x9;&#x9;&#x9;where&#x9;tssoc220.orno = {:tscfg210.cdf_orno}&#xD;&#xA;&#x9;&#x9;&#x9;and&#x9;tssoc220.acln = {:tscfg210.cdf_acln}&#xD;&#xA;&#x9;&#x9;&#x9;and&#x9;tssoc220.item = {:i.Item}&#xD;&#xA;&#x9;&#x9;&#x9;and&#x9;tssoc220.sern = {:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)&#xD;&#xA;&#x9;&#x9;&#x9;if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then&#x9;&#x9;|#EMSJ_1012_003.sn&#xD;&#xA;&#x9;&#x9;&#x9;if not isspace(tssoc220.cdf_cwar) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.cdf_cwar}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;else&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.en&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if not isspace(tssoc220.awrh) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;|&#x9;select&#x9;tsmdm903.sjwh.c:o.StorageLocation&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.awrh}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;|&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;endif&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.n&#xD;&#xA;&#x9;&#x9;&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;&#x9;|&#x9;endselect&#xD;&#xA;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;if ((tscfg215.cdf_serv = 1 or tscfg215.cdf_serv = 2) and etol(tscfg215.stat) = 20) or install_publish = &quot;9&quot; then &#xD;&#xA;&#x9;&#x9;&#x9;select&#x9;tscfg215.*&#xD;&#xA;&#x9;&#x9;&#x9;from&#x9;tscfg215&#xD;&#xA;&#x9;&#x9;&#x9;where&#x9;tscfg215._index2 = {:i.Item,:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;&#x9;and&#x9;tscfg215.stat = 10&#xD;&#xA;&#x9;&#x9;&#x9;order by tscfg215.lgtm desc&#xD;&#xA;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;|&#x9;select&#x9;tssoc220.awrh, tssoc220.lino &#xD;&#xA;&#x9;&#x9;&#x9;&#x9;select&#x9;tssoc220.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;from&#x9;tssoc220&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;where&#x9;tssoc220.orno = {:tscfg210.cdf_orno}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;and&#x9;tssoc220.acln = {:tscfg210.cdf_acln}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;and&#x9;tssoc220.item = {:i.Item}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;and&#x9;tssoc220.sern = {:i.SerialNumber}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then&#x9;&#x9;|#EMSJ_1012_003.sn&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tssoc220.cdf_cwar) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.cdf_cwar}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;else&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.en&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if not isspace(tssoc220.awrh) then&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;|&#x9;select&#x9;tsmdm903.sjwh.c:o.StorageLocation&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;select&#x9;tsmdm903.*&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;from&#x9;tsmdm903&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;where&#x9;tsmdm903.warh.c = {:tssoc220.awrh}&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;as set with 1 rows&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;selectdo&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;|&#x9;&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;endif&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;endif&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;|#EMSJ_1012_003.n&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;o.StorageLocation = tsmdm903.sjwh.c&#xD;&#xA;&#x9;&#x9;&#x9;|&#x9;endselect&#xD;&#xA;&#x9;&#x9;&#x9;endselect&#xD;&#xA;&#x9;&#x9;endif&#xD;&#xA;&#x9;endselect&#x9;&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;io.StorageLocation.isSet = true&#xD;&#xA;&#x9;return(0)</onGetHookExpression>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation-relItem">
+      <position>1</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem">Item</attributeImplementation>
+    </AttributeImplementationRelationship>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation-relSerialNumber">
+      <position>2</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber">SerialNumber</attributeImplementation>
+    </AttributeImplementationRelationship>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition">
+    <name>Position</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrPosition">Position</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehiclePosition">
+    <name>VehiclePosition</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrVehiclePosition">VehiclePosition</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial">
+    <name>Material</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrMaterial">Material</attribute>
+    <type>calculated</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+    <onGetHookExpression>&#x9;o.Material = &quot;&quot;&#xD;&#xA;&#x9;if not isspace(i.FunctionalLocationID) then&#xD;&#xA;&#x9;&#x9;o.Material = concat$(&quot;_&quot;, trim$(i.FunctionalLocationID), i.Position)&#xD;&#xA;&#x9;else&#xD;&#xA;&#x9;&#x9;if not isspace(i.EquipmentID) then&#xD;&#xA;&#x9;&#x9;&#x9;o.Material = concat$(&quot;_&quot;, trim$(i.EquipmentID), i.Position)&#xD;&#xA;&#x9;&#x9;endif&#xD;&#xA;&#x9;endif&#xD;&#xA;&#x9;io.Material.isSet = true&#xD;&#xA;&#x9;return(0)</onGetHookExpression>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial-relEquipmentID">
+      <position>1</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID">EquipmentID</attributeImplementation>
+    </AttributeImplementationRelationship>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial-relFunctionalLocationID">
+      <position>2</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID">FunctionalLocationID</attributeImplementation>
+    </AttributeImplementationRelationship>
+    <AttributeImplementationRelationship id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial-relPosition">
+      <position>3</position>
+      <componentImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle">SJEquipmentInstallDismantleBOD</componentImplementation>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition">Position</attributeImplementation>
+    </AttributeImplementationRelationship>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrLot">
+    <name>Lot</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrLot">Lot</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMeasure">
+    <name>Measure</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrMeasure">Measure</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUnitCode">
+    <name>UnitCode</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrUnitCode">UnitCode</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.st10m">tcmcs.st10m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrError">
+    <name>Error</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrError">Error</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcyesno">tcyesno</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrErrorMessage">
+    <name>ErrorMessage</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrErrorMessage">ErrorMessage</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrResultCode">
+    <name>ResultCode</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrResultCode">ResultCode</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSeverityCode">
+    <name>SeverityCode</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrSeverityCode">SeverityCode</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.long">tcmcs.long</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrNote">
+    <name>Note</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrNote">Note</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUserArea">
+    <name>UserArea</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrUserArea">UserArea</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdtERPAnyType">ERPAnyType</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <AttributeImplementation id="biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrWorkOrderID">
+    <name>WorkOrderID</name>
+    <attribute idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-compSJEquipmentInstallDismantle-attrWorkOrderID">WorkOrderID</attribute>
+    <type>notApplicable</type>
+    <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+    <isIdentifier>false</isIdentifier>
+    <isMandatory>false</isMandatory>
+    <isReadOnly>false</isReadOnly>
+  </AttributeImplementation>
+  <MethodImplementation id="biiSJEquipmentInstallDismantleBOD-methOnProcess">
+    <name>OnProcess</name>
+    <event idref="SJEquipmentInstallDismantleBOD_BID.bi#bidSJEquipmentInstallDismantle0-eventProcess">Process</event>
+    <processingOrder>batch</processingOrder>
+    <onExecuteHookExpression>&#x9;ret = txcom.dll9952.handle.incoming.request.for.sj.equipment.install.dismantle.bod(&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;i.request, err.msg)&#xD;&#xA;&#xD;&#xA;&#x9;if ret &lt;> 0 then&#xD;&#xA;&#x9;&#x9;dal.set.error.message(&quot;@&quot; &amp; err.msg)&#xD;&#xA;&#x9;&#x9;return(DALHOOKERROR)&#xD;&#xA;&#x9;endif&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;return(0)</onExecuteHookExpression>
+  </MethodImplementation>
+  <MethodImplementation id="biiSJEquipmentInstallDismantleBOD-methShow">
+    <name>Show</name>
+    <processingOrder>topDown</processingOrder>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg">
+      <name>SJEquipmentInstallDismantleBOD_BODID_ExternalReferenceID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID">BODID_ExternalReferenceID</attributeImplementation>
+      <position>0</position>
+      <scope>inout</scope>
+      <isMandatory>true</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg0">
+      <name>SJEquipmentInstallDismantleBOD_UUID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUUID">UUID</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg1">
+      <name>SJEquipmentInstallDismantleBOD_EquipmentID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID">EquipmentID</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg2">
+      <name>SJEquipmentInstallDismantleBOD_ActionCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActionCode">ActionCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg3">
+      <name>SJEquipmentInstallDismantleBOD_ValidFromDate</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrValidFromDate">ValidFromDate</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg4">
+      <name>SJEquipmentInstallDismantleBOD_FunctionalLocationID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID">FunctionalLocationID</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg5">
+      <name>SJEquipmentInstallDismantleBOD_SuperiorEquipmentID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID">SuperiorEquipmentID</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg6">
+      <name>SJEquipmentInstallDismantleBOD_WorkOrderID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrWorkOrderID">WorkOrderID</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg7">
+      <name>SJEquipmentInstallDismantleBOD_Item</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem">Item</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg8">
+      <name>SJEquipmentInstallDismantleBOD_SerialNumber</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber">SerialNumber</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg9">
+      <name>SJEquipmentInstallDismantleBOD_ServiceOrder</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrServiceOrder">ServiceOrder</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg10">
+      <name>SJEquipmentInstallDismantleBOD_ActivityNumber</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActivityNumber">ActivityNumber</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg11">
+      <name>SJEquipmentInstallDismantleBOD_User</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUser">User</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcemno">tcemno</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg12">
+      <name>SJEquipmentInstallDismantleBOD_BreakdownStatus</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBreakdownStatus">BreakdownStatus</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tscfg.pb.stat_mandatory.bdt#bdttscfg.pb.stat_mandatory">tscfg.pb.stat_mandatory</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg13">
+      <name>SJEquipmentInstallDismantleBOD_VehilceStatus_Code</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehilceStatus_Code">VehilceStatus_Code</attributeImplementation>
+      <position>0</position>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg14">
+      <name>SJEquipmentInstallDismantleBOD_MovementType</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMovementType">MovementType</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg15">
+      <name>SJEquipmentInstallDismantleBOD_StorageLocation</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation">StorageLocation</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcmcs.str3m.bdt#bdttcmcs.str3m">tcmcs.str3m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg16">
+      <name>SJEquipmentInstallDismantleBOD_Position</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition">Position</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg17">
+      <name>SJEquipmentInstallDismantleBOD_VehiclePosition</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehiclePosition">VehiclePosition</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg18">
+      <name>SJEquipmentInstallDismantleBOD_Material</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial">Material</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg19">
+      <name>SJEquipmentInstallDismantleBOD_Lot</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrLot">Lot</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg20">
+      <name>SJEquipmentInstallDismantleBOD_Measure</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMeasure">Measure</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg21">
+      <name>SJEquipmentInstallDismantleBOD_UnitCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUnitCode">UnitCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.st10m">tcmcs.st10m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg22">
+      <name>SJEquipmentInstallDismantleBOD_Error</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrError">Error</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcyesno">tcyesno</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg23">
+      <name>SJEquipmentInstallDismantleBOD_ErrorMessage</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrErrorMessage">ErrorMessage</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg24">
+      <name>SJEquipmentInstallDismantleBOD_ResultCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrResultCode">ResultCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg25">
+      <name>SJEquipmentInstallDismantleBOD_SeverityCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSeverityCode">SeverityCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.long">tcmcs.long</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg26">
+      <name>SJEquipmentInstallDismantleBOD_Note</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrNote">Note</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methShow-arg27">
+      <name>SJEquipmentInstallDismantleBOD_UserArea</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUserArea">UserArea</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdtERPAnyType">ERPAnyType</datatype>
+      <scope>out</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+  </MethodImplementation>
+  <MethodImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent">
+    <name>PublishEvent</name>
+    <processingOrder>batch</processingOrder>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg">
+      <name>SJEquipmentInstallDismantleBOD_BODID_ExternalReferenceID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBODID_ExternalReferenceID">BODID_ExternalReferenceID</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg0">
+      <name>SJEquipmentInstallDismantleBOD_UUID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUUID">UUID</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg1">
+      <name>SJEquipmentInstallDismantleBOD_EquipmentID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrEquipmentID">EquipmentID</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg2">
+      <name>SJEquipmentInstallDismantleBOD_ActionCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActionCode">ActionCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg3">
+      <name>SJEquipmentInstallDismantleBOD_ValidFromDate</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrValidFromDate">ValidFromDate</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcdate">tcdate</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg4">
+      <name>SJEquipmentInstallDismantleBOD_FunctionalLocationID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrFunctionalLocationID">FunctionalLocationID</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg5">
+      <name>SJEquipmentInstallDismantleBOD_SuperiorEquipmentID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSuperiorEquipmentID">SuperiorEquipmentID</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg6">
+      <name>SJEquipmentInstallDismantleBOD_WorkOrderID</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrWorkOrderID">WorkOrderID</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg7">
+      <name>SJEquipmentInstallDismantleBOD_Item</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrItem">Item</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg8">
+      <name>SJEquipmentInstallDismantleBOD_SerialNumber</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSerialNumber">SerialNumber</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg9">
+      <name>SJEquipmentInstallDismantleBOD_ServiceOrder</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrServiceOrder">ServiceOrder</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcorno.bdt#bdttcorno">tcorno</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg10">
+      <name>SJEquipmentInstallDismantleBOD_ActivityNumber</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrActivityNumber">ActivityNumber</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcpono">tcpono</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg11">
+      <name>SJEquipmentInstallDismantleBOD_User</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUser">User</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcemno">tcemno</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg12">
+      <name>SJEquipmentInstallDismantleBOD_BreakdownStatus</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrBreakdownStatus">BreakdownStatus</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tscfg.pb.stat_mandatory.bdt#bdttscfg.pb.stat_mandatory">tscfg.pb.stat_mandatory</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg13">
+      <name>SJEquipmentInstallDismantleBOD_VehilceStatus_Code</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehilceStatus_Code">VehilceStatus_Code</attributeImplementation>
+      <position>0</position>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg14">
+      <name>SJEquipmentInstallDismantleBOD_MovementType</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMovementType">MovementType</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcmcs.str30m.bdt#bdttcmcs.str30m">tcmcs.str30m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg15">
+      <name>SJEquipmentInstallDismantleBOD_StorageLocation</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrStorageLocation">StorageLocation</attributeImplementation>
+      <position>0</position>
+      <datatype idref="tcmcs.str3m.bdt#bdttcmcs.str3m">tcmcs.str3m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg16">
+      <name>SJEquipmentInstallDismantleBOD_Position</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrPosition">Position</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str7">tcmcs.str7</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg17">
+      <name>SJEquipmentInstallDismantleBOD_VehiclePosition</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrVehiclePosition">VehiclePosition</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg18">
+      <name>SJEquipmentInstallDismantleBOD_Material</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMaterial">Material</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg19">
+      <name>SJEquipmentInstallDismantleBOD_Lot</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrLot">Lot</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg20">
+      <name>SJEquipmentInstallDismantleBOD_Measure</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrMeasure">Measure</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg21">
+      <name>SJEquipmentInstallDismantleBOD_UnitCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUnitCode">UnitCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.st10m">tcmcs.st10m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg22">
+      <name>SJEquipmentInstallDismantleBOD_Error</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrError">Error</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcyesno">tcyesno</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg23">
+      <name>SJEquipmentInstallDismantleBOD_ErrorMessage</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrErrorMessage">ErrorMessage</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg24">
+      <name>SJEquipmentInstallDismantleBOD_ResultCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrResultCode">ResultCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str25">tcmcs.str25</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg25">
+      <name>SJEquipmentInstallDismantleBOD_SeverityCode</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrSeverityCode">SeverityCode</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.long">tcmcs.long</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg26">
+      <name>SJEquipmentInstallDismantleBOD_Note</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrNote">Note</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdttcmcs.str100m">tcmcs.str100m</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+    <MethodArgumentImplementation id="biiSJEquipmentInstallDismantleBOD-methPublishEvent-arg27">
+      <name>SJEquipmentInstallDismantleBOD_UserArea</name>
+      <attributeImplementation idref="#biiSJEquipmentInstallDismantleBOD-compSJEquipmentInstallDismantle-attrUserArea">UserArea</attributeImplementation>
+      <position>0</position>
+      <datatype idref="associations_lib.bi#bdtERPAnyType">ERPAnyType</datatype>
+      <scope>in</scope>
+      <isMandatory>false</isMandatory>
+    </MethodArgumentImplementation>
+  </MethodImplementation>
+  <name>SJEquipmentInstallDismantleBOD</name>
+  <description>SJ Equipment Install and Dismantle</description>
+  <application idref="associations_lib.bi#apsERPLN">ERPLN</application>
+  <visibility>public</visibility>
+  <includeHookExpression>|********************* Includes *******************************************&#x9;&#xD;&#xA;&#x9;#include&#x9;&quot;ibomcs2000&quot;&#xD;&#xA;&#x9;#include&#x9;&quot;itcbod0001&quot;&#xD;&#xA;&#xD;&#xA;&#x9;#pragma used dll &quot;otxcomdll9952&quot;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;|********************* Tables *******************************************&#xD;&#xA;&#x9;table&#x9;ttscfg210&#xD;&#xA;&#x9;table&#x9;ttscfg215&#xD;&#xA;&#x9;table&#x9;ttscfg200&#xD;&#xA;&#x9;table&#x9;ttssoc200&#xD;&#xA;&#x9;table&#x9;ttssoc220&#xD;&#xA;&#x9;table&#x9;ttsmdm903&#xD;&#xA;&#x9;table&#x9;ttssoc210&#xD;&#xA;&#xD;&#xA;|********************* Global Variables **********************************&#x9;&#x9;&#xD;&#xA;&#xD;&#xA;     &#x9;string&#x9;install_publish(1) BASED&#x9;&#x9;&#x9;&#xD;&#xA;&#x9;COMMON &#x9;install_publish&#x9;&#xD;&#xA;&#x9;&#xD;&#xA;&#x9;long &#x9;ret&#xD;&#xA;&#x9;domain&#x9;tcmcs.s200m&#x9;err.msg&#x9;&#x9;&#xD;&#xA;&#x9;</includeHookExpression>
+  <status>developing</status>
+  <versionOfBid>1.0.1</versionOfBid>
+  <removeLeadingSpaces>true</removeLeadingSpaces>
+</BusinessInterfaceImplementation>

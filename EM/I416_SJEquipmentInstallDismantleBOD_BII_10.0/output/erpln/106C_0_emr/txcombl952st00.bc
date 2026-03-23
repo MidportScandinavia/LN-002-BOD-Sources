@@ -1,0 +1,5583 @@
+|***************************| start of source |********************************
+|*
+|* DO NOT EDIT THIS GENERATED SOURCE !!
+|*
+|******************************************************************************
+|*
+|*    THIS SOFTWARE IS THE PROPERTY OF AND CONTAINS
+|*    CONFIDENTIAL INFORMATION OF INFOR, AND SHALL NOT BE
+|*    COPIED, USED, NOR DISCLOSED WITHOUT EXPRESS WRITTEN
+|*    AUTHORIZATION.  ALTHOUGH PUBLICATION IS NOT
+|*    INTENDED, IN THE EVENT OF PUBLICATION, THE
+|*    FOLLOWING NOTICE IS APPLICABLE:
+|*
+|*  Copyright (c) 2023 Infor. All rights reserved.
+|*  The word and design marks set forth herein are trademarks and/or registered
+|*  trademarks of Infor and/or related affiliates and subsidiaries.
+|*  All rights reserved. All other trademarks listed herein are the property of
+|*  their respective owners.
+|*  www.infor.com.
+|*
+|******************************************************************************
+|*
+|*    BDE Name      : SJEquipmentInstallDismantleBOD
+|*    Gen. Date     : 11-Dec-2023 12:40:59
+|*
+|*    Business Interface Definition info:
+|*    -----------------------------------
+|*    BID Name      : SJEquipmentInstallDismantle
+|*    Description   : Equipment Install Dismantle BOD for SJ - I416
+|*    VersionID     : 1.0.1
+|*    SchemaVersion : 1.3.020
+|*
+|*    Business Interface Implementation info:
+|*    ---------------------------------------
+|*    BII Name      : SJEquipmentInstallDismantleBOD
+|*    Description   : SJ Equipment Install and Dismantle
+|*    Status        : developing
+|*    VersionID     : 
+|*    SchemaVersion : 1.3.020
+|*
+|*    Application info:
+|*    -----------------
+|*    Name          : ERPLN
+|*    Description   : 
+|*    Release       : 
+|*    VersionID     : 
+|*    SchemaVersion : 1.3.020
+|* 
+|*    Generator info:
+|*    ---------------
+|*    Name          : Infor LN Studio Implementation Generator
+|*    Id            : com.infor.ln.studio.intg.generator.erpln
+|*    Version       : 10.7.0.0506
+|*    Version       : 10.7.0.0506 (framework)
+|* 
+|******************************************************************************
+|* Script Type: BOL
+|******************************************************************************
+#ident "@(#) BUILD_SJEQUIPMENTINSTALLDISMANTLE_NOVERSION_ERPLN_NOVERSION"
+#ident "@(#) txcom.bl952st00 2023-12-11 BID SJEquipmentInstallDismantle V1.0.1"
+#ident "@(#) txcom.bl952st00 2023-12-11 BII SJEquipmentInstallDismantleBOD noVersion"
+#ident "@(#) txcom.bl952st00 2023-12-11 Application ERPLN noVersion"
+#ident "@(#) txcom.bl952st00 2023-12-11 Infor LN Studio Implementation Generator V10.7.0.0506 (framework V10.7.0.0506)"
+| Constraint violation: ERP LN constraint: Column tscfg200.item of root table must be mapped to an identifying attribute implementation of component SJEquipmentInstallDismantle.
+| Constraint violation: ERP LN constraint: Column tscfg200.sern of root table must be mapped to an identifying attribute implementation of component SJEquipmentInstallDismantle.
+|******************************* Declare Defines ******************************
+
+#define XmlNode	 long
+#define MAX_RECURSION 75
+
+#define RETIFNOK(...)
+^       bl.result = ...
+^	if bl.result <> 0 then
+^		return(bl.result)
+^	endif
+
+#define RETIFNOK_SYNC(...)
+^       set.permission.for.readonly.attributes(true)
+^       bl.result = ...
+^       set.permission.for.readonly.attributes(false)
+^       if bl.result <> 0 then
+^               return(bl.result)
+^       endif
+
+#define SET.DAL.FIELD(FIELD, VALUE, ALWAYS, SET)
+^       if bl.##VALUE##.set and column.##FIELD##.exists() then
+^               if ALWAYS or column.##FIELD##.changed(bl.##VALUE##) then
+^                       dal.set.field("##FIELD##", bl.##VALUE##)
+^						SET = true
+^               endif
+^       endif
+
+#define SET.DAL.FIELD.ARRAY(FIELD, VALUE, ELEM, ALWAYS, SET)
+^       if bl.##VALUE##.set and column.##FIELD##.element.exists(##ELEM##) then
+^               if ALWAYS or column.##FIELD##.element.changed(bl.##VALUE##, ##ELEM##) then
+^                       dal.set.field("##FIELD##", bl.##VALUE##, ##ELEM##)
+^						SET = true
+^               endif
+^       endif
+
+#define SET.DAL.FIELD.ARRAY.LONG(FIELD, VALUE, ELEM, ALWAYS, SET)
+^       if bl.##VALUE##.set(##ELEM##) and column.##FIELD##.element.exists(##ELEM##) then
+^               if ALWAYS or column.##FIELD##.element.changed(bl.##VALUE##(##ELEM##), ##ELEM##) then
+^                       dal.set.field("##FIELD##", bl.##VALUE##(##ELEM##), ##ELEM##)
+^						SET = true
+^               endif
+^       endif
+
+#define SET.DAL.FIELD.ARRAY.STRING(FIELD, VALUE, ELEM, ALWAYS, SET)
+^       if bl.##VALUE##.set(##ELEM##) and column.##FIELD##.element.exists(##ELEM##) then
+^               if ALWAYS or column.##FIELD##.element.changed(bl.##VALUE##(1, ##ELEM##), ##ELEM##) then
+^                       dal.set.field("##FIELD##", bl.##VALUE##(1, ##ELEM##), ##ELEM##)
+^						SET = true
+^               endif
+^       endif
+
+#define SET.DAL.FIELD.REFINT(FIELD, VALUE)
+^       if bl.##VALUE##.set then
+^               dal.set.field("##FIELD##", bl.##VALUE##)
+^       endif
+
+#define CHECK_TOOLS_VERSION_SHOW_AND_PUB(RETVAL)
+^	| The Business Studio version used to generate this business object
+^	| requires Enterprise Server 8.3 or higher including solution 236710 or 236711.
+^	| If an older Enterprise Server version is used, the SubscribeEvent method will
+^	| fail. So the ShowAndPublish... methods can immediately return 0
+^	| (= OK), to avoid fatal errors when invoking non-existing tl code.
+^	if not txcom.bl952st00.is.business.studio.supported() then
+^		return(RETVAL) | OK
+^	endif
+
+#define MESSAGE_EXISTS(MESS.CODE)
+^	pos(form.text$(MESS.CODE), MESS.CODE) = 0
+
+#define DO_ERROR_BYPASS_WITH_RETRY()	true
+#if ES_TIV_LEVEL >= 2010
+#define	SET.ERROR.BYPASS.ON()
+^	if db.set.error.bypass.on(DO_ERROR_BYPASS_WITH_RETRY()) <> 0 then
+^		dal.set.error.message("@Error in db.set.error.bypass.on()")
+^		return(DALHOOKERROR)
+^	endif
+#define	SET.ERROR.BYPASS.ON.STR()
+^	if db.set.error.bypass.on(DO_ERROR_BYPASS_WITH_RETRY()) <> 0 then
+^		dal.set.error.message("@Error in db.set.error.bypass.on()")
+^		return("")
+^	endif
+#define	SET.ERROR.BYPASS.ON.VOID()
+^	if db.set.error.bypass.on(DO_ERROR_BYPASS_WITH_RETRY()) <> 0 then
+^		dal.set.error.message("@Error in db.set.error.bypass.on()")
+^		return
+^	endif
+#define	SET.ERROR.BYPASS.OFF()	db.set.error.bypass.off()
+#define	GET.ERROR.BYPASS()		db.get.error.bypass()
+#else
+#define	SET.ERROR.BYPASS.ON()	error.bypass = 1
+^				error.bypass.with.retry = DO_ERROR_BYPASS_WITH_RETRY()
+#define	SET.ERROR.BYPASS.ON.STR()	error.bypass = 1
+^				error.bypass.with.retry = DO_ERROR_BYPASS_WITH_RETRY()
+#define	SET.ERROR.BYPASS.ON.VOID()	error.bypass = 1
+^				error.bypass.with.retry = DO_ERROR_BYPASS_WITH_RETRY()
+#define	SET.ERROR.BYPASS.OFF()	error.bypass = 0
+^				error.bypass.with.retry = 0
+#define	GET.ERROR.BYPASS()		(error.bypass <> 0)
+#endif
+
+
+#if ES_TIV_LEVEL < 1800
+| No OCM support: dummy define that does not do anything
+#define OCM_SET_QUERY_MODE(tbl)	0
+#else
+| OCM support: define for setting the object type for the current function
+string	___objtype(6)
+#define OCM_SET_QUERY_MODE(tbl)
+^	(is.ocm.active(tbl) ? 
+^		check.result.set.query.mode(get.type.name(tbl, ___objtype),
+^				dbcm.select.object.type(___objtype), ___objtype, tbl)
+^	: 0)
+#endif	| ES_TIV_LEVEL < 1800
+
+|* In Portingset 9.1c or later, MLE fields are not read in all data languages
+|* by default. When MLE fields are read, the queries will be extended with a
+|* modifier to select all data languages for MLE fields.
+#define USE_MODIFIERS_ALL_LANG()	(get.bshell.tiv() >= 2140)
+#if 2140 <= BIC_TIV_LEVEL and (2140 <= ES_TIV_LEVEL or USE_SQL_PARSE_ANNOTATIONS)
+string	sql.parse.message(100)
+long	sql.parse.line
+	#define sql.parse.mle(query, mode)
+^		sql.parse(query, mode, sql.parse.message, sql.parse.line, cSqlAnnotation_SelectAllDataLanguages)
+#else
+	#define sql.parse.mle(query, mode)
+^		sql.parse(query, mode)
+#endif
+
+|******************************* User Helper Defines ***********************************
+| Standard method to be used in hooks when forwarding a request to another BDE
+| Return value is 0 (OK) or <> 0 (error value, but no error message set)
+#define replaceBdeNameInRequest(oldRequest, newBdeName, newRequest)
+^		tlbct.dll1000.replace.bde.name("request", "SJEquipmentInstallDismantleBOD", oldRequest, newBdeName, newRequest)
+#define replaceBdeNameInResponse(oldResponse, oldBdeName, newResponse)
+^		tlbct.dll1000.replace.bde.name("response", oldBdeName, oldResponse, "SJEquipmentInstallDismantleBOD", newResponse)
+#define removeNilAttributesInBdeResponse(response)
+^		tlbct.dll1000.remove.nillable.attributes(response)
+
+| Assisting method for SubscribeEvent when using multiple BIIs for a BID
+#define removeStandardEventsFromRequest(io_request_xml, o_any_event_action_left)
+^		tlbct.dll1000.remove.standard.events(io_request_xml, o_any_event_action_left)
+|******************************* End of User Helper Defines ****************************
+
+#define ERR_IF(condition, component)
+^	if condition then
+^		dal.set.error.message("tlbctstgen", "PublishEvent", component, "SJEquipmentInstallDismantleBOD")
+^		|* Error occurred in Method '%1$s' on component '%2$s' of Object '%3$s'.
+^		return(DALHOOKERROR)
+^	endif
+#define ERR_IF(condition)	ERR_IF(condition, "")
+
+|******************************* Initialize ***********************************
+	domain tcmcs.str50m bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID
+    boolean bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.UUID
+    boolean bl.SJEquipmentInstallDismantleBOD.UUID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.UUID.get
+	domain tcmcs.str50m bl.SJEquipmentInstallDismantleBOD.EquipmentID
+    boolean bl.SJEquipmentInstallDismantleBOD.EquipmentID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.EquipmentID.get
+	domain tcmcs.str7 bl.SJEquipmentInstallDismantleBOD.ActionCode
+    boolean bl.SJEquipmentInstallDismantleBOD.ActionCode.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ActionCode.get
+	domain tcdate bl.SJEquipmentInstallDismantleBOD.ValidFromDate
+    boolean bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ValidFromDate.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID
+    boolean bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID
+    boolean bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.get
+	domain tcitem bl.SJEquipmentInstallDismantleBOD.Item
+    boolean bl.SJEquipmentInstallDismantleBOD.Item.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Item.get
+	domain tcibd.sern bl.SJEquipmentInstallDismantleBOD.SerialNumber
+    boolean bl.SJEquipmentInstallDismantleBOD.SerialNumber.set
+    boolean bl.SJEquipmentInstallDismantleBOD.SerialNumber.get
+	domain tcorno bl.SJEquipmentInstallDismantleBOD.ServiceOrder
+    boolean bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ServiceOrder.get
+	domain tcpono bl.SJEquipmentInstallDismantleBOD.ActivityNumber
+    boolean bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ActivityNumber.get
+	domain tcemno bl.SJEquipmentInstallDismantleBOD.User
+    boolean bl.SJEquipmentInstallDismantleBOD.User.set
+    boolean bl.SJEquipmentInstallDismantleBOD.User.get
+	domain tscfg.pb.stat bl.SJEquipmentInstallDismantleBOD.BreakdownStatus
+    boolean bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set
+    boolean bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.get
+	domain tscfg.cfst bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code
+    boolean bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set
+    boolean bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.get
+	domain tcmcs.str30m bl.SJEquipmentInstallDismantleBOD.MovementType
+    boolean bl.SJEquipmentInstallDismantleBOD.MovementType.set
+    boolean bl.SJEquipmentInstallDismantleBOD.MovementType.get
+	domain tcmcs.st10m bl.SJEquipmentInstallDismantleBOD.StorageLocation
+    boolean bl.SJEquipmentInstallDismantleBOD.StorageLocation.set
+    boolean bl.SJEquipmentInstallDismantleBOD.StorageLocation.get
+	domain tcmcs.str7 bl.SJEquipmentInstallDismantleBOD.Position
+    boolean bl.SJEquipmentInstallDismantleBOD.Position.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Position.get
+	domain tcmcs.str25 bl.SJEquipmentInstallDismantleBOD.VehiclePosition
+    boolean bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set
+    boolean bl.SJEquipmentInstallDismantleBOD.VehiclePosition.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.Material
+    boolean bl.SJEquipmentInstallDismantleBOD.Material.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Material.get
+	domain tcmcs.str25 bl.SJEquipmentInstallDismantleBOD.Lot
+    boolean bl.SJEquipmentInstallDismantleBOD.Lot.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Lot.get
+	domain tcmcs.str25 bl.SJEquipmentInstallDismantleBOD.Measure
+    boolean bl.SJEquipmentInstallDismantleBOD.Measure.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Measure.get
+	domain tcmcs.st10m bl.SJEquipmentInstallDismantleBOD.UnitCode
+    boolean bl.SJEquipmentInstallDismantleBOD.UnitCode.set
+    boolean bl.SJEquipmentInstallDismantleBOD.UnitCode.get
+	domain tcyesno bl.SJEquipmentInstallDismantleBOD.Error
+    boolean bl.SJEquipmentInstallDismantleBOD.Error.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Error.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.ErrorMessage
+    boolean bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ErrorMessage.get
+	domain tcmcs.str25 bl.SJEquipmentInstallDismantleBOD.ResultCode
+    boolean bl.SJEquipmentInstallDismantleBOD.ResultCode.set
+    boolean bl.SJEquipmentInstallDismantleBOD.ResultCode.get
+	domain tcmcs.long bl.SJEquipmentInstallDismantleBOD.SeverityCode
+    boolean bl.SJEquipmentInstallDismantleBOD.SeverityCode.set
+    boolean bl.SJEquipmentInstallDismantleBOD.SeverityCode.get
+	domain tcmcs.str100m bl.SJEquipmentInstallDismantleBOD.Note
+    boolean bl.SJEquipmentInstallDismantleBOD.Note.set
+    boolean bl.SJEquipmentInstallDismantleBOD.Note.get
+	domain bolong bl.SJEquipmentInstallDismantleBOD.UserArea
+    boolean bl.SJEquipmentInstallDismantleBOD.UserArea.set
+    boolean bl.SJEquipmentInstallDismantleBOD.UserArea.get
+	domain tcmcs.str25 bl.SJEquipmentInstallDismantleBOD.WorkOrderID
+    boolean bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set
+    boolean bl.SJEquipmentInstallDismantleBOD.WorkOrderID.get
+	boolean	bl.SJEquipmentInstallDismantleBOD.custom.output
+	boolean bl.permission.for.setting.readonly.attributes
+
+	long	tbl.ttscfg200
+	long	len.ttscfg200
+	long	len.ttscfg200.real
+	string	rcd.ttscfg200 based
+	boolean bl.tscfg200.set
+
+	boolean bl.SJEquipmentInstallDismantleBOD.initialize
+
+	string  bl.object(99)
+	string  bl.bodesc(99)
+	string  bl.component(99)
+	long    bl.dal.nr.messages
+	string  bl.method(50)
+
+	long    bl.result
+	long    bl.before.initialize
+	long    bl.method.result
+	long	bl.component.result
+	long    bl.ret
+
+	xmlNode	bl.RequestArgument
+	xmlNode	bl.ResponseArgument
+	xmlNode	bl.ResultArgument
+
+	boolean	bl.SortingExpressionSet
+
+	xmlNode	bl.Filter
+	xmlNode	bl.FilteredAttributes
+	string	bl.FilterExpression(8192)
+	boolean	bl.PostFilter
+	boolean	bl.SaveFirstRecord
+	static	long bl.Len.SJEquipmentInstallDismantleBOD.tscfg200
+	string	bl.First.SJEquipmentInstallDismantleBOD.tscfg200 based
+	string	bl.NextFirst.SJEquipmentInstallDismantleBOD.tscfg200 based
+	boolean	bl.PageUp
+	boolean	bl.SwitchDirection
+	boolean	bl.performing.ShowAndPublishBOD
+
+	string	bl.processingScope(26)	|* transaction granularity
+
+#include <bic_dam>
+#pragma used dll otlbctdll1000
+
+
+
+function extern void txcom.bl952st00.set.xmlArguments(
+					const xmlNode i.RequestArgument,
+					const xmlNode i.ResponseArgument,
+					const xmlNode i.ResultArgument)
+{
+	bl.RequestArgument  = i.RequestArgument
+	bl.ResponseArgument = i.ResponseArgument
+	bl.ResultArgument   = i.ResultArgument
+}
+
+function extern void txcom.bl952st00.initialize.tables()
+{
+static	boolean	initialized
+	long	duml
+	
+	if initialized then
+		return
+	endif
+
+	if rdi.table("tscfg200", duml, duml, len.ttscfg200, len.ttscfg200.real) = 0 then
+		alloc.mem(rcd.ttscfg200,len.ttscfg200)
+		tbl.ttscfg200 = db.bind("ttscfg200", rcd.ttscfg200)
+	endif
+	
+	initialized = true
+}
+
+function extern 
+void txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+{
+	DllUsage
+	EndDllUsage
+
+	long	i
+	i = 0
+
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = false
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.get = false
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID = "" 
+	bl.SJEquipmentInstallDismantleBOD.UUID.set = false
+	bl.SJEquipmentInstallDismantleBOD.UUID.get = false
+	bl.SJEquipmentInstallDismantleBOD.UUID = "" 
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.get = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID = "" 
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.get = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate = 0 
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.get = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = "" 
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.get = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = "" 
+	bl.SJEquipmentInstallDismantleBOD.Item.set = false
+	bl.SJEquipmentInstallDismantleBOD.Item.get = false
+	bl.SJEquipmentInstallDismantleBOD.Item = "" 
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.get = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber = "" 
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.get = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder = "" 
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.get = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber = 0 
+	bl.SJEquipmentInstallDismantleBOD.User.set = false
+	bl.SJEquipmentInstallDismantleBOD.User.get = false
+	bl.SJEquipmentInstallDismantleBOD.User = "" 
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.get = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = empty 
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.get = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code = empty 
+	bl.SJEquipmentInstallDismantleBOD.MovementType.set = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType.get = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType = "" 
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.set = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.get = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation = "" 
+	bl.SJEquipmentInstallDismantleBOD.Position.set = false
+	bl.SJEquipmentInstallDismantleBOD.Position.get = false
+	bl.SJEquipmentInstallDismantleBOD.Position = "" 
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.get = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition = "" 
+	bl.SJEquipmentInstallDismantleBOD.Material.set = false
+	bl.SJEquipmentInstallDismantleBOD.Material.get = false
+	bl.SJEquipmentInstallDismantleBOD.Material = "" 
+	bl.SJEquipmentInstallDismantleBOD.Lot.set = false
+	bl.SJEquipmentInstallDismantleBOD.Lot.get = false
+	bl.SJEquipmentInstallDismantleBOD.Lot = "" 
+	bl.SJEquipmentInstallDismantleBOD.Measure.set = false
+	bl.SJEquipmentInstallDismantleBOD.Measure.get = false
+	bl.SJEquipmentInstallDismantleBOD.Measure = "" 
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.Error.set = false
+	bl.SJEquipmentInstallDismantleBOD.Error.get = false
+	bl.SJEquipmentInstallDismantleBOD.Error = empty 
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.get = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage = "" 
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode = 0 
+	bl.SJEquipmentInstallDismantleBOD.Note.set = false
+	bl.SJEquipmentInstallDismantleBOD.Note.get = false
+	bl.SJEquipmentInstallDismantleBOD.Note = "" 
+	bl.SJEquipmentInstallDismantleBOD.UserArea.set = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea.get = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea = 0 
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.get = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID = "" 
+	bl.SJEquipmentInstallDismantleBOD.custom.output = true
+
+	bl.SJEquipmentInstallDismantleBOD.initialize = true
+	bl.tscfg200.set = false
+	set.permission.for.readonly.attributes(false)
+
+}
+
+
+function extern boolean txcom.bl952st00.is.pageup()
+{
+	return(bl.PageUp)
+}
+
+function extern void txcom.bl952st00.set.pageup(boolean i.pageup)
+{
+	bl.PageUp = i.pageup
+}
+
+function extern boolean txcom.bl952st00.is.switch.direction()
+{
+	return(bl.SwitchDirection)
+}
+
+function extern void txcom.bl952st00.set.switch.direction(boolean i.switch)
+{
+	bl.SwitchDirection = i.switch
+}
+
+function extern void txcom.bl952st00.set.save.first.record(boolean i.save.first.record)
+{
+	bl.SaveFirstRecord = i.save.first.record
+}
+
+function extern void txcom.bl952st00.init.paging()
+{
+	bl.SwitchDirection=false
+	if bl.Len.SJEquipmentInstallDismantleBOD.tscfg200 = 0 then
+		db.row.length(tbl.ttscfg200,bl.Len.SJEquipmentInstallDismantleBOD.tscfg200)
+		alloc.mem(bl.First.SJEquipmentInstallDismantleBOD.tscfg200,bl.Len.SJEquipmentInstallDismantleBOD.tscfg200)
+		set.mem(bl.First.SJEquipmentInstallDismantleBOD.tscfg200,"")
+		alloc.mem(bl.NextFirst.SJEquipmentInstallDismantleBOD.tscfg200,bl.Len.SJEquipmentInstallDismantleBOD.tscfg200)
+		set.mem(bl.NextFirst.SJEquipmentInstallDismantleBOD.tscfg200,"")
+	endif
+}
+
+function extern void txcom.bl952st00.setProcessingScope(const string i.processingScope)
+{
+	bl.processingScope = i.processingScope
+}
+
+function extern boolean txcom.bl952st00.is.business.studio.supported()
+{
+	| Checks if the needed functionality is present.
+	static	boolean	initialized
+	static	boolean	supported
+	long		dll.id
+	
+	if not initialized then
+		if get.tools.tiv() < 1400 then
+			| A check is done if DLL tlbctdll1000 has external function
+			| tlbct.dll1000.remove.nillable.attributes().
+			dll.id = load_dll("otlbctdll1000", DLL_SILENT_ERR)
+			if dll.id = 0 then
+				supported = false
+			else
+				supported = (get_function(dll.id, "tlbct.dll1000.remove.nillable.attributes") > 0)
+			endif
+		else
+			| ES 8.4.2 or later is used
+			supported = true
+		endif
+		initialized = true
+	endif
+	return(supported)
+}
+
+function long column.exists(
+	const	string	i.table,
+	const	string	i.column)
+{
+| Returns:
+| > 0: the depth of the column (1 for non-array columns)
+|   0: column (or table) does not exist
+
+static	long	tables
+	long	table.node
+	long	fp
+	long	duml
+	long	retl
+	long	nr.keys
+	long	nr.columns
+	long	i
+	string	column.name(17)
+	string	dums
+	long	depth
+	long	column.type
+	long	column.offset
+	long	table.real.length
+
+	if tables = 0 then
+		| initialize structure
+		tables = xmlNewNode("tables")
+	endif
+	table.node = xmlFindFirst(i.table, tables)
+	if table.node = 0 then
+		| initialize node for table
+		table.node = xmlNewNode(i.table, XML_ELEMENT, tables)
+		
+		if get.bshell.tiv() < 2100 then
+			| check if table exists
+			fp = seq.open("{nolog}F_BRDD:d" & i.table, "r")
+			if fp > 0 then
+				| table exists
+				duml = seq.close(fp)
+			else
+				| table does not exist
+				return(0)
+			endif
+		endif
+		
+		retl = rdi.table(i.table, nr.keys, nr.columns, duml, table.real.length)
+		if retl = 0 then
+			| add the columns to the table node
+			for i = 1 to nr.columns
+				retl = rdi.table.column(i.table, i,
+					column.name, dums, column.offset, duml,
+					depth, column.type, duml, dums)
+				if retl = 0 and
+				   is.application.column(column.name, column.type, column.offset, table.real.length) then
+					duml = xmlSetAttribute(table.node, column.name(10), depth)
+				endif
+			endfor
+		endif
+	endif
+	
+	| retrieve depth from structure
+	depth = lval(xmlAttribute$(table.node, i.column))
+	
+	return(depth)
+}
+
+function boolean is.application.column(const string i.column.name, long i.column.type, long i.column.offset, long i.table.real.length)
+{
+#if ES_TIV_LEVEL >= 2032
+	if get.tools.tiv() >= 2032 then
+		return(rdi.is.application.column(i.column.name, i.column.type, i.column.offset, i.table.real.length))
+	else
+#endif
+		| Any column starting at the real length is not an application column
+		if i.column.offset >= i.table.real.length then
+			return(false)
+		endif
+	
+		| Indices and combined fields are not considered application columns
+		if i.column.type = DB.COMBINED then
+			return(false)
+		endif
+	
+		| Reference counters and rcd_utc are the only columns that are automatically added before the real length
+		if i.column.name(10;7) = "Refcntd" or
+		   i.column.name(10;7) = "Refcntu" or
+		   i.column.name(10;7) = "rcd_utc" then
+			return(false)
+		endif
+
+		return(true)
+#if ES_TIV_LEVEL >= 2032
+	endif
+#endif
+}
+
+
+function boolean column.tscfg200.cdf_giai.exists()
+{
+	static	boolean	initialized	| whether this method was called before
+	static	boolean	exists		| whether the column exists in the current application version
+			long	depth	| depth for array column
+	
+	if not initialized then
+		depth = column.exists("tscfg200", "cdf_giai")
+		exists = (depth > 0)
+
+		initialized = true
+	endif
+	return(exists)
+}
+
+function boolean column.tscfg200.cdf_giai.changed(const string i.value)
+{
+	string	value(100) mb	| current value of field
+	long	retl	| return value to be checked
+	
+	retl = get.var(pid, "tscfg200.cdf_giai", value)
+	if retl <> 1 then
+		return(false)
+	endif
+	return(strip$(value) <> strip$(i.value))
+}
+
+function boolean column.tscfg200.item.exists()
+{
+	static	boolean	initialized	| whether this method was called before
+	static	boolean	exists		| whether the column exists in the current application version
+			long	depth	| depth for array column
+	
+	if not initialized then
+		depth = column.exists("tscfg200", "item")
+		exists = (depth > 0)
+
+		initialized = true
+	endif
+	return(exists)
+}
+
+function boolean column.tscfg200.item.changed(const string i.value)
+{
+	string	value(100)	| current value of field
+	long	retl	| return value to be checked
+	
+	retl = get.var(pid, "tscfg200.item", value)
+	if retl <> 1 then
+		return(false)
+	endif
+	return(strip$(value) <> strip$(i.value))
+}
+
+function boolean column.tscfg200.sern.exists()
+{
+	static	boolean	initialized	| whether this method was called before
+	static	boolean	exists		| whether the column exists in the current application version
+			long	depth	| depth for array column
+	
+	if not initialized then
+		depth = column.exists("tscfg200", "sern")
+		exists = (depth > 0)
+
+		initialized = true
+	endif
+	return(exists)
+}
+
+function boolean column.tscfg200.sern.changed(const string i.value)
+{
+	string	value(100)	| current value of field
+	long	retl	| return value to be checked
+	
+	retl = get.var(pid, "tscfg200.sern", value)
+	if retl <> 1 then
+		return(false)
+	endif
+	return(strip$(value) <> strip$(i.value))
+}
+
+function boolean column.tscfg200.stat.exists()
+{
+	static	boolean	initialized	| whether this method was called before
+	static	boolean	exists		| whether the column exists in the current application version
+			long	depth	| depth for array column
+	
+	if not initialized then
+		depth = column.exists("tscfg200", "stat")
+		exists = (depth > 0)
+
+		initialized = true
+	endif
+	return(exists)
+}
+
+function boolean column.tscfg200.stat.changed(domain	tscfg.cfst i.value)
+{
+	domain	tscfg.cfst	value	| current value of field
+	long	retl	| return value to be checked
+	
+	retl = get.var(pid, "tscfg200.stat", value)
+	if retl <> 1 then
+		return(false)
+	endif
+	return(value <> i.value)
+}
+
+|****************************** Set & Get generic *********************************
+
+
+function extern 
+boolean txcom.bl952st00.supports.referential.integrity()
+{
+	DllUsage
+	EndDllUsage
+	return(false)
+}
+
+function 
+void set.permission.for.readonly.attributes(boolean i.value)
+{
+	bl.permission.for.setting.readonly.attributes = i.value
+}
+
+|****************************** Set & Get *********************************
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID(const domain tcmcs.str50m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID = i.value
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = true
+		bl.tscfg200.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID(
+					ref domain tcmcs.str50m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID
+
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UUID(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.UUID = i.value
+		bl.SJEquipmentInstallDismantleBOD.UUID.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UUID(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+	long	duml
+
+	duml = 0
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.UUID
+
+	RETIFNOK(Hook.OnGet.SJEquipmentInstallDismantleBOD.UUID(
+		o.value,
+		bl.SJEquipmentInstallDismantleBOD.UUID.set))
+
+	bl.SJEquipmentInstallDismantleBOD.UUID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UUID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.UUID.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.EquipmentID(const domain tcmcs.str50m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID = i.value
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = true
+		bl.tscfg200.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.EquipmentID(
+					ref domain tcmcs.str50m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.EquipmentID
+
+	RETIFNOK(Hook.AfterGet.SJEquipmentInstallDismantleBOD.EquipmentID(
+		bl.SJEquipmentInstallDismantleBOD.Item,
+		bl.SJEquipmentInstallDismantleBOD.Item.set,
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber,
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set,
+			o.value,
+			bl.SJEquipmentInstallDismantleBOD.EquipmentID.set))
+
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.EquipmentID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.EquipmentID.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ActionCode(const domain tcmcs.str7 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ActionCode = i.value
+		bl.SJEquipmentInstallDismantleBOD.ActionCode.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ActionCode(
+					ref domain tcmcs.str7 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ActionCode
+
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ActionCode()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ActionCode.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ValidFromDate(const domain tcdate i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ValidFromDate = i.value
+		bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ValidFromDate(
+					ref domain tcdate o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ValidFromDate
+
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ValidFromDate()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = i.value
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID
+
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = i.value
+		bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID
+
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Item(const domain tcitem i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Item = i.value
+		bl.SJEquipmentInstallDismantleBOD.Item.set = true
+		bl.tscfg200.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Item(
+					ref domain tcitem o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Item
+
+	bl.SJEquipmentInstallDismantleBOD.Item.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Item()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Item.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SerialNumber(const domain tcibd.sern i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber = i.value
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = true
+		bl.tscfg200.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SerialNumber(
+					ref domain tcibd.sern o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.SerialNumber
+
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SerialNumber()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.SerialNumber.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ServiceOrder(const domain tcorno i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ServiceOrder = i.value
+		bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ServiceOrder(
+					ref domain tcorno o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ServiceOrder
+
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ServiceOrder()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ActivityNumber(const domain tcpono i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ActivityNumber = i.value
+		bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ActivityNumber(
+					ref domain tcpono o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ActivityNumber
+
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ActivityNumber()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.User(const domain tcemno i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.User = i.value
+		bl.SJEquipmentInstallDismantleBOD.User.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.User(
+					ref domain tcemno o.value)
+{
+	DllUsage
+	EndDllUsage
+
+	long	duml
+
+	duml = 0
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.User
+
+	RETIFNOK(Hook.OnGet.SJEquipmentInstallDismantleBOD.User(
+		o.value,
+		bl.SJEquipmentInstallDismantleBOD.User.set))
+
+	bl.SJEquipmentInstallDismantleBOD.User.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.User()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.User.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.BreakdownStatus(const domain tscfg.pb.stat i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = i.value
+		bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.BreakdownStatus(
+					ref domain tscfg.pb.stat o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.BreakdownStatus
+
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.BreakdownStatus()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code(const domain tscfg.cfst i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code = i.value
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = true
+		bl.tscfg200.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.VehilceStatus_Code(
+					ref domain tscfg.cfst o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code
+
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.MovementType(const domain tcmcs.str30m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.MovementType = i.value
+		bl.SJEquipmentInstallDismantleBOD.MovementType.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.MovementType(
+					ref domain tcmcs.str30m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.MovementType
+
+	bl.SJEquipmentInstallDismantleBOD.MovementType.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.MovementType()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.MovementType.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.StorageLocation(const domain tcmcs.st10m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.StorageLocation = i.value
+		bl.SJEquipmentInstallDismantleBOD.StorageLocation.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.StorageLocation(
+					ref domain tcmcs.st10m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+	long	duml
+
+	duml = 0
+
+	duml = txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Item(
+		bl.SJEquipmentInstallDismantleBOD.Item)
+		bl.SJEquipmentInstallDismantleBOD.Item.set = 
+			txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Item()
+	duml = txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SerialNumber(
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber)
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = 
+			txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SerialNumber()
+	o.value = bl.SJEquipmentInstallDismantleBOD.StorageLocation
+
+	RETIFNOK(Hook.OnGet.SJEquipmentInstallDismantleBOD.StorageLocation(
+		bl.SJEquipmentInstallDismantleBOD.Item,
+		bl.SJEquipmentInstallDismantleBOD.Item.set,
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber,
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set,
+		o.value,
+		bl.SJEquipmentInstallDismantleBOD.StorageLocation.set))
+
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.StorageLocation()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.StorageLocation.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Position(const domain tcmcs.str7 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Position = i.value
+		bl.SJEquipmentInstallDismantleBOD.Position.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Position(
+					ref domain tcmcs.str7 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Position
+
+	bl.SJEquipmentInstallDismantleBOD.Position.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Position()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Position.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.VehiclePosition(const domain tcmcs.str25 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.VehiclePosition = i.value
+		bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.VehiclePosition(
+					ref domain tcmcs.str25 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.VehiclePosition
+
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.VehiclePosition()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Material(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Material = i.value
+		bl.SJEquipmentInstallDismantleBOD.Material.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Material(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+	long	duml
+
+	duml = 0
+
+	duml = txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.EquipmentID(
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID)
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = 
+			txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.EquipmentID()
+	duml = txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID(
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID)
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set = 
+			txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+	duml = txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Position(
+		bl.SJEquipmentInstallDismantleBOD.Position)
+		bl.SJEquipmentInstallDismantleBOD.Position.set = 
+			txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Position()
+	o.value = bl.SJEquipmentInstallDismantleBOD.Material
+
+	RETIFNOK(Hook.OnGet.SJEquipmentInstallDismantleBOD.Material(
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID,
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set,
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID,
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set,
+		bl.SJEquipmentInstallDismantleBOD.Position,
+		bl.SJEquipmentInstallDismantleBOD.Position.set,
+		o.value,
+		bl.SJEquipmentInstallDismantleBOD.Material.set))
+
+	bl.SJEquipmentInstallDismantleBOD.Material.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Material()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Material.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Lot(const domain tcmcs.str25 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Lot = i.value
+		bl.SJEquipmentInstallDismantleBOD.Lot.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Lot(
+					ref domain tcmcs.str25 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Lot
+
+	bl.SJEquipmentInstallDismantleBOD.Lot.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Lot()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Lot.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Measure(const domain tcmcs.str25 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Measure = i.value
+		bl.SJEquipmentInstallDismantleBOD.Measure.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Measure(
+					ref domain tcmcs.str25 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Measure
+
+	bl.SJEquipmentInstallDismantleBOD.Measure.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Measure()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Measure.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UnitCode(const domain tcmcs.st10m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.UnitCode = i.value
+		bl.SJEquipmentInstallDismantleBOD.UnitCode.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UnitCode(
+					ref domain tcmcs.st10m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.UnitCode
+
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UnitCode()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.UnitCode.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Error(const domain tcyesno i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Error = i.value
+		bl.SJEquipmentInstallDismantleBOD.Error.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Error(
+					ref domain tcyesno o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Error
+
+	bl.SJEquipmentInstallDismantleBOD.Error.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Error()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Error.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ErrorMessage(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ErrorMessage = i.value
+		bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ErrorMessage(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ErrorMessage
+
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ErrorMessage()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ResultCode(const domain tcmcs.str25 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.ResultCode = i.value
+		bl.SJEquipmentInstallDismantleBOD.ResultCode.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ResultCode(
+					ref domain tcmcs.str25 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.ResultCode
+
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ResultCode()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.ResultCode.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SeverityCode(const domain tcmcs.long i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.SeverityCode = i.value
+		bl.SJEquipmentInstallDismantleBOD.SeverityCode.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SeverityCode(
+					ref domain tcmcs.long o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.SeverityCode
+
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SeverityCode()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.SeverityCode.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Note(const domain tcmcs.str100m i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.Note = i.value
+		bl.SJEquipmentInstallDismantleBOD.Note.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Note(
+					ref domain tcmcs.str100m o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.Note
+
+	bl.SJEquipmentInstallDismantleBOD.Note.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Note()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.Note.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UserArea(const domain bolong i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.UserArea = i.value
+		bl.SJEquipmentInstallDismantleBOD.UserArea.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UserArea(
+					ref domain bolong o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.UserArea
+	
+	if bl.SJEquipmentInstallDismantleBOD.UserArea.set and o.value <> 0 and xmlName$(o.value) <> "UserArea" then
+		dal.set.error.message("tlbctst0049", "UserArea")
+		|* Top-level node for anyType attribute %1$s is not valid.
+		return (DALHOOKERROR)
+	endif
+
+	bl.SJEquipmentInstallDismantleBOD.UserArea.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UserArea()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.UserArea.set)
+}
+
+
+function extern 
+long txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.WorkOrderID(const domain tcmcs.str25 i.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+
+	if not bl.SJEquipmentInstallDismantleBOD.initialize then
+		txcom.bl952st00.SJEquipmentInstallDismantleBOD.initialize()
+	endif
+		bl.SJEquipmentInstallDismantleBOD.WorkOrderID = i.value
+		bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set = true
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.WorkOrderID(
+					ref domain tcmcs.str25 o.value)
+{
+	DllUsage
+	EndDllUsage
+
+
+	o.value = bl.SJEquipmentInstallDismantleBOD.WorkOrderID
+
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.get = true
+
+	return(0)
+}
+
+function extern 
+boolean txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.WorkOrderID()
+{
+	DllUsage
+	EndDllUsage
+	return(bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set)
+}
+
+
+#define DALERROR_IF(cond, mesg)
+^	if cond then
+^		dal.set.error.message("@" & mesg)
+^		return(DALHOOKERROR)
+^	endif
+
+function extern boolean txcom.bl952st00.must.add.SJEquipmentInstallDismantleBOD.custom.output()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.SJEquipmentInstallDismantleBOD.custom.output)
+}
+
+function extern void txcom.bl952st00.do.not.add.SJEquipmentInstallDismantleBOD.custom.output()
+{
+	DllUsage
+	EndDllUsage
+
+	bl.SJEquipmentInstallDismantleBOD.custom.output = false
+}
+
+XmlNode	bl.index.SJEquipmentInstallDismantleBOD
+
+function extern txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.custom.index(long i.xml)
+{
+	DllUsage
+	EndDllUsage
+	
+	bl.index.SJEquipmentInstallDismantleBOD = i.xml
+}
+
+function extern txcom.bl952st00.reset.SJEquipmentInstallDismantleBOD.custom.index()
+{
+	DllUsage
+	EndDllUsage
+	
+	bl.index.SJEquipmentInstallDismantleBOD = 0
+}
+
+function extern 
+long txcom.bl952st00.get.SJEquipmentInstallDismantleBOD._index1(
+		ref		long		o.xml)
+{
+	DllUsage
+	EndDllUsage
+
+	long	table.node
+	long	column.node
+	long	retl
+	long	i
+
+	if bl.index.SJEquipmentInstallDismantleBOD <> 0 and
+	   xmlGetFirstChild(bl.index.SJEquipmentInstallDismantleBOD) <> 0
+	then
+		| identifiers already set
+		o.xml = xmlDuplicate(bl.index.SJEquipmentInstallDismantleBOD)
+		return(0)
+	endif
+	
+	i = 0
+	retl = 0
+	table.node = 0
+	column.node = 0
+	o.xml = xmlNewNode("IndexValues")
+	DALERROR_IF(o.xml = 0, "Cannot create XML node")
+
+	if column.tscfg200.item.exists() then
+		if bl.SJEquipmentInstallDismantleBOD.Item.set then
+			table.node = xmlNewNode("Table", XML_ELEMENT, o.xml)
+			DALERROR_IF(table.node = 0, "Cannot create XML node")
+			retl = xmlSetAttribute(table.node, "name", "tscfg200")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+			column.node = xmlNewDataElement("Column",
+				bl.SJEquipmentInstallDismantleBOD.Item, table.node)
+			DALERROR_IF(column.node = 0, "Cannot create XML node")
+			retl = xmlSetAttribute(column.node, "name", "item")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+			retl = xmlSetAttribute(column.node, "dataType", "DB.STRING")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+		else
+			dal.set.error.message("@Protected attribute SJEquipmentInstallDismantleBOD.Item is mandatory.")
+			return(DALHOOKERROR)
+		endif
+	endif
+	if column.tscfg200.sern.exists() then
+		if bl.SJEquipmentInstallDismantleBOD.SerialNumber.set then
+			table.node = xmlNewNode("Table", XML_ELEMENT, o.xml)
+			DALERROR_IF(table.node = 0, "Cannot create XML node")
+			retl = xmlSetAttribute(table.node, "name", "tscfg200")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+			column.node = xmlNewDataElement("Column",
+				bl.SJEquipmentInstallDismantleBOD.SerialNumber, table.node)
+			DALERROR_IF(column.node = 0, "Cannot create XML node")
+			retl = xmlSetAttribute(column.node, "name", "sern")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+			retl = xmlSetAttribute(column.node, "dataType", "DB.STRING")
+			DALERROR_IF(retl = 0, "Cannot set XML attribute")
+		else
+			dal.set.error.message("@Protected attribute SJEquipmentInstallDismantleBOD.SerialNumber is mandatory.")
+			return(DALHOOKERROR)
+		endif
+	endif
+	return(0)
+}
+
+
+|****************************** Helper functions for control data **********
+
+function boolean getControlAttribute(
+	const	string	i.name,
+	ref	string	o.value)
+{
+	return(getControlAttributeFromRequest(
+		bl.RequestArgument, i.name, o.value))
+}
+
+function boolean setControlAttribute(
+	const	string	i.name,
+	const	string	i.value)
+{
+	return(setControlAttributeInResponse(
+		bl.ResponseArgument, i.name, i.value))
+}
+
+function boolean getControlAttributeFromRequest(
+		long	i.request,
+	const	string	i.name,
+	ref	string	o.value)
+{
+	xmlnode ControlAreaNode
+	long	retl
+
+	ControlAreaNode = xmlFindFirst("ControlArea", i.request)
+	retl = xmlGetDataElement(ControlAreaNode, i.name, o.value)
+	if retl = 0 then
+		return (false)
+	endif
+	return (true)
+}
+
+function boolean setControlAttributeInResponse(
+		long	io.response,
+	const	string	i.name,
+	const	string	i.value)
+{
+	xmlnode ControlAreaNode
+	long	retl
+
+	ControlAreaNode = xmlFindFirst("ControlArea", io.response)
+	if ControlAreaNode = 0 then
+		ControlAreaNode = xmlNewNode("ControlArea")
+		retl = xmlInsertInChilds(io.response, ControlAreaNode)
+		if retl = 0 then
+			return (false)
+		endif
+	endif
+	retl = xmlRewriteDataElement(ControlAreaNode, i.name, i.value)
+	if retl = 0 then
+		return (false)
+	endif
+	return (true)
+}
+
+function boolean getAttributeValueFromRequest(
+		long	i.request,
+	const	string	i.path,
+	ref	string	o.value)
+{
+	string	path(1000)
+	long	matching.node
+
+	path = i.path
+	if isspace(i.path) or not tlbct.dll1000.replace.data(path, ".", ">.<") then
+		o.value = ""
+		return(false)
+	endif
+	matching.node = xmlFindFirstMatch(sprintf$("<>.<DataArea>.<%s>", path),
+					i.request)
+	if matching.node = 0 or xmlGetType(xmlGetFirstChild(matching.node)) <> XML_DATA then
+		o.value = ""
+		return(false)
+	endif
+	o.value = xmlData$(matching.node)
+	return(true)
+}
+
+function long getRequest()
+{
+	return(bl.RequestArgument)
+}
+
+#define attributeIsSelected(componentName, attributeImplementationName)
+^	bl.##componentName##.##attributeImplementationName##.selected
+
+function do.not.use.this.function()
+{
+| The purpose of this function is to avoid compile warnings on unused
+| functions.
+	
+	boolean	dumb
+	long	duml
+	string	dums(1)
+	
+	if false then
+		do.not.use.this.function()
+		dumb = getControlAttribute(dums, dums)
+		dumb = setControlAttribute(dums, dums)
+		dumb = getControlAttributeFromRequest(duml, dums, dums)
+		dumb = setControlAttributeInResponse(duml, dums, dums)
+		dumb = getAttributeValueFromRequest(duml, dums, dums)
+		duml = getRequest()
+		duml = handle.result(duml)
+		duml = OCM_SET_QUERY_MODE("")
+		duml = txcom.bl952st00.SJEquipmentInstallDismantleBOD.Show.set.derived()
+		log.identifiers.DAL.message.SJEquipmentInstallDismantleBOD()
+		dums = childComponentJoin.SJEquipmentInstallDismantleBOD("")
+		dums = nonRootJoin.SJEquipmentInstallDismantleBOD.tscfg200_1()
+	endif
+}
+
+
+
+|****************************** Methods ********************************
+
+
+|****************************** Execute Method ********************************
+|	boolean	ibl.cancel
+
+function extern 
+long txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.Read()
+{
+	DllUsage
+	EndDllUsage
+
+	long	result
+	long	hold.context
+	long	retl
+	long	i
+	
+	retl = 0
+	i = 0
+
+	result = 0
+	bl.component.result = 0
+	hold.context = dal.get.context()
+	dal.set.context(CTX_INTEGRATION)
+	
+	if not bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set then
+		dal.set.error.message("tlbctst0001",
+			"SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID")
+		|* Mandatory protected attribute %1$s is not set.
+		dal.set.context(hold.context)
+		return(DALHOOKERROR)
+	endif
+
+	set.permission.for.readonly.attributes(true)
+
+	retl = Read.Object.SJEquipmentInstallDismantleBOD.tscfg200_1()
+	if retl <> 0 then
+		dal.set.context(hold.context)
+		return(retl)
+	endif
+	set.current.number.of.DAL.messages()
+	clear.recent.DAL.error.messages()
+
+
+|*	RETIFNOKINITFIN_COMPONENT(Read, SJEquipmentInstallDismantleBOD, "txcom.bl952sf00.after.Read.SJEquipmentInstallDismantleBOD")
+
+	bl.SJEquipmentInstallDismantleBOD.initialize = false
+	bl.ret = txcom.bl952st00.finalize.Read()
+	dal.set.context(hold.context)
+
+	return(0)
+}
+
+function extern 
+long txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.Read.Only()
+{
+	DllUsage
+	EndDllUsage
+
+	long	result
+	long	hold.context
+
+	result = 0
+	hold.context = dal.get.context()
+	dal.set.context(CTX_INTEGRATION)
+	set.current.number.of.DAL.messages()
+	
+	result = dal.get.object("tscfg200", false
+		,"tscfg200.item", bl.SJEquipmentInstallDismantleBOD.Item
+		,"tscfg200.sern", bl.SJEquipmentInstallDismantleBOD.SerialNumber
+		)
+	if result <> 0 then
+		clear.recent.DAL.error.messages()
+		dal.set.context(hold.context)
+		return(result)
+	endif
+
+	clear.recent.DAL.error.messages()
+	dal.set.context(hold.context)
+	return(0)
+}
+
+|****************************** Finalize Method *******************************
+
+function set.component.init.vars.to.false()
+{
+	long	ret
+
+	bl.SJEquipmentInstallDismantleBOD.initialize = false
+	bl.SortingExpressionSet = false
+	if bl.Filter <> 0 then
+		ret = xmlDelete(bl.Filter)
+	endif
+	bl.Filter = 0
+	if bl.FilteredAttributes <> 0 then
+		ret = xmlDelete(bl.FilteredAttributes)
+	endif
+	bl.FilteredAttributes = 0
+	bl.FilterExpression = ""
+	bl.PostFilter = false
+	set.permission.for.readonly.attributes(false)
+}
+
+function extern long txcom.bl952st00.finalize.Read(...)
+{
+	DllUsage
+	EndDllUsage
+
+	bl.method.result = ( get.argc() > 0 ) ? get.long.arg(1) : 0
+	bl.component.result = bl.method.result
+	if bl.before.initialize <> 0 then
+		bl.before.initialize = 0
+|*		Not possible yet... No After hook for method available in model.
+|*		if bl.method.result = 0 then
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.Read")
+|*			bl.method.result = retval
+|*		else
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.Read")
+|*		endif
+	endif
+
+	set.component.init.vars.to.false()
+
+	return(bl.method.result)
+}
+function extern long txcom.bl952st00.finalize.OnProcess(...)
+{
+	DllUsage
+	EndDllUsage
+
+	bl.method.result = ( get.argc() > 0 ) ? get.long.arg(1) : 0
+	bl.component.result = bl.method.result
+	if bl.before.initialize <> 0 then
+		bl.before.initialize = 0
+|*		Not possible yet... No After hook for method available in model.
+|*		if bl.method.result = 0 then
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.OnProcess")
+|*			bl.method.result = retval
+|*		else
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.OnProcess")
+|*		endif
+	endif
+
+	set.component.init.vars.to.false()
+
+	return(bl.method.result)
+}
+function extern long txcom.bl952st00.finalize.Show(...)
+{
+	DllUsage
+	EndDllUsage
+
+	bl.method.result = ( get.argc() > 0 ) ? get.long.arg(1) : 0
+	bl.component.result = bl.method.result
+	if bl.before.initialize <> 0 then
+		bl.before.initialize = 0
+|*		Not possible yet... No After hook for method available in model.
+|*		if bl.method.result = 0 then
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.Show")
+|*			bl.method.result = retval
+|*		else
+|*			CALL.SPECIFIC.METHOD.NO.RET(
+|*				"txcom.bl952st00.after.Show")
+|*		endif
+	endif
+
+	set.component.init.vars.to.false()
+
+	return(bl.method.result)
+}
+
+function extern long txcom.bl952st00.before.initialized()
+{
+	DllUsage
+	EndDllUsage
+
+	return( (bl.before.initialize = 0) ? 0 : 1)
+}
+
+function extern long txcom.bl952st00.get.method.result()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.method.result)
+}
+
+function extern long txcom.bl952st00.get.component.result()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.component.result)
+}
+
+|******************************** Create Object *******************************
+
+|****************** Assign attribute implementation from column ***************
+
+function long assign.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.from.column.tscfg200()
+{
+	long	retl	| return value to be checked
+	if column.tscfg200.cdf_giai.exists() then
+		retl = get.var(pid, "tscfg200.cdf_giai", bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID)
+		if retl = 0 then
+			dal.set.error.message("@Cannot assign SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID from tscfg200.cdf_giai (error at %s-%d)", __FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = true
+	else
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = false
+	endif
+	return(0)
+}
+
+function long assign.SJEquipmentInstallDismantleBOD.EquipmentID.from.column.tscfg200()
+{
+	long	retl	| return value to be checked
+	if column.tscfg200.cdf_giai.exists() then
+		retl = get.var(pid, "tscfg200.cdf_giai", bl.SJEquipmentInstallDismantleBOD.EquipmentID)
+		if retl = 0 then
+			dal.set.error.message("@Cannot assign SJEquipmentInstallDismantleBOD.EquipmentID from tscfg200.cdf_giai (error at %s-%d)", __FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = true
+	else
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = false
+	endif
+	return(0)
+}
+
+function long assign.SJEquipmentInstallDismantleBOD.Item.from.column.tscfg200()
+{
+	long	retl	| return value to be checked
+	if column.tscfg200.item.exists() then
+		retl = get.var(pid, "tscfg200.item", bl.SJEquipmentInstallDismantleBOD.Item)
+		if retl = 0 then
+			dal.set.error.message("@Cannot assign SJEquipmentInstallDismantleBOD.Item from tscfg200.item (error at %s-%d)", __FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.Item.set = true
+	else
+		bl.SJEquipmentInstallDismantleBOD.Item.set = false
+	endif
+	return(0)
+}
+
+function long assign.SJEquipmentInstallDismantleBOD.SerialNumber.from.column.tscfg200()
+{
+	long	retl	| return value to be checked
+	if column.tscfg200.sern.exists() then
+		retl = get.var(pid, "tscfg200.sern", bl.SJEquipmentInstallDismantleBOD.SerialNumber)
+		if retl = 0 then
+			dal.set.error.message("@Cannot assign SJEquipmentInstallDismantleBOD.SerialNumber from tscfg200.sern (error at %s-%d)", __FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = true
+	else
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = false
+	endif
+	return(0)
+}
+
+function long assign.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.from.column.tscfg200()
+{
+	long	retl	| return value to be checked
+	if column.tscfg200.stat.exists() then
+		retl = get.var(pid, "tscfg200.stat", bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code)
+		if retl = 0 then
+			dal.set.error.message("@Cannot assign SJEquipmentInstallDismantleBOD.VehilceStatus_Code from tscfg200.stat (error at %s-%d)", __FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = true
+	else
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = false
+	endif
+	return(0)
+}
+
+|******************************** Read Object *********************************
+
+function long Read.Object.SJEquipmentInstallDismantleBOD.tscfg200_1()
+{
+	long	result
+	long	i
+
+	result = 0
+	i = 0
+	bl.object = "txcom952 SJEquipmentInstallDismantleBOD"
+	bl.bodesc = "txcom952 SJEquipmentInstallDismantleBOD"
+	bl.component = "SJEquipmentInstallDismantleBOD"
+	bl.method = "Read"
+
+	result = dal.get.object("tscfg200", false
+		,"tscfg200.item", bl.SJEquipmentInstallDismantleBOD.Item
+		,"tscfg200.sern", bl.SJEquipmentInstallDismantleBOD.SerialNumber
+		)
+	if result <> 0 then
+		log.identifiers.DAL.message.SJEquipmentInstallDismantleBOD()
+	endif
+	bl.result = handle.result(result)
+	if bl.result <> 0 then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+		bl.ret = txcom.bl952st00.finalize.Read(bl.result)
+		return(bl.result)
+	endif
+	bl.result = handle.result(assign.SJEquipmentInstallDismantleBOD.EquipmentID.from.column.tscfg200())
+	if bl.result <> 0 then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+		bl.ret = txcom.bl952st00.finalize.Read(bl.result)
+		return(bl.result)
+	endif
+	bl.result = handle.result(assign.SJEquipmentInstallDismantleBOD.Item.from.column.tscfg200())
+	if bl.result <> 0 then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+		bl.ret = txcom.bl952st00.finalize.Read(bl.result)
+		return(bl.result)
+	endif
+	bl.result = handle.result(assign.SJEquipmentInstallDismantleBOD.SerialNumber.from.column.tscfg200())
+	if bl.result <> 0 then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+		bl.ret = txcom.bl952st00.finalize.Read(bl.result)
+		return(bl.result)
+	endif
+	bl.result = handle.result(assign.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.from.column.tscfg200())
+	if bl.result <> 0 then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+		bl.ret = txcom.bl952st00.finalize.Read(bl.result)
+		return(bl.result)
+	endif
+	return(0)
+}
+
+|******************************** Change Object *******************************
+
+|******************************** Delete Object *******************************
+
+|* afs.set_error_message
+
+|****************************** Setting fields for create/change *************
+
+|****************************** Set derived attributes ***********************
+
+| The following function is used by any non-batch method implementation.
+| So either standard methods such as Create/Change/Delete or List/Show or
+| specific methods.
+
+function 
+long txcom.bl952st00.SJEquipmentInstallDismantleBOD.Show.set.derived()
+{
+	FunctionUsage
+	This function is be called after setting the public input arguments for a method,
+	before starting the actual execution.
+	In other words, at the start of the before.execute... function.
+	It sets the protected/private attribute implementations that are derived from the
+	public input arguments.
+	For example, public attributes A1, A2, A3 and A4 exist.
+	Protected attributes having on set hooks are P1 (used attribute A2),
+	P2 (used attribute P1), P3 (used attributes A2 and P4),
+	P4 (used attributes P2 and A3) and P5 (no used attributes).
+	Then the following logic is executed (sequence must take dependencies into account!):
+	- set P5
+	- If A2 is set then set P1
+	- If P1 is set then set P2
+	- If P2 is set or(!) A3 is set then set P4
+	- If A2 is set or(!) P4 is set then set P3
+	EndFunctionUsage
+	long	i
+
+	i = 0
+	return(0) | OK
+}
+
+|***************************** Private Functions ******************************
+
+function clear.recent.DAL.error.messages()
+{
+	long	ret.bl
+	string  MessageCode(25)
+	string  MessageContent(256) mb
+	long    MessageTypeCode
+
+	while dal.count.messages(MSG.ALL) > bl.dal.nr.messages
+		ret.bl = dal.get.last.message(MSG.ALL, MessageCode,
+			MessageContent,
+		   MessageTypeCode)
+	endwhile
+}
+
+function set.current.number.of.DAL.messages()
+{
+	bl.dal.nr.messages = dal.count.messages(MSG.ALL)
+}
+
+function log.identifiers.DAL.message.SJEquipmentInstallDismantleBOD()
+{
+	| Because the application DAL does not always log all identifiers,
+	| it would be difficult to determine which instance causes the
+	| reported problem. Therefore, the identifiers are logged in this
+	| function.
+	dal.set.error.message("@Identifiers: BODID_ExternalReferenceID=" &
+			trim$(bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID)
+	)
+}
+
+function long handle.result(long i.result)
+{
+
+	string	e.message(256) mb
+	string	mscode(12)
+
+	if i.result = 0 then
+		return (0)
+	endif
+	if i.result = 0 or
+	   i.result = DALHOOKERROR or
+	   i.result = DALDBERROR or
+	   i.result = DALNOSETPERM or
+	   i.result = DALNOOBJPERM then
+		|* error message already present
+		if i.result <> 0 then
+			dal.set.info.message("tlbctstgen",
+				strip$(bl.method), strip$(bl.component),
+				strip$(bl.bodesc))
+			|* Error occurred in Method '%1$s' on component '2$s'
+			|* of Object '%3$s'
+		endif
+		return(i.result)
+	endif
+
+	e.message = ""
+	if i.result > 0 then
+		|* get errormessage by messcode tlbcterrX
+		mscode = "tlbcterr" & str$(i.result)
+		e.message = sprintf$(form.text$(mscode),
+					strip$(bl.method), strip$(bl.object))
+	endif
+
+	if i.result > 0 and pos(e.message, "???") = 0 then
+		dal.set.error.message(mscode,
+				bl.method, strip$(bl.object))
+	else
+		e.message = db.error.message()
+		if isspace(e.message) then
+			dal.set.error.message("tlbcts0021",
+						strip$(bl.method),
+						strip$(bl.object),
+						i.result)
+			|* Method '%1$s', Object '%2$s':
+			|* error-code: %3$d ( Error description not present )
+			tlbct.dll1000.log(__FILE__, __LINE__,
+				sprintf$(form.text$("tlbcts0004"),
+	 						i.result))
+			|* Error description not present (code: %1$d).
+		else
+			dal.set.error.message("@" & e.message)
+			dal.set.info.message("tlbctstgen",
+				strip$(bl.method), strip$(bl.component),
+				strip$(bl.bodesc))
+			|* Error occurred in Method '%1$s' on component '2$s'
+			|* of Object '%3$s'
+		endif
+	endif
+	return(i.result)
+}
+
+#if ES_TIV_LEVEL >= 1800
+|*********************** OCM helper functions **********************************
+
+function boolean is.ocm.active(const string i.table)
+{
+	if (get.tools.tiv() >= 1800) then
+		return(dbcm.is.cm.active(i.table))
+	else
+		return(false)
+	endif
+}
+
+function long get.type.name(const string i.table, ref string o.obj.type)
+{
+	if (get.tools.tiv() >= 1800) then
+		on case dbcm.get.type.name(i.table, o.obj.type)
+		case 0:
+			| OK
+			return(0)
+		case 1:
+			| multiple object types found
+			dal.set.error.message("@Cannot determine Object Type for " &
+				"table '%1s': the table occurs in multiple Object Types.",
+				i.table)
+			return(DALHOOKERROR)
+		default:
+			| error
+			dal.set.error.message("@Cannot determine Object Type for " &
+				"table '%1$s' (error %2$d).", i.table, e)
+			return(DALHOOKERROR)
+		endcase
+	else
+		o.obj.type = ""
+		return(0)
+	endif
+}
+
+function long check.result.set.query.mode(long first, long second,
+		const string i.obj.type, const string i.table)
+{
+	RETIFNOK(first)
+	if second <> 0 then
+		dal.set.error.message("@Cannot select Object Type '%s' for " &
+				"table '%s' (error %d).", strip$(i.obj.type), i.table, e)
+		return(DALHOOKERROR)
+	endif
+	return(0)
+}
+#endif	| ES_TIV_LEVEL < 1800
+
+|****************************** Query List/Show ******************************
+
+#define	QUERY.INACTIVE		0
+#define QUERY.INIT			1
+#define QUERY.START			2
+#define	QUERY.FETCH			3
+#define QUERY.END			4
+#define QUERY.ERROR			99
+	#define MAX_QUERY_LENGTH	8192
+	#define SJEquipmentInstallDismantleBOD.tscfg200_1 "t1"
+
+	|* Query vars for component SJEquipmentInstallDismantleBOD
+	string	bl.tables.inselection.SJEquipmentInstallDismantleBOD(MAX_QUERY_LENGTH)
+	string	bl.select.SJEquipmentInstallDismantleBOD(MAX_QUERY_LENGTH)
+	string	bl.from.SJEquipmentInstallDismantleBOD(MAX_QUERY_LENGTH)
+	string	bl.where.SJEquipmentInstallDismantleBOD(MAX_QUERY_LENGTH)
+	string	bl.orderby.SJEquipmentInstallDismantleBOD(MAX_QUERY_LENGTH)
+	long	bl.select.bind.counter.SJEquipmentInstallDismantleBOD
+	long	bl.select.bind.max.SJEquipmentInstallDismantleBOD
+	string	bl.select.bind.SJEquipmentInstallDismantleBOD(1,1)	based
+	string	bl.where.bind.SJEquipmentInstallDismantleBOD(1,1)	based
+	long	bl.where.bind.counter.SJEquipmentInstallDismantleBOD
+	long	bl.where.bind.max.SJEquipmentInstallDismantleBOD
+	long	bl.fetches.SJEquipmentInstallDismantleBOD
+	long	bl.sql.pointer.SJEquipmentInstallDismantleBOD
+	long	bl.SJEquipmentInstallDismantleBOD.query.status
+	boolean bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.UUID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.UUID.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.EquipmentID.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ActionCode.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ActionCode.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ValidFromDate.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ValidFromDate.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Item.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Item.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.SerialNumber.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ServiceOrder.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ServiceOrder.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ActivityNumber.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ActivityNumber.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.User.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.User.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.MovementType.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.MovementType.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.StorageLocation.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.StorageLocation.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Position.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Position.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.VehiclePosition.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.VehiclePosition.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Material.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Material.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Lot.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Lot.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Measure.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Measure.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.UnitCode.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.UnitCode.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Error.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Error.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ErrorMessage.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ErrorMessage.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.ResultCode.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.ResultCode.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.SeverityCode.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.SeverityCode.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.Note.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.Note.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.UserArea.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.UserArea.filtered
+	boolean bl.SJEquipmentInstallDismantleBOD.WorkOrderID.selected
+	boolean bl.SJEquipmentInstallDismantleBOD.WorkOrderID.filtered
+	boolean	bl.component.filter.set.SJEquipmentInstallDismantleBOD
+	boolean	bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set
+
+function extern string txcom.bl952st00.retrieve.table_alias(long	i)
+{
+	DllUsage
+	EndDllUsage
+
+	on case i
+	case 1:
+		return ("t1 tscfg200 (1) [Component:SJEquipmentInstallDismantleBOD]")
+	endcase
+
+	return("")
+}
+
+function extern long txcom.bl952st00.retrieve.table_alias.count()
+{
+	DllUsage
+	EndDllUsage
+
+	return(1)
+}
+
+function extern
+long txcom.bl952st00.set.sorting.expression(boolean	i.sortingExpressionSet)
+{				
+	bl.SortingExpressionSet = i.sortingExpressionSet
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.set.request.filter(
+				const	xmlnode	i.filter)
+{
+	DllUsage
+	EndDllUsage
+
+	long	retl
+
+	bl.Filter = i.filter
+	
+	|* read filter from filter node
+	retl = tlbct.dll1000.readFilter(	
+				"otxcombl952st00",
+				"txcom.bl952st00.get.AttributeData." & bl.method,
+				bl.Filter,
+				bl.FilterExpression)
+	RETIFNOK(retl)
+
+	|* set all attributes specified in postfilter
+	if bl.PostFilter then
+		bl.FilteredAttributes = xmlNewNode("postFiltered")
+		if bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.UUID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.UUID", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.EquipmentID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.EquipmentID", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ActionCode.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ActionCode", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ValidFromDate.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ValidFromDate", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.FunctionalLocationID", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.SuperiorEquipmentID", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Item.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Item", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.SerialNumber.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.SerialNumber", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ServiceOrder.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ServiceOrder", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ActivityNumber.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ActivityNumber", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.User.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.User", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.BreakdownStatus", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.VehilceStatus_Code", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.MovementType.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.MovementType", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.StorageLocation.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.StorageLocation", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Position.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Position", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.VehiclePosition.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.VehiclePosition", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Material.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Material", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Lot.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Lot", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Measure.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Measure", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.UnitCode.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.UnitCode", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Error.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Error", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ErrorMessage.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ErrorMessage", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.ResultCode.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.ResultCode", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.SeverityCode.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.SeverityCode", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.Note.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.Note", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.UserArea.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.UserArea", 
+				bl.FilteredAttributes)
+		endif
+		if bl.SJEquipmentInstallDismantleBOD.WorkOrderID.filtered then
+			retl = xmlNewDataElement(
+				"attribute", 
+				"SJEquipmentInstallDismantleBOD.WorkOrderID", 
+				bl.FilteredAttributes)
+		endif
+	endif
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.get.postfilter(
+				ref	boolean	o.postfilter)
+{
+	DllUsage
+	EndDllUsage
+
+	o.postfilter = bl.PostFilter
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.get.filter(
+				ref	boolean	o.filter)
+{
+	DllUsage
+	EndDllUsage
+
+	o.filter = bl.Filter
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.get.filteredAttributes(
+				ref	xmlNode	o.filteredAttributes)
+{
+	DllUsage
+	EndDllUsage
+
+	o.filteredAttributes = bl.FilteredAttributes
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.get.filter.expression(
+				ref	string	o.filterExpression)
+{
+	DllUsage
+	EndDllUsage
+
+	o.filterExpression = bl.FilterExpression
+
+	return(0)
+}
+
+function string childComponentJoin.SJEquipmentInstallDismantleBOD(const string joinType)
+{
+	string	childComponentJoin(MAX_QUERY_LENGTH)
+	
+	childComponentJoin = ""
+
+	return(childComponentJoin)
+}
+
+function boolean hasSiblingChildFilter.SJEquipmentInstallDismantleBOD()
+{
+	long	hasSiblingChildFilter
+	
+	hasSiblingChildFilter = 0
+
+	return(hasSiblingChildFilter > 1)
+}
+
+function boolean hasChildFilter.SJEquipmentInstallDismantleBOD()
+{
+	boolean	hasChildFilter
+	
+	hasChildFilter = false
+
+	return(hasChildFilter)
+}
+
+function string childComponentExists.SJEquipmentInstallDismantleBOD()
+{
+	string	childExists(MAX_QUERY_LENGTH)
+	string	componentJoin(MAX_QUERY_LENGTH)
+	string	sepa(5)
+	
+	childExists = ""
+	sepa = ""
+	componentJoin = ""
+
+	return(childExists)
+}
+
+function string nonRootJoin.SJEquipmentInstallDismantleBOD.tscfg200_1()
+{
+	string	nonRootJoin(MAX_QUERY_LENGTH)
+	
+	nonRootJoin = ""
+
+	return(nonRootJoin)
+}	
+
+function extern long txcom.bl952st00.get.AttributeData.Show(
+				const	string	i.PublicAttribute,
+				ref	string	o.Attribute.map,
+				ref	string	o.Attribute.alias.map,
+				ref	string	o.Attribute.domain,
+				ref	long	o.Attribute.datatype,
+				ref	boolean	o.Attribute.isRoot,
+				ref	boolean	o.Attribute.filter)
+{
+	on case	trim$(i.PublicAttribute)
+	case "SJEquipmentInstallDismantleBOD.BODID.ExternalReferenceID":	
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = true
+		o.Attribute.map = "tscfg200.cdf_giai"
+		o.Attribute.alias.map = "t1.cdf_giai"
+		o.Attribute.domain = "tcmcs.str50m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		if not column.tscfg200.cdf_giai.exists() then 
+			| public attribute mapped to non-existing column; use postfiltering instead
+			bl.PostFilter = true
+			o.Attribute.filter = false
+		else
+			o.Attribute.filter = true
+		endif
+		break
+	case "SJEquipmentInstallDismantleBOD.UUID":	
+		bl.PostFilter = true |* Calculated attribute
+		bl.SJEquipmentInstallDismantleBOD.UUID.filtered = true
+		o.Attribute.map = "UUID"
+		o.Attribute.alias.map = "UUID"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = false
+		break
+	case "SJEquipmentInstallDismantleBOD.EquipmentID":	
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = true
+		o.Attribute.map = "tscfg200.cdf_giai"
+		o.Attribute.alias.map = "t1.cdf_giai"
+		o.Attribute.domain = "tcmcs.str50m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		if not column.tscfg200.cdf_giai.exists() then 
+			| public attribute mapped to non-existing column; use postfiltering instead
+			bl.PostFilter = true
+			o.Attribute.filter = false
+		else
+			o.Attribute.filter = true
+		endif
+		break
+	case "SJEquipmentInstallDismantleBOD.ActionCode":	
+		bl.SJEquipmentInstallDismantleBOD.ActionCode.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ActionCode"
+		o.Attribute.alias.map = "ActionCode"
+		o.Attribute.domain = "tcmcs.str7"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.ValidFromDate":	
+		bl.SJEquipmentInstallDismantleBOD.ValidFromDate.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ValidFromDate"
+		o.Attribute.alias.map = "ValidFromDate"
+		o.Attribute.domain = "tcdate"
+		o.Attribute.datatype = DB.TIME
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.FunctionalLocationID":	
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "FunctionalLocationID"
+		o.Attribute.alias.map = "FunctionalLocationID"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.SuperiorEquipmentID":	
+		bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "SuperiorEquipmentID"
+		o.Attribute.alias.map = "SuperiorEquipmentID"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.Item":	
+		bl.SJEquipmentInstallDismantleBOD.Item.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = true
+		o.Attribute.map = "tscfg200.item"
+		o.Attribute.alias.map = "t1.item"
+		o.Attribute.domain = "tcitem"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		if not column.tscfg200.item.exists() then 
+			| public attribute mapped to non-existing column; use postfiltering instead
+			bl.PostFilter = true
+			o.Attribute.filter = false
+		else
+			o.Attribute.filter = true
+		endif
+		break
+	case "SJEquipmentInstallDismantleBOD.SerialNumber":	
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = true
+		o.Attribute.map = "tscfg200.sern"
+		o.Attribute.alias.map = "t1.sern"
+		o.Attribute.domain = "tcibd.sern"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		if not column.tscfg200.sern.exists() then 
+			| public attribute mapped to non-existing column; use postfiltering instead
+			bl.PostFilter = true
+			o.Attribute.filter = false
+		else
+			o.Attribute.filter = true
+		endif
+		break
+	case "SJEquipmentInstallDismantleBOD.ServiceOrder":	
+		bl.SJEquipmentInstallDismantleBOD.ServiceOrder.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ServiceOrder"
+		o.Attribute.alias.map = "ServiceOrder"
+		o.Attribute.domain = "tcorno"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.ActivityNumber":	
+		bl.SJEquipmentInstallDismantleBOD.ActivityNumber.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ActivityNumber"
+		o.Attribute.alias.map = "ActivityNumber"
+		o.Attribute.domain = "tcpono"
+		o.Attribute.datatype = DB.LONG
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.User":	
+		bl.PostFilter = true |* Calculated attribute
+		bl.SJEquipmentInstallDismantleBOD.User.filtered = true
+		o.Attribute.map = "User"
+		o.Attribute.alias.map = "User"
+		o.Attribute.domain = "tcemno"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = false
+		break
+	case "SJEquipmentInstallDismantleBOD.BreakdownStatus":	
+		bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "BreakdownStatus"
+		o.Attribute.alias.map = "BreakdownStatus"
+		o.Attribute.domain = "tscfg.pb.stat"
+		o.Attribute.datatype = DB.ENUM
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.VehilceStatus.Code":	
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = true
+		o.Attribute.map = "tscfg200.stat"
+		o.Attribute.alias.map = "t1.stat"
+		o.Attribute.domain = "tscfg.cfst"
+		o.Attribute.datatype = DB.ENUM
+		o.Attribute.isRoot = true
+		if not column.tscfg200.stat.exists() then 
+			| public attribute mapped to non-existing column; use postfiltering instead
+			bl.PostFilter = true
+			o.Attribute.filter = false
+		else
+			o.Attribute.filter = true
+		endif
+		break
+	case "SJEquipmentInstallDismantleBOD.MovementType":	
+		bl.SJEquipmentInstallDismantleBOD.MovementType.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "MovementType"
+		o.Attribute.alias.map = "MovementType"
+		o.Attribute.domain = "tcmcs.str30m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.StorageLocation":	
+		bl.PostFilter = true |* Calculated attribute
+		bl.SJEquipmentInstallDismantleBOD.StorageLocation.filtered = true
+		o.Attribute.map = "StorageLocation"
+		o.Attribute.alias.map = "StorageLocation"
+		o.Attribute.domain = "tcmcs.st10m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = false
+		break
+	case "SJEquipmentInstallDismantleBOD.Position":	
+		bl.SJEquipmentInstallDismantleBOD.Position.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "Position"
+		o.Attribute.alias.map = "Position"
+		o.Attribute.domain = "tcmcs.str7"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.VehiclePosition":	
+		bl.SJEquipmentInstallDismantleBOD.VehiclePosition.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "VehiclePosition"
+		o.Attribute.alias.map = "VehiclePosition"
+		o.Attribute.domain = "tcmcs.str25"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.Material":	
+		bl.PostFilter = true |* Calculated attribute
+		bl.SJEquipmentInstallDismantleBOD.Material.filtered = true
+		o.Attribute.map = "Material"
+		o.Attribute.alias.map = "Material"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = false
+		break
+	case "SJEquipmentInstallDismantleBOD.Lot":	
+		bl.SJEquipmentInstallDismantleBOD.Lot.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "Lot"
+		o.Attribute.alias.map = "Lot"
+		o.Attribute.domain = "tcmcs.str25"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.Measure":	
+		bl.SJEquipmentInstallDismantleBOD.Measure.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "Measure"
+		o.Attribute.alias.map = "Measure"
+		o.Attribute.domain = "tcmcs.str25"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.UnitCode":	
+		bl.SJEquipmentInstallDismantleBOD.UnitCode.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "UnitCode"
+		o.Attribute.alias.map = "UnitCode"
+		o.Attribute.domain = "tcmcs.st10m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.Error":	
+		bl.SJEquipmentInstallDismantleBOD.Error.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "Error"
+		o.Attribute.alias.map = "Error"
+		o.Attribute.domain = "tcyesno"
+		o.Attribute.datatype = DB.ENUM
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.ErrorMessage":	
+		bl.SJEquipmentInstallDismantleBOD.ErrorMessage.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ErrorMessage"
+		o.Attribute.alias.map = "ErrorMessage"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.ResultCode":	
+		bl.SJEquipmentInstallDismantleBOD.ResultCode.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "ResultCode"
+		o.Attribute.alias.map = "ResultCode"
+		o.Attribute.domain = "tcmcs.str25"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.SeverityCode":	
+		bl.SJEquipmentInstallDismantleBOD.SeverityCode.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "SeverityCode"
+		o.Attribute.alias.map = "SeverityCode"
+		o.Attribute.domain = "tcmcs.long"
+		o.Attribute.datatype = DB.LONG
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.Note":	
+		bl.SJEquipmentInstallDismantleBOD.Note.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "Note"
+		o.Attribute.alias.map = "Note"
+		o.Attribute.domain = "tcmcs.str100m"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.UserArea":	
+		bl.SJEquipmentInstallDismantleBOD.UserArea.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "UserArea"
+		o.Attribute.alias.map = "UserArea"
+		o.Attribute.domain = "bolong"
+		o.Attribute.datatype = DB.LONG
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	case "SJEquipmentInstallDismantleBOD.WorkOrderID":	
+		bl.SJEquipmentInstallDismantleBOD.WorkOrderID.filtered = true
+		bl.component.filter.set.SJEquipmentInstallDismantleBOD = true
+		o.Attribute.map = "WorkOrderID"
+		o.Attribute.alias.map = "WorkOrderID"
+		o.Attribute.domain = "tcmcs.str25"
+		o.Attribute.datatype = DB.STRING
+		o.Attribute.isRoot = true
+		o.Attribute.filter = true
+		break
+	default:		
+		return(-1)
+	endcase
+	
+	return(0)
+}
+
+function extern long txcom.bl952st00.finalize.request.Show(...)
+{
+	DllUsage
+	EndDllUsage
+
+	bl.method.result = ( get.argc() > 0 ) ? get.long.arg(1) : 0
+
+	if bl.before.initialize <> 0 then
+		bl.before.initialize = 0
+	endif
+
+	set.component.init.vars.to.false()
+
+	return(bl.method.result)
+}
+
+function extern long txcom.bl952st00.finalize.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+	long	ret
+
+    if not bl.performing.ShowAndPublishBOD then
+	clean.up.sql.data.SJEquipmentInstallDismantleBOD()
+	if bl.sql.pointer.SJEquipmentInstallDismantleBOD <> 0 then
+		ret = sql.close(bl.sql.pointer.SJEquipmentInstallDismantleBOD)
+		bl.sql.pointer.SJEquipmentInstallDismantleBOD = 0
+	endif
+	bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.INACTIVE
+    endif
+
+	return(0)
+}
+
+function extern long txcom.bl952st00.initialize.request.Show()
+{
+	DllUsage
+	EndDllUsage
+
+	bl.method = "Show"
+	bl.method.result = 0	
+
+	set.component.init.vars.to.false()
+
+    if not bl.performing.ShowAndPublishBOD then
+	clean.up.sql.data.SJEquipmentInstallDismantleBOD()
+    endif
+	bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.INACTIVE
+
+	return(bl.method.result)
+}
+
+function clean.up.sql.data.SJEquipmentInstallDismantleBOD()
+{
+	bl.select.SJEquipmentInstallDismantleBOD = ""
+	bl.select.bind.counter.SJEquipmentInstallDismantleBOD = 0
+	bl.tables.inselection.SJEquipmentInstallDismantleBOD = ""
+	bl.where.SJEquipmentInstallDismantleBOD = ""
+	bl.component.filter.set.SJEquipmentInstallDismantleBOD = false
+	bl.SJEquipmentInstallDismantleBOD.tscfg200_1.filter.is.set = false
+	bl.where.bind.counter.SJEquipmentInstallDismantleBOD = 0
+	bl.from.SJEquipmentInstallDismantleBOD = ""
+	if bl.select.bind.max.SJEquipmentInstallDismantleBOD > 0 then
+		free.mem(bl.select.bind.SJEquipmentInstallDismantleBOD)
+		bl.select.bind.max.SJEquipmentInstallDismantleBOD = 0
+	endif
+	if bl.where.bind.max.SJEquipmentInstallDismantleBOD > 0 then
+		free.mem(bl.where.bind.SJEquipmentInstallDismantleBOD)
+		bl.where.bind.max.SJEquipmentInstallDismantleBOD = 0
+	endif
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.UUID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.UUID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Item.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Item.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.User.selected = false
+	bl.SJEquipmentInstallDismantleBOD.User.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.selected = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType.selected = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.selected = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Position.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Position.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.selected = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Material.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Material.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Lot.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Lot.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Measure.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Measure.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.selected = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Error.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Error.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.selected = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.selected = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.Note.selected = false
+	bl.SJEquipmentInstallDismantleBOD.Note.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea.selected = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.selected = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.filtered = false
+	bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.INACTIVE
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID()
+{
+  if column.tscfg200.cdf_giai.exists() then
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected = true
+  else
+	| bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected remains false
+  endif
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UUID()
+{
+	bl.SJEquipmentInstallDismantleBOD.UUID.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.EquipmentID()
+{
+  if column.tscfg200.cdf_giai.exists() then
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected = true
+  else
+	| bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected remains false
+  endif
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ActionCode()
+{
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ValidFromDate()
+{
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+{
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID()
+{
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Item()
+{
+  if column.tscfg200.item.exists() then
+	bl.SJEquipmentInstallDismantleBOD.Item.selected = true
+  else
+	| bl.SJEquipmentInstallDismantleBOD.Item.selected remains false
+  endif
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SerialNumber()
+{
+  if column.tscfg200.sern.exists() then
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected = true
+  else
+	| bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected remains false
+  endif
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ServiceOrder()
+{
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ActivityNumber()
+{
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.User()
+{
+	bl.SJEquipmentInstallDismantleBOD.User.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.BreakdownStatus()
+{
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.VehilceStatus_Code()
+{
+  if column.tscfg200.stat.exists() then
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected = true
+  else
+	| bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected remains false
+  endif
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.MovementType()
+{
+	bl.SJEquipmentInstallDismantleBOD.MovementType.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.StorageLocation()
+{
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.selected = true
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Item()
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SerialNumber()
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Position()
+{
+	bl.SJEquipmentInstallDismantleBOD.Position.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.VehiclePosition()
+{
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Material()
+{
+	bl.SJEquipmentInstallDismantleBOD.Material.selected = true
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.EquipmentID()
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Position()
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Lot()
+{
+	bl.SJEquipmentInstallDismantleBOD.Lot.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Measure()
+{
+	bl.SJEquipmentInstallDismantleBOD.Measure.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UnitCode()
+{
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Error()
+{
+	bl.SJEquipmentInstallDismantleBOD.Error.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ErrorMessage()
+{
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ResultCode()
+{
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SeverityCode()
+{
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Note()
+{
+	bl.SJEquipmentInstallDismantleBOD.Note.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UserArea()
+{
+	bl.SJEquipmentInstallDismantleBOD.UserArea.selected = true
+}
+
+function extern txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.WorkOrderID()
+{
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.selected = true
+}
+
+function extern long txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.SJEquipmentInstallDismantleBOD.query.status)
+}
+
+function extern string txcom.bl952st00.retrieve.select.clause.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.select.SJEquipmentInstallDismantleBOD)
+}
+
+function extern string txcom.bl952st00.retrieve.from.clause.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.from.SJEquipmentInstallDismantleBOD)
+}
+
+function extern string txcom.bl952st00.retrieve.where.clause.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.where.SJEquipmentInstallDismantleBOD)
+}
+
+
+function extern string txcom.bl952st00.retrieve.orderby.clause.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.orderby.SJEquipmentInstallDismantleBOD)
+}
+
+function extern string txcom.bl952st00.retrieve.selectbind.clause.SJEquipmentInstallDismantleBOD(long	i)
+{
+	DllUsage
+	EndDllUsage
+
+	if len(strip$(bl.select.bind.SJEquipmentInstallDismantleBOD(1,i))) = 15 and
+       bl.select.bind.SJEquipmentInstallDismantleBOD(12,i;4) = ".set"
+	then
+		return(bl.select.bind.SJEquipmentInstallDismantleBOD(4,i;8)) |* Only return table name
+	else
+		return(bl.select.bind.SJEquipmentInstallDismantleBOD(35,i))	|* Do no return 'bl.'
+	endif
+}
+
+function extern long txcom.bl952st00.retrieve.selectbind.count.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+}
+
+function extern string txcom.bl952st00.retrieve.wherebind.clause.SJEquipmentInstallDismantleBOD(long	i)
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.where.bind.SJEquipmentInstallDismantleBOD(35,i))	|* Do no return 'bl.'
+}
+
+function extern long txcom.bl952st00.retrieve.wherebind.count.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.where.bind.counter.SJEquipmentInstallDismantleBOD)
+}
+
+function extern long txcom.bl952st00.retrieve.fetch.count.SJEquipmentInstallDismantleBOD()
+{
+	DllUsage
+	EndDllUsage
+
+	return(bl.fetches.SJEquipmentInstallDismantleBOD)
+}
+
+
+function long bind.selection.SJEquipmentInstallDismantleBOD(long i)
+{
+	long	ret
+	
+	on case strip$(bl.select.bind.SJEquipmentInstallDismantleBOD(1,i))
+	case "bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UUID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UUID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.EquipmentID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.EquipmentID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ActionCode":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ActionCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ValidFromDate":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ValidFromDate)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Item":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Item)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SerialNumber":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SerialNumber)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ServiceOrder":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ServiceOrder)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ActivityNumber":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ActivityNumber)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.User":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.User)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.BreakdownStatus":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.BreakdownStatus)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.MovementType":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.MovementType)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.StorageLocation":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.StorageLocation)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Position":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Position)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.VehiclePosition":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.VehiclePosition)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Material":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Material)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Lot":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Lot)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Measure":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Measure)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UnitCode":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UnitCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Error":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Error)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ErrorMessage":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ErrorMessage)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ResultCode":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ResultCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SeverityCode":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SeverityCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Note":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Note)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UserArea":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UserArea)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.WorkOrderID":
+		ret = sql.select.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.WorkOrderID)
+		break		
+	default:
+		if MESSAGE_EXISTS("tlbcts0083") then
+			dal.set.error.message("tlbcts0083", "SJEquipmentInstallDismantleBOD", strip$(bl.select.bind.SJEquipmentInstallDismantleBOD(1,i)))
+			|* Error binding attribute %1$s in selection for component %2$s
+		else
+			dal.set.error.message("@Error binding attribute %s in selection for component SJEquipmentInstallDismantleBOD", 
+				strip$(bl.select.bind.SJEquipmentInstallDismantleBOD(1,i)))
+		endif
+	endcase
+	return (0)
+}
+
+function bind.where.SJEquipmentInstallDismantleBOD(long i)
+{
+	long ret
+	
+	on case strip$(bl.where.bind.SJEquipmentInstallDismantleBOD(1,i))
+	case "bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UUID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UUID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.EquipmentID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.EquipmentID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ActionCode":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ActionCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ValidFromDate":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ValidFromDate)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Item":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Item)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SerialNumber":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SerialNumber)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ServiceOrder":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ServiceOrder)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ActivityNumber":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ActivityNumber)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.User":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.User)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.BreakdownStatus":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.BreakdownStatus)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.MovementType":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.MovementType)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.StorageLocation":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.StorageLocation)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Position":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Position)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.VehiclePosition":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.VehiclePosition)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Material":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Material)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Lot":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Lot)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Measure":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Measure)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UnitCode":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UnitCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Error":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Error)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ErrorMessage":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ErrorMessage)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.ResultCode":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.ResultCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.SeverityCode":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.SeverityCode)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.Note":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.Note)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.UserArea":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.UserArea)
+		break		
+	case "bl.SJEquipmentInstallDismantleBOD.WorkOrderID":
+		ret = sql.where.bind(bl.sql.pointer.SJEquipmentInstallDismantleBOD, i, 
+					bl.SJEquipmentInstallDismantleBOD.WorkOrderID)
+		break		
+	endcase
+}
+
+function set.setters.after.fetch.SJEquipmentInstallDismantleBOD(boolean	i.set)
+{
+	long	i
+	i = 0
+	if bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected then
+		bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.UUID.selected then
+		bl.SJEquipmentInstallDismantleBOD.UUID.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected then
+		bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ActionCode.selected then
+		bl.SJEquipmentInstallDismantleBOD.ActionCode.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ValidFromDate.selected then
+		bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.selected then
+		bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.selected then
+		bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Item.selected then
+		bl.SJEquipmentInstallDismantleBOD.Item.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected then
+		bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ServiceOrder.selected then
+		bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ActivityNumber.selected then
+		bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.User.selected then
+		bl.SJEquipmentInstallDismantleBOD.User.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.selected then
+		bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected then
+		bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.MovementType.selected then
+		bl.SJEquipmentInstallDismantleBOD.MovementType.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.StorageLocation.selected then
+		bl.SJEquipmentInstallDismantleBOD.StorageLocation.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Position.selected then
+		bl.SJEquipmentInstallDismantleBOD.Position.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.VehiclePosition.selected then
+		bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Material.selected then
+		bl.SJEquipmentInstallDismantleBOD.Material.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Lot.selected then
+		bl.SJEquipmentInstallDismantleBOD.Lot.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Measure.selected then
+		bl.SJEquipmentInstallDismantleBOD.Measure.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.UnitCode.selected then
+		bl.SJEquipmentInstallDismantleBOD.UnitCode.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Error.selected then
+		bl.SJEquipmentInstallDismantleBOD.Error.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ErrorMessage.selected then
+		bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.ResultCode.selected then
+		bl.SJEquipmentInstallDismantleBOD.ResultCode.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.SeverityCode.selected then
+		bl.SJEquipmentInstallDismantleBOD.SeverityCode.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Note.selected then
+		bl.SJEquipmentInstallDismantleBOD.Note.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.UserArea.selected then
+		bl.SJEquipmentInstallDismantleBOD.UserArea.set = i.set
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.WorkOrderID.selected then
+		bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set = i.set
+	endif
+}
+
+
+function extern long txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+	long	ret
+	
+	if bl.sql.pointer.SJEquipmentInstallDismantleBOD <> 0 then
+		ret = sql.break(bl.sql.pointer.SJEquipmentInstallDismantleBOD)
+	endif
+	return (0)
+}
+
+function extern boolean txcom.bl952st00.query.on.hook.SJEquipmentInstallDismantleBOD.Show(ref string o.hook())
+{
+	DllUsage
+	EndDllUsage
+	
+	o.hook = ""
+	return (false)
+}
+
+function extern
+long txcom.bl952st00.initialize.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+
+static	long	hold.sapb.sql.pointer
+	long	i
+
+    if not bl.performing.ShowAndPublishBOD or hold.sapb.sql.pointer = 0 then
+	build.select.for.SJEquipmentInstallDismantleBOD(false)
+	build.from.for.SJEquipmentInstallDismantleBOD()
+	if isspace(bl.from.SJEquipmentInstallDismantleBOD) then
+		bl.sql.pointer.SJEquipmentInstallDismantleBOD = 0
+		return(0)
+	endif
+	build.where.for.SJEquipmentInstallDismantleBOD()
+	add.show.condition.to.where.SJEquipmentInstallDismantleBOD()
+	RETIFNOK(build.orderby.for.SJEquipmentInstallDismantleBOD(true)) | suppress order by
+	
+	SET.ERROR.BYPASS.ON()
+	bl.sql.pointer.SJEquipmentInstallDismantleBOD = sql.parse.mle(combine.query.SJEquipmentInstallDismantleBOD(), PARSE.DIALECT.6 + PARSE.SUPPRESS)
+	SET.ERROR.BYPASS.OFF()
+	if bl.performing.ShowAndPublishBOD then
+		| store the SQL pointer for next time
+		hold.sapb.sql.pointer = bl.sql.pointer.SJEquipmentInstallDismantleBOD
+	endif
+    else
+	| restore the SQL pointer from previous time
+	bl.sql.pointer.SJEquipmentInstallDismantleBOD = hold.sapb.sql.pointer
+    endif
+	bl.fetches.SJEquipmentInstallDismantleBOD = 0
+	if bl.sql.pointer.SJEquipmentInstallDismantleBOD <= 0 then
+		if MESSAGE_EXISTS("tlbcts0084") then
+			dal.set.error.message("tlbcts0084", e, "SJEquipmentInstallDismantleBOD", "Show")
+			|* Error %1$d in parsing of query for component %2$s in method %3$s
+		else
+			dal.set.error.message("@Error %d in parsing of query for component SJEquipmentInstallDismantleBOD in method Show", e)
+		endif
+		bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.ERROR
+		return (e)
+	endif
+
+	for i = 1 to bl.select.bind.counter.SJEquipmentInstallDismantleBOD
+		RETIFNOK(bind.selection.SJEquipmentInstallDismantleBOD(i))
+	endfor
+
+	bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.INIT
+	
+	return (0)
+}
+
+function extern
+long txcom.bl952st00.initialize.set.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+
+	long	i
+	long	ret
+	
+	for i = 1 to bl.where.bind.counter.SJEquipmentInstallDismantleBOD
+		bind.where.SJEquipmentInstallDismantleBOD(i)
+	endfor
+
+	ret = sql.exec(bl.sql.pointer.SJEquipmentInstallDismantleBOD)
+	bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.START
+	
+	return (0)
+}
+
+function extern
+long txcom.bl952st00.before.execute.SJEquipmentInstallDismantleBOD.Show(ref	boolean	io.cancel)
+{
+	DllUsage
+	EndDllUsage
+	
+	long	i
+	i = 0
+	io.cancel = false
+
+	bl.SJEquipmentInstallDismantleBOD.UUID.set = false
+	bl.SJEquipmentInstallDismantleBOD.UUID.get = false
+	bl.SJEquipmentInstallDismantleBOD.UUID = "" 
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.set = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID.get = false
+	bl.SJEquipmentInstallDismantleBOD.EquipmentID = "" 
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.ActionCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.set = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate.get = false
+	bl.SJEquipmentInstallDismantleBOD.ValidFromDate = 0 
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.set = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID.get = false
+	bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = "" 
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.set = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.get = false
+	bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = "" 
+	bl.SJEquipmentInstallDismantleBOD.Item.set = false
+	bl.SJEquipmentInstallDismantleBOD.Item.get = false
+	bl.SJEquipmentInstallDismantleBOD.Item = "" 
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.set = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber.get = false
+	bl.SJEquipmentInstallDismantleBOD.SerialNumber = "" 
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.set = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder.get = false
+	bl.SJEquipmentInstallDismantleBOD.ServiceOrder = "" 
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.set = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber.get = false
+	bl.SJEquipmentInstallDismantleBOD.ActivityNumber = 0 
+	bl.SJEquipmentInstallDismantleBOD.User.set = false
+	bl.SJEquipmentInstallDismantleBOD.User.get = false
+	bl.SJEquipmentInstallDismantleBOD.User = "" 
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.set = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus.get = false
+	bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = empty 
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.set = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.get = false
+	bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code = empty 
+	bl.SJEquipmentInstallDismantleBOD.MovementType.set = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType.get = false
+	bl.SJEquipmentInstallDismantleBOD.MovementType = "" 
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.set = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation.get = false
+	bl.SJEquipmentInstallDismantleBOD.StorageLocation = "" 
+	bl.SJEquipmentInstallDismantleBOD.Position.set = false
+	bl.SJEquipmentInstallDismantleBOD.Position.get = false
+	bl.SJEquipmentInstallDismantleBOD.Position = "" 
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.set = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition.get = false
+	bl.SJEquipmentInstallDismantleBOD.VehiclePosition = "" 
+	bl.SJEquipmentInstallDismantleBOD.Material.set = false
+	bl.SJEquipmentInstallDismantleBOD.Material.get = false
+	bl.SJEquipmentInstallDismantleBOD.Material = "" 
+	bl.SJEquipmentInstallDismantleBOD.Lot.set = false
+	bl.SJEquipmentInstallDismantleBOD.Lot.get = false
+	bl.SJEquipmentInstallDismantleBOD.Lot = "" 
+	bl.SJEquipmentInstallDismantleBOD.Measure.set = false
+	bl.SJEquipmentInstallDismantleBOD.Measure.get = false
+	bl.SJEquipmentInstallDismantleBOD.Measure = "" 
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.UnitCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.Error.set = false
+	bl.SJEquipmentInstallDismantleBOD.Error.get = false
+	bl.SJEquipmentInstallDismantleBOD.Error = empty 
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.set = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage.get = false
+	bl.SJEquipmentInstallDismantleBOD.ErrorMessage = "" 
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.ResultCode = "" 
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.set = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode.get = false
+	bl.SJEquipmentInstallDismantleBOD.SeverityCode = 0 
+	bl.SJEquipmentInstallDismantleBOD.Note.set = false
+	bl.SJEquipmentInstallDismantleBOD.Note.get = false
+	bl.SJEquipmentInstallDismantleBOD.Note = "" 
+	bl.SJEquipmentInstallDismantleBOD.UserArea.set = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea.get = false
+	bl.SJEquipmentInstallDismantleBOD.UserArea = 0 
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.set = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID.get = false
+	bl.SJEquipmentInstallDismantleBOD.WorkOrderID = "" 
+	
+	
+	RETIFNOK( txcom.bl952st00.SJEquipmentInstallDismantleBOD.Show.set.derived() )
+
+	if not bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set then
+		dal.set.error.message("tlbctst0001",
+			"SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID")
+		|* Mandatory protected attribute %1$s is not set.
+		return(DALHOOKERROR)
+	endif
+
+	if io.cancel then
+		bl.SJEquipmentInstallDismantleBOD.initialize = false
+	endif
+
+	return(0)
+}
+
+function extern
+long txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+	long	ret
+
+	if bl.sql.pointer.SJEquipmentInstallDismantleBOD <> 0 then
+		ret = sql.fetch(bl.sql.pointer.SJEquipmentInstallDismantleBOD)
+	else
+		ret = ENOREC
+	endif
+	on case ret
+	case 0:
+		bl.fetches.SJEquipmentInstallDismantleBOD = bl.fetches.SJEquipmentInstallDismantleBOD + 1
+		bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.FETCH
+		bl.tscfg200.set = true
+		set.setters.after.fetch.SJEquipmentInstallDismantleBOD(true)
+		return (0)
+	case eendfile:
+	case ENOREC:
+		bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.END
+		set.setters.after.fetch.SJEquipmentInstallDismantleBOD(false)
+		return (0)
+	default:
+		bl.SJEquipmentInstallDismantleBOD.query.status = QUERY.ERROR
+		if ret = -1 then
+			ret = handle.result(e)
+		endif
+		if MESSAGE_EXISTS("tlbcts0085") then
+			dal.set.error.message("tlbcts0085", ret, "Show")
+			|* Error %1$d in method %2$s
+		else
+			dal.set.error.message("@Error %d in method Show", ret)
+		endif
+		return (DALHOOKERROR)
+	endcase
+}
+
+function extern 
+long txcom.bl952st00.after.execute.SJEquipmentInstallDismantleBOD.Show()
+{
+	DllUsage
+	EndDllUsage
+	bl.SJEquipmentInstallDismantleBOD.initialize = false
+	return(0)
+}
+
+function string combine.query.SJEquipmentInstallDismantleBOD()
+{
+	return (
+		strip$(add.select.ifnot.empty.SJEquipmentInstallDismantleBOD()) & " " &
+		strip$(add.from.ifnot.empty.SJEquipmentInstallDismantleBOD()) & " " &
+		strip$(add.where.ifnot.empty.SJEquipmentInstallDismantleBOD()) & " " &
+		strip$(add.orderby.ifnot.empty.SJEquipmentInstallDismantleBOD())
+			)
+}
+
+function string add.select.ifnot.empty.SJEquipmentInstallDismantleBOD()
+{
+	if not isspace(bl.select.SJEquipmentInstallDismantleBOD) then
+		return ("select " & bl.select.SJEquipmentInstallDismantleBOD)
+	endif
+	return ("")
+}
+
+function string add.from.ifnot.empty.SJEquipmentInstallDismantleBOD()
+{
+	if not isspace(bl.from.SJEquipmentInstallDismantleBOD) then
+		return ("from " & bl.from.SJEquipmentInstallDismantleBOD)
+	endif
+	return ("")
+}
+
+function string add.where.ifnot.empty.SJEquipmentInstallDismantleBOD()
+{
+	if not isspace(bl.where.SJEquipmentInstallDismantleBOD) then
+		return ("where " & bl.where.SJEquipmentInstallDismantleBOD)
+	endif
+	
+	return ("")
+}
+
+function string add.orderby.ifnot.empty.SJEquipmentInstallDismantleBOD()
+{
+	if not isspace(bl.orderby.SJEquipmentInstallDismantleBOD) then
+		return ("order by " & bl.orderby.SJEquipmentInstallDismantleBOD)
+	endif
+	return ("")
+}
+
+function build.select.for.SJEquipmentInstallDismantleBOD(boolean i.set.rcd)
+{
+	string	sepa(1)
+	
+	sepa = ""
+	bl.select.bind.counter.SJEquipmentInstallDismantleBOD = 0
+	bl.select.SJEquipmentInstallDismantleBOD = i.set.rcd ? "*," : ""
+
+	build.select.for.SJEquipmentInstallDismantleBOD.tscfg200_1(sepa)
+
+	set.nonroot.dependencies.for.SJEquipmentInstallDismantleBOD()
+}
+
+function set.nonroot.dependencies.for.SJEquipmentInstallDismantleBOD()
+{
+	|* set non-root table selection dependencies
+}
+
+function build.from.for.SJEquipmentInstallDismantleBOD()
+{
+	string sepa(1)
+
+	sepa = ""
+	bl.from.SJEquipmentInstallDismantleBOD = ""
+	if tbl.ttscfg200 <> 0 then
+
+	if SJEquipmentInstallDismantleBOD.tscfg200_1.in.selection() then
+		bl.from.SJEquipmentInstallDismantleBOD = bl.from.SJEquipmentInstallDismantleBOD & sepa &  
+			"tscfg200 " & SJEquipmentInstallDismantleBOD.tscfg200_1
+		sepa = ","
+	endif
+	endif
+}
+
+function build.where.for.SJEquipmentInstallDismantleBOD()
+{
+	string sepa(5)
+
+	sepa = ""
+	bl.where.bind.counter.SJEquipmentInstallDismantleBOD = 0
+	bl.where.SJEquipmentInstallDismantleBOD =
+		build.where.for.SJEquipmentInstallDismantleBOD.tscfg200_1(sepa)
+
+	|* add exists when filter active on child component
+	if hasChildFilter.SJEquipmentInstallDismantleBOD() and
+	   not hasSiblingChildFilter.SJEquipmentInstallDismantleBOD() then
+		bl.where.SJEquipmentInstallDismantleBOD = bl.where.SJEquipmentInstallDismantleBOD &
+			sepa & childComponentExists.SJEquipmentInstallDismantleBOD()
+	else
+		|* apply filter
+		if bl.component.filter.set.SJEquipmentInstallDismantleBOD = true 
+		or hasSiblingChildFilter.SJEquipmentInstallDismantleBOD() then
+			bl.where.SJEquipmentInstallDismantleBOD = bl.where.SJEquipmentInstallDismantleBOD &
+				sepa & bl.FilterExpression	
+		endif
+	endif
+
+	if bl.SwitchDirection then
+		bl.where.SJEquipmentInstallDismantleBOD = bl.where.SJEquipmentInstallDismantleBOD
+			& "{"
+			& SJEquipmentInstallDismantleBOD.tscfg200_1 & ".item"
+			& ","
+			& SJEquipmentInstallDismantleBOD.tscfg200_1 & ".sern"
+			& "}"
+			& (bl.PageUp ? "<" : ">")
+			& "{"
+			& ":tscfg200.item"
+			& ","
+			& ":tscfg200.sern"
+			& "}"
+	endif |* bl.SwitchDirection
+}
+
+function long build.orderby.for.SJEquipmentInstallDismantleBOD(
+		boolean	i.suppress.order.by) | use empty order by, do not sort
+{
+	if i.suppress.order.by then
+		bl.orderby.SJEquipmentInstallDismantleBOD = ""
+	else	
+		bl.orderby.SJEquipmentInstallDismantleBOD = SJEquipmentInstallDismantleBOD.tscfg200_1 & "._index1" & (bl.PageUp ? " DESC" : "" )
+	endif
+	return(0)
+}
+
+function add.field.where.bind.SJEquipmentInstallDismantleBOD(string i.attr.field(67), ref long o.number)
+{
+	long	i
+	for i = 1 to bl.where.bind.counter.SJEquipmentInstallDismantleBOD
+		if strip$(i.attr.field) = strip$(bl.where.bind.SJEquipmentInstallDismantleBOD(1, i)) then
+			o.number = i
+			return
+		endif
+	endfor
+	bl.where.bind.counter.SJEquipmentInstallDismantleBOD = bl.where.bind.counter.SJEquipmentInstallDismantleBOD + 1
+	if bl.where.bind.counter.SJEquipmentInstallDismantleBOD > bl.where.bind.max.SJEquipmentInstallDismantleBOD then
+		bl.where.bind.max.SJEquipmentInstallDismantleBOD = bl.where.bind.max.SJEquipmentInstallDismantleBOD + 10
+		alloc.mem(bl.where.bind.SJEquipmentInstallDismantleBOD, 67, bl.where.bind.max.SJEquipmentInstallDismantleBOD)
+	endif
+	bl.where.bind.SJEquipmentInstallDismantleBOD(1,bl.where.bind.counter.SJEquipmentInstallDismantleBOD) = i.attr.field
+	o.number = bl.where.bind.counter.SJEquipmentInstallDismantleBOD
+}
+
+function add.field.select.bind.SJEquipmentInstallDismantleBOD(string i.attr.field(59))
+{
+	bl.select.bind.counter.SJEquipmentInstallDismantleBOD = bl.select.bind.counter.SJEquipmentInstallDismantleBOD + 1
+	if bl.select.bind.counter.SJEquipmentInstallDismantleBOD > bl.select.bind.max.SJEquipmentInstallDismantleBOD then
+		bl.select.bind.max.SJEquipmentInstallDismantleBOD = bl.select.bind.max.SJEquipmentInstallDismantleBOD + 10
+		alloc.mem(bl.select.bind.SJEquipmentInstallDismantleBOD, 59, bl.select.bind.max.SJEquipmentInstallDismantleBOD)
+	endif
+	bl.select.bind.SJEquipmentInstallDismantleBOD(1,bl.select.bind.counter.SJEquipmentInstallDismantleBOD) = i.attr.field
+}
+
+function add.show.condition.to.where.SJEquipmentInstallDismantleBOD()
+{
+	string	sepa(5)
+	long	where.number
+	long	i
+	
+	if isspace(bl.where.SJEquipmentInstallDismantleBOD) then
+		sepa = ""
+	else
+		sepa = " and "
+	endif
+	where.number = 0
+	i = 0
+	if bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set then
+		add.field.where.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID", where.number)
+		bl.where.SJEquipmentInstallDismantleBOD = strip$(bl.where.SJEquipmentInstallDismantleBOD) & sepa & 
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".cdf_giai = :" & str$(where.number) | bl.where.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = " and "
+	endif
+}
+
+function build.select.for.SJEquipmentInstallDismantleBOD.tscfg200_1(ref string sepa())
+{
+|	long	fieldcount
+	boolean	in.selection
+	
+	in.selection = false
+	if bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.selected then
+		add.field.select.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID")
+		bl.select.SJEquipmentInstallDismantleBOD = bl.select.SJEquipmentInstallDismantleBOD & sepa &
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".cdf_giai:" & str$(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = ","
+		in.selection = true
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.EquipmentID.selected then
+		add.field.select.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.EquipmentID")
+		bl.select.SJEquipmentInstallDismantleBOD = bl.select.SJEquipmentInstallDismantleBOD & sepa &
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".cdf_giai:" & str$(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = ","
+		in.selection = true
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.Item.selected then
+		add.field.select.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.Item")
+		bl.select.SJEquipmentInstallDismantleBOD = bl.select.SJEquipmentInstallDismantleBOD & sepa &
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".item:" & str$(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = ","
+		in.selection = true
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.SerialNumber.selected then
+		add.field.select.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.SerialNumber")
+		bl.select.SJEquipmentInstallDismantleBOD = bl.select.SJEquipmentInstallDismantleBOD & sepa &
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".sern:" & str$(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = ","
+		in.selection = true
+	endif
+	if bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.selected then
+		add.field.select.bind.SJEquipmentInstallDismantleBOD("bl.SJEquipmentInstallDismantleBOD.VehilceStatus_Code")
+		bl.select.SJEquipmentInstallDismantleBOD = bl.select.SJEquipmentInstallDismantleBOD & sepa &
+			SJEquipmentInstallDismantleBOD.tscfg200_1 & ".stat:" & str$(bl.select.bind.counter.SJEquipmentInstallDismantleBOD)
+		sepa = ","
+		in.selection = true
+	endif
+
+	if in.selection then
+		bl.tables.inselection.SJEquipmentInstallDismantleBOD = bl.tables.inselection.SJEquipmentInstallDismantleBOD &
+			";tscfg200_1;"
+	endif
+}
+
+function boolean SJEquipmentInstallDismantleBOD.tscfg200_1.in.selection()
+{
+	long	p
+	
+	p = pos(bl.tables.inselection.SJEquipmentInstallDismantleBOD, "tscfg200_1")
+	
+	return (p > 0)
+}
+
+function string build.where.for.SJEquipmentInstallDismantleBOD.tscfg200_1(ref string sepa())
+{
+	string	field.where(MAX_QUERY_LENGTH)
+	long	where.number
+
+	if not SJEquipmentInstallDismantleBOD.tscfg200_1.in.selection() and
+	   isspace(bl.FilterExpression) then
+		return ("")
+	else
+		field.where = ""
+		where.number = 0
+	endif
+
+	return (field.where)
+}
+
+function extern long txcom.bl952st00.convert.relation.ID(
+			string	iRelID(200))
+{
+	on case strip$(iRelID)
+	endcase
+	
+	return (0)
+}
+
+function extern boolean txcom.bl952st00.attr.is.calculated(	const string i.comp,
+					const string i.attr)
+{
+	string	comp.attr(1024)
+
+	comp.attr = (isspace(i.comp)) ? i.attr : i.comp & "." & i.attr
+
+	on case comp.attr
+	case "SJEquipmentInstallDismantleBOD.UUID":
+		return(true)
+	case "SJEquipmentInstallDismantleBOD.User":
+		return(true)
+	case "SJEquipmentInstallDismantleBOD.StorageLocation":
+		return(true)
+	case "SJEquipmentInstallDismantleBOD.Material":
+		return(true)
+	endcase
+	return(false)
+}
+
+
+
+
+|* ****** Batch method: SJEquipmentInstallDismantleBOD.OnProcess ******
+
+function extern 
+long txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.OnProcess(
+						long	i.request, 
+					ref	long	o.response, 
+					ref	long	o.result)
+{
+	DllUsage
+	EndDllUsage
+	boolean	loc.default
+
+	loc.default = false
+	RETIFNOK(Hook.OnExecute.SJEquipmentInstallDismantleBOD.OnProcess(
+		i.request, o.response, o.result))
+	return(0)
+}	
+|* ****** Batch method: SJEquipmentInstallDismantleBOD.PublishEvent ******
+
+function extern 
+long txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.PublishEvent(
+						long	i.request, 
+					ref	long	o.response, 
+					ref	long	o.result)
+{
+	DllUsage
+	EndDllUsage
+	long	loc.metaData
+	long	duml
+	long	retl
+
+		| Create meta data node containing info on generated library and function name
+		retl = tlbct.dll1000.CreateMetaDataNode(
+						"otxcombl952sb00", "txcom.bl952sb00.", 
+						"otxcombl952st00", "txcom.bl952st00.",
+					loc.metaData,
+					o.result,
+						"bod")
+		if retl <> 0 then
+			dal.set.error.message("tlbctstgen", "PublishEvent",
+					"SJEquipmentInstallDismantleBOD", "SJEquipmentInstallDismantleBOD")
+			|* Error occurred in method '%1$s' on component '%2$s' of object '%3$s'
+			| this message will be added to existing result in sb
+			if o.response <> 0 then
+				duml = xmlDelete(o.response)
+				o.response = 0
+			endif
+		endif
+
+		| Call the default execute for PublishEvent
+		retl = tlbct.dll1000.DefaultOnExecute.PublishBOD(
+					"SJEquipmentInstallDismantleBOD",
+					"SJEquipmentInstallDismantle",
+					loc.metaData,
+					i.request, o.response, o.result)
+		| Cleanup meta data information
+		duml = xmlDelete(loc.metaData)
+		loc.metaData = 0
+
+		RETIFNOK(retl)
+	return(0)
+}	
+
+|------------ GetPublishableEventActions() for all components ------------
+
+function extern long txcom.bl952st00.GetPublishableEventActions()
+{
+DllUsage
+	Desc:	Returns a list of all publishable actions
+	Return: XML structure containing all publishable verbs
+EndDllUsage
+
+	long	publishable.actions
+	long	duml
+	
+	publishable.actions = xmlNewNode("PublishableEventActions")
+	duml = xmlNewDataElement("eventAction", "Sync", publishable.actions)
+	
+	return(publishable.actions)
+}
+
+|------------ GetReceivableEventActions() for all components ------------
+
+function extern long txcom.bl952st00.GetReceivableEventActions()
+{
+DllUsage
+	Desc:	Returns a list of all receivable actions
+	Return: XML structure containing all receivable verbs
+EndDllUsage
+
+	long	receivable.actions
+	long	duml
+	
+	receivable.actions = xmlNewNode("ReceivableEventActions")
+	duml = xmlNewDataElement("eventAction", "Process", receivable.actions)
+	
+	return(receivable.actions)
+}
+
+|------------ SetInternalIdentifiers() for all components ------------
+
+function extern long txcom.bl952st00.SetInternalIdentifiers(
+		long	i.internalData)
+{
+DllUsage
+	This function must only be used by the Tools Add-On package
+	or the public layer.
+	Do not use it in hook code or other libraries.
+	Return value: 0 (OK) or an error value.
+	In case of error a dal error message has been set.
+EndDllUsage
+
+	string	component.name(50)
+	domain  tcmcs.str50m  local.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID
+	long	attributeNode	| child of instanceNode
+	long	retl			| return value to be checked
+	long	duml			| dummy variable
+
+	attributeNode = 0
+	retl = 0
+	duml = 0
+	component.name = xmlName$(i.internalData)
+
+	on case component.name
+	case "SJEquipmentInstallDismantleBOD":
+		attributeNode = xmlFindFirstMatch("<SJEquipmentInstallDismantleBOD>.<BODID_ExternalReferenceID>",
+							i.internalData)
+		ERR_IF(attributeNode = 0, "SJEquipmentInstallDismantleBOD")
+
+		local.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID =
+				xmlData$(attributeNode)
+		retl = txcom.bl952st00.SJEquipmentInstallDismantleBOD.SetInternalIdentifiers(
+				local.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID,
+					duml)
+		ERR_IF(retl <> 0, "SJEquipmentInstallDismantleBOD") | incorrect component
+		break
+	default:
+		ERR_IF(true, component.name) | incorrect component
+	endcase
+
+	return(0) | OK
+}
+
+|------------ SetInternalIdentifiers() for SJEquipmentInstallDismantleBOD ------------
+
+function extern long txcom.bl952st00.SJEquipmentInstallDismantleBOD.SetInternalIdentifiers(
+     	domain  tcmcs.str50m  i.BODID_ExternalReferenceID, 
+		long	i.settings)
+{
+DllUsage
+	This function must only be used by the Tools Add-On package
+	or the public layer.
+	Do not use it in hook code or other libraries.
+	Return value: 0 (OK) or an error value.
+	In case of error a dal error message has been set.
+EndDllUsage
+
+
+	long	attributeNode	| child of instanceNode
+	long	duml
+
+	attributeNode = 0
+	duml = 0
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID = i.BODID_ExternalReferenceID
+	bl.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.set = true
+
+
+	return(0) | OK
+}
+function extern long txcom.bl952st00.SJEquipmentInstallDismantleBOD.GetRootTableIdentifiers(
+	ref	long	o.internalData)
+{
+DllUsage
+	This function must only be used by the Publisher DLL (included in the
+	Tools Add-On package).
+	Do not use it in hook code or other libraries.
+	Return value: 0 (OK) or an error value.
+	In case of error a dal error message has been set.
+EndDllUsage
+
+	long	attributeNode	| node containing attribute
+	long	retl		| return value to be checked
+	long	i
+
+	o.internalData = xmlNewNode("Data")
+	i = 0
+
+	| add item / bl.SJEquipmentInstallDismantleBOD.Item
+	ERR_IF(not bl.SJEquipmentInstallDismantleBOD.Item.set)
+	attributeNode = xmlNewDataElement("columnValue",
+					bl.SJEquipmentInstallDismantleBOD.Item,
+					o.internalData)
+	ERR_IF(attributeNode = 0)
+	retl = xmlSetAttribute(attributeNode, "column", "item")
+	ERR_IF(retl = 0)
+
+	| add sern / bl.SJEquipmentInstallDismantleBOD.SerialNumber
+	ERR_IF(not bl.SJEquipmentInstallDismantleBOD.SerialNumber.set)
+	attributeNode = xmlNewDataElement("columnValue",
+					bl.SJEquipmentInstallDismantleBOD.SerialNumber,
+					o.internalData)
+	ERR_IF(attributeNode = 0)
+	retl = xmlSetAttribute(attributeNode, "column", "sern")
+	ERR_IF(retl = 0)
+
+	return(0) | OK
+}
+
+|------------ GetInternalIdentifiersXml() for SJEquipmentInstallDismantleBOD ------------
+
+function boolean txcom.bl952st00.SJEquipmentInstallDismantleBOD.GetInternalIdentifiersXml(
+     	domain  tcmcs.str50m  i.BODID_ExternalReferenceID, 
+	ref	long	o.identifiersXml)
+{
+| Create XML containing input for txcom.bl952st00.SJEquipmentInstallDismantleBOD.SetInternalIdentifiers()
+| Return value: true = OK, false = error
+
+	long	attributeNode	| xml node for attribute element
+	long	duml			| dummy variable
+
+	o.identifiersXml = xmlNewNode("SJEquipmentInstallDismantleBOD")
+	if o.identifiersXml = 0 then
+		return(false)
+	endif
+	attributeNode = xmlNewDataElement("BODID_ExternalReferenceID", i.BODID_ExternalReferenceID, o.identifiersXml)
+	if attributeNode = 0 then
+		duml = xmlDelete(o.identifiersXml)
+		o.identifiersXml = 0
+		return(false)
+	endif
+	return(true)
+}
+#define DALHOOKERROR_IF(condition, action)
+^	if condition then
+^		dal.set.error.message("tlbctst0014",
+^			action, "SJEquipmentInstallDismantleBOD", "SJEquipmentInstallDismantleBOD")
+^		| Unable to execute ShowAndPublish%1$sBOD for %2$s.%3$s.
+^		return(DALHOOKERROR) 
+^	endif
+
+|------------ ShowAndPublishSyncBOD() for SJEquipmentInstallDismantleBOD ------------
+
+function extern long txcom.bl952st00.SJEquipmentInstallDismantleBOD.ShowAndPublishSyncBOD(
+     	domain  tcmcs.str50m		i.BODID_ExternalReferenceID, 
+	const	string		i.actionCode,
+	const	string		i.documentId,
+	const	string		i.revisionId,
+	const	string		i.variationId,
+	const	string		i.tenantId,
+	const	string		i.accountingEntityId,
+	const	string		i.locationId,
+	[	long		i.settings ,
+	ref	long		o.bodInfo ] )
+{
+DllUsage
+Desc	This function publishes an event for the instance defined by the input parameters.
+	- the values for the public identifying attributes are determined
+	- the Show request is built and the Show is invoked (unless i.actionCode =
+	  "Delete" and the component is the top-level component)
+	- the metadata is retrieved
+	- an event message is created (using the Show response if applicable)
+	- the event message is published through PublishBOD().
+	- in case of errors, DALHOOKERROR is returned
+Input	other parameters identifiers for the components root table
+	i.actionCode          action code
+	i.documentId          document ID
+	i.revisionId          revision ID
+	i.variationId         variation ID
+	i.tenantId            tenant ID
+	i.accountingEntityId  accounting entity ID
+	i.locationId          location ID
+	i.settings		XML containing additional settings (optional);
+				refer to the developer's documentation for more information
+Output	o.bodInfo	XML containing logging info on published BODs and message size
+	return value	0 (OK) or DALHOOKERROR (Error)
+EndDllUsage
+
+	long	identifiersXml	| xml containing identifying attributes and their values
+	long	metadataXml	| xml containing metadata
+	long	o.result	| result from tlbct.dll1000.CreateMetaDataNode
+	long	bodInfoXml	| xml containing BOD publishing info
+	long	retl		| return value to be checked
+	long	duml		| dummy variable
+
+	CHECK_TOOLS_VERSION_SHOW_AND_PUB(0)
+
+	retl = txcom.bl952st00.SJEquipmentInstallDismantleBOD.SetInternalIdentifiers(
+    			i.BODID_ExternalReferenceID,
+			duml)
+	DALHOOKERROR_IF(retl <> 0, "Sync")
+
+	DALHOOKERROR_IF(not txcom.bl952st00.SJEquipmentInstallDismantleBOD.GetInternalIdentifiersXml(
+				i.BODID_ExternalReferenceID,
+				identifiersXml),
+			"Sync")
+
+	retl = tlbct.dll1000.CreateMetaDataNode(
+				"otxcombl952sb00", "txcom.bl952sb00.",
+				"otxcombl952st00", "txcom.bl952st00.",
+				metadataXml,
+				o.result,
+				"bod")
+	if o.result <> 0 then
+		duml = xmlDelete(o.result) | not used
+		o.result = 0	
+	endif
+	DALHOOKERROR_IF(retl <> 0, "Sync")
+
+	if get.argc() > 8 then
+		i.settings = get.long.arg(9)
+	else
+		i.settings = 0
+	endif
+	bl.performing.ShowAndPublishBOD	= true
+	retl = tlbct.dll1000.DefaultOnExecute.ShowAndPublishBOD(
+			"SJEquipmentInstallDismantleBOD",
+			"SJEquipmentInstallDismantle",
+			"Sync",	| event action
+			identifiersXml,
+			metadataXml,
+			i.actionCode,
+			i.documentId,
+			i.revisionId,
+			i.variationId,
+			i.tenantId,
+			i.accountingEntityId,
+			i.locationId,
+			i.settings,
+			bodInfoXml)
+	bl.performing.ShowAndPublishBOD	= false
+			
+	duml = xmlDelete(identifiersXml)
+	identifiersXml = 0
+
+	duml = xmlDelete(metadataXml)
+	metadataXml = 0
+
+	if get.argc() > 9 then
+		put.long.arg(10, bodInfoXml)
+	else
+		duml = xmlDelete(bodInfoXml)
+		bodInfoXml = 0
+	endif
+
+	DALHOOKERROR_IF(retl <> 0, "Sync") | error from ShowAndPublishBOD
+
+	return(0) | OK
+}
+
+#undef DALHOOKERROR_IF(condition, action)
+
+|------------------- Check whether publishing is on ---------------------------
+
+function extern boolean txcom.bl952st00.SJEquipmentInstallDismantleBOD.EventMustBePublished(
+	const	string		i.verb)
+{
+DllUsage
+Desc    This function checks whether a 'subscription' exists for the specified
+        noun and verb (in the current company).
+Input   i.verb          : the BOD verb
+Output  return value    : true if the BOD must be published (a 'subscription'
+                          exists); false otherwise.
+EndDllUsage
+
+	CHECK_TOOLS_VERSION_SHOW_AND_PUB(false)
+
+	return(tlbct.dll1000.bod.must.be.published("SJEquipmentInstallDismantle", i.verb))
+}
+
+
+|************* Undeclare defines (to prevent name clashes in hooks) ***********
+
+#undef	XmlNode
+#undef	MAX_RECURSION
+
+#undef	RETIFNOK(...)
+#undef	RETIFNOK_SYNC(...)
+#undef	SET.DAL.FIELD(FIELD, VALUE, ALWAYS, SET)
+#undef	SET.DAL.FIELD.ARRAY(FIELD, VALUE, ELEM, ALWAYS, SET)
+#undef	SET.DAL.FIELD.ARRAY.LONG(FIELD, VALUE, ELEM, ALWAYS, SET)
+#undef	SET.DAL.FIELD.ARRAY.STRING(FIELD, VALUE, ELEM, ALWAYS, SET)
+#undef	CHECK_TOOLS_VERSION_SHOW_AND_PUB(RETVAL)
+#undef	MESSAGE_EXISTS(MESS.CODE)
+#undef	SET.ERROR.BYPASS.ON()
+#undef	SET.ERROR.BYPASS.ON.STR()
+#undef	SET.ERROR.BYPASS.ON.VOID()
+#undef	SET.ERROR.BYPASS.OFF()
+#undef	GET.ERROR.BYPASS()
+
+
+#undef	OCM_SET_QUERY_MODE(tbl)
+
+#undef	USE_MODIFIERS_ALL_LANG()
+
+
+#undef	ERR_IF(condition, component)
+#undef	ERR_IF(condition)
+
+|****************************** Hooks **********************************
+
+|------------------------------ Include Hook ----------------------------------
+#context_on "HOOK:includeHook"
+
+|********************* Includes *******************************************	
+	#include	"ibomcs2000"
+	#include	"itcbod0001"
+
+	#pragma used dll "otxcomdll9952"
+
+
+|********************* Tables *******************************************
+	table	ttscfg210
+	table	ttscfg215
+	table	ttscfg200
+	table	ttssoc200
+	table	ttssoc220
+	table	ttsmdm903
+	table	ttssoc210
+
+|********************* Global Variables **********************************		
+
+     	string	install_publish(1) BASED			
+	COMMON 	install_publish	
+	
+	long 	ret
+	domain	tcmcs.s200m	err.msg		
+	
+
+#context_off
+|------------------------------ End of Include Hook ----------------------------
+#context_on "HOOK:onGetHook; ATTRIBUTE:SJEquipmentInstallDismantleBOD.UUID"
+function long Hook.OnGet.SJEquipmentInstallDismantleBOD.UUID(
+	ref domain	tcmcs.str100m	o.UUID,
+	ref boolean	io.UUID.isSet)
+{
+io.UUID.isSet = true
+
+	o.UUID = uuid.format$(uuid.generate$())
+	io.UUID.isSet = true
+	return(0)
+}
+#context_off
+#context_on "HOOK:afterGetHook; ATTRIBUTE:SJEquipmentInstallDismantleBOD.EquipmentID"
+function long Hook.AfterGet.SJEquipmentInstallDismantleBOD.EquipmentID(
+		domain	tcitem	i.Item,
+		boolean			i.Item.isSet,
+		domain	tcibd.sern	i.SerialNumber,
+		boolean			i.SerialNumber.isSet,
+		domain tcmcs.str50m	i.EquipmentID,
+		boolean				i.EquipmentID.isSet)
+{
+	select	tscfg210.*
+	from	tscfg210
+	where	tscfg210._index2 = {:i.Item,:i.SerialNumber}
+	and   	tscfg210.cdf_dism = {"Dismantle"}
+	order by tscfg210.sttm desc
+	as set with 1 rows
+	selectdo
+		bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg210.stat
+		bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg210.sttm
+		bl.SJEquipmentInstallDismantleBOD.Position = tscfg210.lcid
+		bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg210.cdf_orno
+		bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg210.cdf_acln
+		bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg210.cdf_cloc		
+		bl.SJEquipmentInstallDismantleBOD.SeverityCode = 0
+		bl.SJEquipmentInstallDismantleBOD.Note = ""
+	|	bl.SJEquipmentInstallDismantleBOD.ResultCode =	str$(tscfg215.cdf_lino)		|#EMSJ_1012_002.n	|#EMSJ_1012_009.o		|* Material Line
+		bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg210.cdf_lino)		|#EMSJ_1012_002.n	|#EMSJ_1012_009.n		|* Material Line
+|#EMSJ_1012_004.sn
+		if not isspace(tscfg210.pitm) and not isspace(tscfg210.pser) then
+			select	tscfg200.cdf_giai, tscfg200.cdf_evne
+			from	tscfg200
+			where	tscfg200._index1 = {:tscfg210.pitm, :tscfg210.pser}
+			as set with 1 rows
+			selectdo
+				if not isspace(tscfg200.cdf_evne) then
+					bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne
+				else
+					if not isspace(tscfg200.cdf_giai) then
+						bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai
+					endif
+				endif
+			endselect
+		endif
+|#EMSJ_1012_004.en
+|#EMSJ_1012_009.sn
+		if not isspace(tscfg210.cdf_orno) and tscfg210.cdf_acln <> 0 then
+			select	tssoc210.*
+			from	tssoc210
+			where	tssoc210._index1 = {:tscfg210.cdf_orno,:tscfg210.cdf_acln}
+			as set with 1 rows
+			selectdo
+			endselect
+			bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word
+		endif
+|#EMSJ_1012_009.en
+	selectempty
+		select	tscfg215.*
+		from	tscfg215
+		where	tscfg215._index2 = {:i.Item,:i.SerialNumber}
+		order by tscfg215.lgtm desc
+		as set with 1 rows
+		selectdo
+			bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg215.stat
+			bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg215.ettm
+			bl.SJEquipmentInstallDismantleBOD.Position = tscfg215.lcid
+			bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg215.cdf_orno
+			bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg215.cdf_acln
+			bl.SJEquipmentInstallDismantleBOD.SeverityCode = tscfg215.cdf_serv
+			bl.SJEquipmentInstallDismantleBOD.Note = tscfg215.cdf_note		
+			bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg215.cdf_cloc
+			bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg215.cdf_lino)		|#EMSJ_1012_002.n		|* Material Line		
+|#EMSJ_1012_004.sn
+			if not isspace(tscfg215.pitm) and not isspace(tscfg215.pser) then
+				select	tscfg200.cdf_giai, tscfg200.cdf_evne
+				from	tscfg200
+				where	tscfg200._index1 = {:tscfg215.pitm, :tscfg215.pser}
+				as set with 1 rows
+				selectdo
+					if not isspace(tscfg200.cdf_evne) then
+						bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne
+					else
+						if not isspace(tscfg200.cdf_giai) then
+							bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai
+						endif
+					endif
+				endselect
+			endif
+|#EMSJ_1012_004.en
+|#EMSJ_1012_009.sn
+			if not isspace(tscfg215.cdf_orno) and tscfg215.cdf_acln <> 0 then
+				select	tssoc210.*
+				from	tssoc210
+				where	tssoc210._index1 = {:tscfg215.cdf_orno,:tscfg215.cdf_acln}
+				as set with 1 rows
+				selectdo
+				endselect
+				bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word
+			endif
+|#EMSJ_1012_009.en
+		endselect
+		
+		if ((tscfg215.cdf_serv = 1 or tscfg215.cdf_serv = 2) and etol(tscfg215.stat) = 20) or install_publish = "9"  then 
+			select	tscfg215.*
+			from	tscfg215
+			where	tscfg215._index2 = {:i.Item,:i.SerialNumber}
+			and	tscfg215.stat = 10
+			order by tscfg215.lgtm desc
+			as set with 1 rows
+			selectdo
+				bl.SJEquipmentInstallDismantleBOD.BreakdownStatus = tscfg215.stat
+				bl.SJEquipmentInstallDismantleBOD.ValidFromDate = tscfg215.ettm
+				bl.SJEquipmentInstallDismantleBOD.Position = tscfg215.lcid
+				bl.SJEquipmentInstallDismantleBOD.ServiceOrder = tscfg215.cdf_orno
+				bl.SJEquipmentInstallDismantleBOD.ActivityNumber = tscfg215.cdf_acln
+				bl.SJEquipmentInstallDismantleBOD.SeverityCode = tscfg215.cdf_serv
+				bl.SJEquipmentInstallDismantleBOD.Note = tscfg215.cdf_note
+				bl.SJEquipmentInstallDismantleBOD.VehiclePosition = tscfg215.cdf_cloc	
+				bl.SJEquipmentInstallDismantleBOD.ResultCode = str$(tscfg215.cdf_lino)		|#EMSJ_1012_002.n		|* Material Line	
+|#EMSJ_1012_004.sn
+				if not isspace(tscfg215.pitm) and not isspace(tscfg215.pser) then
+					select	tscfg200.cdf_giai, tscfg200.cdf_evne
+					from	tscfg200
+					where	tscfg200._index1 = {:tscfg215.pitm, :tscfg215.pser}
+					as set with 1 rows
+					selectdo
+						if not isspace(tscfg200.cdf_evne) then
+							bl.SJEquipmentInstallDismantleBOD.FunctionalLocationID = tscfg200.cdf_evne
+						else
+							if not isspace(tscfg200.cdf_giai) then
+								bl.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID = tscfg200.cdf_giai
+							endif
+						endif
+					endselect
+				endif
+|#EMSJ_1012_004.en		
+|#EMSJ_1012_009.sn
+				if not isspace(tscfg215.cdf_orno) and tscfg215.cdf_acln <> 0 then
+					select	tssoc210.*
+					from	tssoc210
+					where	tssoc210._index1 = {:tscfg215.cdf_orno,:tscfg215.cdf_acln}
+					as set with 1 rows
+					selectdo
+					endselect
+					bl.SJEquipmentInstallDismantleBOD.WorkOrderID = tssoc210.cdf_word
+				endif
+|#EMSJ_1012_009.en	
+			endselect
+		endif
+	endselect
+	
+	return(0)
+}
+#context_off
+#context_on "HOOK:onGetHook; ATTRIBUTE:SJEquipmentInstallDismantleBOD.User"
+function long Hook.OnGet.SJEquipmentInstallDismantleBOD.User(
+	ref domain	tcemno	o.User,
+	ref boolean	io.User.isSet)
+{
+io.User.isSet = true
+
+	o.User = str$(logname$)
+	io.User.isSet = true
+	
+	return(0)
+}
+#context_off
+#context_on "HOOK:onGetHook; ATTRIBUTE:SJEquipmentInstallDismantleBOD.StorageLocation"
+function long Hook.OnGet.SJEquipmentInstallDismantleBOD.StorageLocation(
+		domain	tcitem	i.Item,
+		boolean			i.Item.isSet,
+		domain	tcibd.sern	i.SerialNumber,
+		boolean			i.SerialNumber.isSet,
+	ref domain	tcmcs.st10m	o.StorageLocation,
+	ref boolean	io.StorageLocation.isSet)
+{
+io.StorageLocation.isSet = true
+
+	o.StorageLocation = ""
+	select	tscfg210.*
+	from	tscfg210
+	where	tscfg210._index2 = {:i.Item,:i.SerialNumber}
+	and   	tscfg210.cdf_dism = {"Dismantle"}
+	order by tscfg210.sttm desc
+	as set with 1 rows
+	selectdo
+	|	select	tssoc220.awrh, tssoc220.lino
+		select	tssoc220.*
+		from	tssoc220
+		where	tssoc220.orno = {:tscfg210.cdf_orno}
+		and	tssoc220.acln = {:tscfg210.cdf_acln}
+		and	tssoc220.item = {:i.Item}
+		and	tssoc220.sern = {:i.SerialNumber}
+		as set with 1 rows
+		selectdo
+		endselect
+		bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)
+		if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then		|#EMSJ_1012_003.sn
+			if not isspace(tssoc220.cdf_cwar) then
+				select	tsmdm903.*
+				from	tsmdm903
+				where	tsmdm903.warh.c = {:tssoc220.cdf_cwar}
+				as set with 1 rows
+				selectdo
+				endselect
+			endif
+		else												|#EMSJ_1012_003.en		
+			if not isspace(tssoc220.awrh) then
+			|	select	tsmdm903.sjwh.c:o.StorageLocation
+				select	tsmdm903.*
+				from	tsmdm903
+				where	tsmdm903.warh.c = {:tssoc220.awrh}
+				as set with 1 rows
+				selectdo
+			|		o.StorageLocation = tsmdm903.sjwh.c
+				endselect
+			endif
+		endif												|#EMSJ_1012_003.n
+		o.StorageLocation = tsmdm903.sjwh.c
+	|	endselect
+	selectempty
+		select	tscfg215.*
+		from	tscfg215
+		where	tscfg215._index2 = {:i.Item,:i.SerialNumber}
+		order by tscfg215.lgtm desc
+		as set with 1 rows
+		selectdo
+		|	select	tssoc220.awrh, tssoc220.lino
+			select	tssoc220.*
+			from	tssoc220
+			where	tssoc220.orno = {:tscfg210.cdf_orno}
+			and	tssoc220.acln = {:tscfg210.cdf_acln}
+			and	tssoc220.item = {:i.Item}
+			and	tssoc220.sern = {:i.SerialNumber}
+			as set with 1 rows
+			selectdo
+			endselect
+			bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)
+			if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then		|#EMSJ_1012_003.sn
+			if not isspace(tssoc220.cdf_cwar) then
+				select	tsmdm903.*
+				from	tsmdm903
+				where	tsmdm903.warh.c = {:tssoc220.cdf_cwar}
+				as set with 1 rows
+				selectdo
+				endselect
+			endif
+			else												|#EMSJ_1012_003.en
+				if not isspace(tssoc220.awrh) then
+				|	select	tsmdm903.sjwh.c:o.StorageLocation
+					select	tsmdm903.*
+					from	tsmdm903
+					where	tsmdm903.warh.c = {:tssoc220.awrh}
+					as set with 1 rows
+					selectdo
+				|	o.StorageLocation = tsmdm903.sjwh.c
+					endselect
+				endif
+			endif												|#EMSJ_1012_003.n
+			o.StorageLocation = tsmdm903.sjwh.c
+		|	endselect
+		endselect
+		
+		if ((tscfg215.cdf_serv = 1 or tscfg215.cdf_serv = 2) and etol(tscfg215.stat) = 20) or install_publish = "9" then 
+			select	tscfg215.*
+			from	tscfg215
+			where	tscfg215._index2 = {:i.Item,:i.SerialNumber}
+			and	tscfg215.stat = 10
+			order by tscfg215.lgtm desc
+			as set with 1 rows
+			selectdo
+			|	select	tssoc220.awrh, tssoc220.lino 
+				select	tssoc220.*
+				from	tssoc220
+				where	tssoc220.orno = {:tscfg210.cdf_orno}
+				and	tssoc220.acln = {:tscfg210.cdf_acln}
+				and	tssoc220.item = {:i.Item}
+				and	tssoc220.sern = {:i.SerialNumber}
+				as set with 1 rows
+				selectdo
+				endselect
+				bl.SJEquipmentInstallDismantleBOD.Lot = str$(tssoc220.lino)
+				if tssoc220.dltp = tsmdm.dltp.to.scrap or tssoc220.dltp = tsmdm.dltp.from.serv.inv then		|#EMSJ_1012_003.sn
+					if not isspace(tssoc220.cdf_cwar) then
+						select	tsmdm903.*
+						from	tsmdm903
+						where	tsmdm903.warh.c = {:tssoc220.cdf_cwar}
+						as set with 1 rows
+						selectdo
+						endselect
+					endif
+				else												|#EMSJ_1012_003.en
+					if not isspace(tssoc220.awrh) then
+					|	select	tsmdm903.sjwh.c:o.StorageLocation
+						select	tsmdm903.*
+						from	tsmdm903
+						where	tsmdm903.warh.c = {:tssoc220.awrh}
+						as set with 1 rows
+						selectdo
+					|		o.StorageLocation = tsmdm903.sjwh.c
+						endselect
+					endif
+				endif												|#EMSJ_1012_003.n
+				o.StorageLocation = tsmdm903.sjwh.c
+			|	endselect
+			endselect
+		endif
+	endselect	
+	
+	io.StorageLocation.isSet = true
+	return(0)
+}
+#context_off
+#context_on "HOOK:onGetHook; ATTRIBUTE:SJEquipmentInstallDismantleBOD.Material"
+function long Hook.OnGet.SJEquipmentInstallDismantleBOD.Material(
+		domain	tcmcs.str50m	i.EquipmentID,
+		boolean			i.EquipmentID.isSet,
+		domain	tcmcs.str100m	i.FunctionalLocationID,
+		boolean			i.FunctionalLocationID.isSet,
+		domain	tcmcs.str7	i.Position,
+		boolean			i.Position.isSet,
+	ref domain	tcmcs.str100m	o.Material,
+	ref boolean	io.Material.isSet)
+{
+io.Material.isSet = true
+
+	o.Material = ""
+	if not isspace(i.FunctionalLocationID) then
+		o.Material = concat$("_", trim$(i.FunctionalLocationID), i.Position)
+	else
+		if not isspace(i.EquipmentID) then
+			o.Material = concat$("_", trim$(i.EquipmentID), i.Position)
+		endif
+	endif
+	io.Material.isSet = true
+	return(0)
+}
+#context_off
+#context_on "HOOK:onExecuteHook; Method:SJEquipmentInstallDismantleBOD.OnProcess"
+function long Hook.OnExecute.SJEquipmentInstallDismantleBOD.OnProcess(
+		const		long		i.request,
+		ref		long		o.response,
+		ref		long		o.result)
+{
+	ret = txcom.dll9952.handle.incoming.request.for.sj.equipment.install.dismantle.bod(
+				i.request, err.msg)
+
+	if ret <> 0 then
+		dal.set.error.message("@" & err.msg)
+		return(DALHOOKERROR)
+	endif
+	
+	return(0)
+}
+#context_off
+
+
+|****************************| end of source |*********************************

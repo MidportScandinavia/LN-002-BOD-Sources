@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttscfg.pb.stat_mandatory" schemaVersion="1.3.020">
+  <name>tscfg.pb.stat_mandatory</name>
+  <description></description>
+  <type>simple</type>
+  <primitiveDatatype>string</primitiveDatatype>
+  <nativeDatatype>tscfg.pb.stat</nativeDatatype>
+  <dbDatatype>db.enum</dbDatatype>
+  <schema></schema>
+  <isTranslatable>false</isTranslatable>
+  <documentation></documentation>
+  <Facet>
+    <type>enumeration</type>
+    <description>To be Installed</description>
+    <value>to.be.installed</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <description>Installed</description>
+    <value>installed</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <description>To be Removed</description>
+    <value>to.be.removed</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <description>Removed</description>
+    <value>removed</value>
+  </Facet>
+</Datatype>

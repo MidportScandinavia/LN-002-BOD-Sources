@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttscfg.owtp_mandatory" schemaVersion="1.3.020">
+  <name>tscfg.owtp_mandatory</name>
+  <type>simple</type>
+  <primitiveDatatype>string</primitiveDatatype>
+  <nativeDatatype>tscfg.owtp</nativeDatatype>
+  <dbDatatype>db.enum</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <Facet>
+    <type>enumeration</type>
+    <value>external</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>internal</value>
+  </Facet>
+</Datatype>

@@ -1,0 +1,3828 @@
+|***************************| start of source |********************************
+|*
+|* DO NOT EDIT THIS GENERATED SOURCE !!
+|*
+|******************************************************************************
+|*
+|*    THIS SOFTWARE IS THE PROPERTY OF AND CONTAINS
+|*    CONFIDENTIAL INFORMATION OF INFOR, AND SHALL NOT BE
+|*    COPIED, USED, NOR DISCLOSED WITHOUT EXPRESS WRITTEN
+|*    AUTHORIZATION.  ALTHOUGH PUBLICATION IS NOT
+|*    INTENDED, IN THE EVENT OF PUBLICATION, THE
+|*    FOLLOWING NOTICE IS APPLICABLE:
+|*
+|*  Copyright (c) 2023 Infor. All rights reserved.
+|*  The word and design marks set forth herein are trademarks and/or registered
+|*  trademarks of Infor and/or related affiliates and subsidiaries.
+|*  All rights reserved. All other trademarks listed herein are the property of
+|*  their respective owners.
+|*  www.infor.com.
+|*
+|******************************************************************************
+|*
+|*    BDE Name      : SJEquipmentInstallDismantleBOD
+|*    Gen. Date     : 11-Dec-2023 12:40:59
+|*
+|*    Business Interface Definition info:
+|*    -----------------------------------
+|*    BID Name      : SJEquipmentInstallDismantle
+|*    Description   : Equipment Install Dismantle BOD for SJ - I416
+|*    VersionID     : 1.0.1
+|*    SchemaVersion : 1.3.020
+|*
+|*    Business Interface Implementation info:
+|*    ---------------------------------------
+|*    BII Name      : SJEquipmentInstallDismantleBOD
+|*    Description   : SJ Equipment Install and Dismantle
+|*    Status        : developing
+|*    VersionID     : 
+|*    SchemaVersion : 1.3.020
+|*
+|*    Application info:
+|*    -----------------
+|*    Name          : ERPLN
+|*    Description   : 
+|*    Release       : 
+|*    VersionID     : 
+|*    SchemaVersion : 1.3.020
+|* 
+|*    Generator info:
+|*    ---------------
+|*    Name          : Infor LN Studio Implementation Generator
+|*    Id            : com.infor.ln.studio.intg.generator.erpln
+|*    Version       : 10.7.0.0506
+|*    Version       : 10.7.0.0506 (framework)
+|* 
+|******************************************************************************
+|* Script Type: BOL
+|******************************************************************************
+#ident "@(#) BUILD_SJEQUIPMENTINSTALLDISMANTLE_NOVERSION_ERPLN_NOVERSION"
+#ident "@(#) txcom.bl952sb00 2023-12-11 BID SJEquipmentInstallDismantle V1.0.1"
+#ident "@(#) txcom.bl952sb00 2023-12-11 BII SJEquipmentInstallDismantleBOD noVersion"
+#ident "@(#) txcom.bl952sb00 2023-12-11 Application ERPLN noVersion"
+#ident "@(#) txcom.bl952sb00 2023-12-11 Infor LN Studio Implementation Generator V10.7.0.0506 (framework V10.7.0.0506)"
+
+	|* General defines
+	#define XmlNode	 long
+	|* Defines for List and Show
+	#define SELECTION	 	"Selection"
+	#define SEL_ATTR	 	"selectionAttribute"
+	|* Defines for ProcessingScope
+	#define NOT_APPLICABLE	"not_applicable"
+	#define FUTURE			"future_use"
+	#define REQUEST			"request"
+	#define BUS_ENT		 	"business_entity"
+	#define BUS_ENT_CMP	 	"business_entity_component"
+	
+	#define TOP_DOWN		1
+	#define BOTTOM_UP		2
+	#define	BATCH			3
+	
+	#define	ANCHOR_MARKER		"XXXXXX_ANCHOR_"
+
+	     
+	extern	boolean	is.outbound
+
+	boolean	bl.keep.child.transaction
+	boolean	bl.suppress.conversion.hooks
+	boolean SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select
+	boolean SJEquipmentInstallDismantleBOD.UUID.select
+	boolean SJEquipmentInstallDismantleBOD.EquipmentID.select
+	boolean SJEquipmentInstallDismantleBOD.ActionCode.select
+	boolean SJEquipmentInstallDismantleBOD.ValidFromDate.select
+	boolean SJEquipmentInstallDismantleBOD.FunctionalLocationID.select
+	boolean SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select
+	boolean SJEquipmentInstallDismantleBOD.Item.select
+	boolean SJEquipmentInstallDismantleBOD.SerialNumber.select
+	boolean SJEquipmentInstallDismantleBOD.ServiceOrder.select
+	boolean SJEquipmentInstallDismantleBOD.ActivityNumber.select
+	boolean SJEquipmentInstallDismantleBOD.User.select
+	boolean SJEquipmentInstallDismantleBOD.BreakdownStatus.select
+	boolean SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select
+	boolean SJEquipmentInstallDismantleBOD.MovementType.select
+	boolean SJEquipmentInstallDismantleBOD.StorageLocation.select
+	boolean SJEquipmentInstallDismantleBOD.Position.select
+	boolean SJEquipmentInstallDismantleBOD.VehiclePosition.select
+	boolean SJEquipmentInstallDismantleBOD.Material.select
+	boolean SJEquipmentInstallDismantleBOD.Lot.select
+	boolean SJEquipmentInstallDismantleBOD.Measure.select
+	boolean SJEquipmentInstallDismantleBOD.UnitCode.select
+	boolean SJEquipmentInstallDismantleBOD.Error.select
+	boolean SJEquipmentInstallDismantleBOD.ErrorMessage.select
+	boolean SJEquipmentInstallDismantleBOD.ResultCode.select
+	boolean SJEquipmentInstallDismantleBOD.SeverityCode.select
+	boolean SJEquipmentInstallDismantleBOD.Note.select
+	boolean SJEquipmentInstallDismantleBOD.UserArea.select
+	boolean SJEquipmentInstallDismantleBOD.WorkOrderID.select
+	string	emptyML(1) mb	| empty multi language value string
+
+	#define Selection.must.be.filled(...)
+^			tlbct.dll1000.Selection.must.be.filled(...)	
+
+
+	     
+
+	boolean	log.query
+	long	element
+	long	messageCnt
+
+	long	bl.result
+	xmlNode bl.xml.result
+	long	bl.ret
+	xmlNode	bl.RequestArgument
+	xmlNode	bl.ResponseArgument
+	xmlNode	bl.ResultArgument
+	string	bl.processingScope(26)	|* transaction granularity
+					|* for Create, Change and Delete &
+					|* Specific methods
+	boolean	bl.skipComponent	|* flag to indicate whether or not
+					|* the remainder of the business
+					|* object should be processed
+	string	bl.current.method(50)	|* Used for component selection
+ 	#include <bic_tt>
+	#include <bic_dam>
+	#include <bic_text>
+	
+	|Defines for functions in the tlbctdll1000 library
+	#define RewriteDataElementAsNode(...)
+^			tlbct.dll1000.xmlRewriteDataElementAsNode(...)
+	#define createGroupNodes(...)
+^			tlbct.dll1000.createGroupNodes(...)
+	#define getSubNode(...)
+^			tlbct.dll1000.getSubNode(...)
+	#define getValue(...)
+^			tlbct.dll1000.getValue(...)
+	#define getAttributeValue(...)
+^			tlbct.dll1000.getAttributeValue(...)
+	#define createResponseObject(...)
+^			tlbct.dll1000.createResponseObject(...)
+	#define createResponseObject.WithoutDataArea(...)
+^			tlbct.dll1000.createResponseObject.WithoutDataArea(...)
+	#define createResultObject(...)
+^			tlbct.dll1000.createResultObject(...)
+^			messageCnt = 1
+	#define createCompNode(...)
+^			tlbct.dll1000.createCompNode(...)
+	#define selectObjectNode(...)
+^			tlbct.dll1000.selectObjectNode(...)
+	#define selectResponseNode(...)
+^			tlbct.dll1000.selectResponseNode(...)
+	#define handle.messages(...)
+^			tlbct.dll1000.handle.messages(...)
+	#define handle.transactionScope(...)
+^			tlbct.dll1000.handle.transactionScope(bl.result, bl.processingScope, bl.skipComponent,...)
+	#define loXMLtoBaan(...)
+^			tlbct.dll1000.loXMLtoBaan(...)
+
+	#define RETIFNOK(...)
+^		bl.result = ...
+^		if bl.result <> 0 then
+^			if bl.processingScope = BUS_ENT
+^			   or bl.processingScope = BUS_ENT_CMP
+^			then
+^				if not bl.keep.child.transaction then
+^					db.set.child.transaction(0)
+^					abort.transaction()
+^				endif
+^			endif
+^			return(bl.result)
+^		endif
+
+	#define CONTINUEIFNOK(MTH,RESP,RESU,BODESC,COMPNAME,LCOMP, ...)
+^		on case bl.processingScope
+^		case BUS_ENT_CMP:
+^			if bl.result = 0 then
+^				if not bl.skipComponent then
+^					RETIFNOK6(RESP, RESU, ...)
+^				endif
+^			endif
+^			break
+^		case REQUEST:
+^		case BUS_ENT:
+^		case NOT_APPLICABLE:
+^		default:
+^			RETIFNOK6(RESP, RESU, ...)
+^			break
+^		endcase
+
+	#define SET_RETRY_POINT_BUS_ENT()
+^		if bl.processingScope = BUS_ENT then
+^			db.retry.point()
+^		endif
+	#define SET_RETRY_POINT_BUS_ENT_CMP()
+^		if bl.processingScope = BUS_ENT_CMP then
+^			db.retry.point()
+^		endif
+
+	#define CLEAR_RESPONSE_BUS_ENT_RESPONSE_IN_RETRY(BODESC)
+^		if bl.processingScope = BUS_ENT and db.retry.hit() > 0 and 
+^		   Response##BODESC##node <> 0 then
+^			bl.ret = xmlDelete(Response##BODESC##node)
+^			Response##BODESC##node = 0
+^		endif
+
+	#define COMMIT_BUS_ENT()
+^		if bl.processingScope = BUS_ENT then
+^			commit.transaction()
+^		endif
+
+	#define COMMIT_BUS_ENT_CMP()
+^		if bl.processingScope = BUS_ENT_CMP then
+^			commit.transaction()
+^		endif
+
+	#define RETIFNOK_WITH_RETRY(...)
+^		if bl.processingScope = BUS_ENT_CMP then
+^			db.retry.point()
+^		endif
+^		bl.result = ...
+^		if bl.result <> 0 then
+^			if bl.processingScope = BUS_ENT
+^			   or bl.processingScope = BUS_ENT_CMP
+^			then
+^				if not bl.keep.child.transaction then
+^					db.set.child.transaction(0)
+^					abort.transaction()
+^				endif
+^			endif
+^			return(bl.result)
+^		else
+^			if bl.processingScope = BUS_ENT_CMP then
+^				commit.transaction()
+^			endif
+^		endif
+
+	#define	RETIFNOK5_WITH_RETRY(MTH, RESP, RESU, BODESC, COMPNAME, LCOMP, ...)
+^		if not bl.skipComponent then
+^			bl.result = ...
+^			handle.transactionScope(##LCOMP##,
+^						##RESP##,
+^						##RESU##,
+^						"##MTH##",
+^						##BODESC##,
+^						##COMPNAME##)
+^
+^			if not ##LCOMP## then
+^				if bl.result <> 0 and
+^					bl.processingScope = REQUEST then
+^					bl.ret =
+^					txcom.bl952st00.finalize.##MTH##(
+^								bl.result)
+^					return(bl.result)
+^				endif
+^			else
+^				if bl.result <> 0 and
+^					bl.processingScope = REQUEST then
+^					return(bl.result)
+^				endif
+^			endif
+^		endif
+
+	#define CONTINUEIFNOK_WITH_RETRY(MTH,RESP,RESU,BODESC,COMPNAME,LCOMP, ...)
+^		on case bl.processingScope
+^		case BUS_ENT_CMP:
+^			if bl.result = 0 then
+^				if not bl.skipComponent then
+^					RETIFNOK5_WITH_RETRY(MTH,
+^						RESP,
+^						RESU,
+^						BODESC,
+^						COMPNAME,
+^						LCOMP,
+^						...)
+^				endif
+^			endif
+^			break
+^		case REQUEST:
+^		case BUS_ENT:
+^		case NOT_APPLICABLE:
+^		default:
+^			RETIFNOK_WITH_RETRY(...)
+^			break
+^		endcase
+
+	#define RETIFNOK2(...)
+^		bl.result = ...
+^ 		if bl.result <> 0 then
+^			handle.messages(o.responseArgument,
+^				o.resultArgument, set.in.result(true))
+^			bl.ret = xmlDelete(o.ResponseArgument)
+^			o.ResponseArgument = 0
+^			bl.ResponseArgument = 0
+^			if bl.processingScope = BUS_ENT
+^				   or bl.processingScope = BUS_ENT_CMP then
+^				if not bl.keep.child.transaction then
+^					db.set.child.transaction(0)
+^					abort.transaction()
+^				endif
+^			endif
+^			return(bl.result)
+^		endif
+
+	#define RETIFNOK2_LIST(...)
+^               bl.result = ...
+^               if bl.result <> 0 then
+^                       handle.messages(o.responseArgument,
+^							o.resultArgument, set.in.result(true))
+^                       bl.ret = xmlDelete(o.ResponseArgument)
+^                       o.ResponseArgument = 0
+^						bl.ResponseArgument = 0
+^                       bl.ret = xmlDelete(SelectionNode)
+^                       SelectionNode = 0
+^                       return(bl.result)
+^               endif
+
+	#define RETIFNOK4(...)
+^               bl.xml.result = ...
+^               if bl.xml.result = 0 then
+^			tlbct.dll1000.set.and.log.xml.error(__FILE__, __LINE__)
+^			return(DALHOOKERROR)
+^               endif
+
+	#define	RETIFNOK5(MTH, RESP, RESU, BODESC, COMPNAME, LCOMP, ...)
+^		bl.result = ...
+^		handle.transactionScope(##LCOMP##,
+^					##RESP##,
+^					##RESU##,
+^					"##MTH##",
+^					##BODESC##,
+^					##COMPNAME##)
+^
+^			if not ##LCOMP## then
+^			if bl.result <> 0 and
+^				bl.processingScope = REQUEST
+^			then
+^				bl.ret =
+^				txcom.bl952st00.finalize.##MTH##(
+^							bl.result)
+^				return(bl.result)
+^			endif
+^		else
+^			if bl.result <> 0 and
+^				bl.processingScope = REQUEST
+^			then
+^				return(bl.result)
+^			endif
+^		endif
+
+	#define	RETIFNOK6(RESP, RESU, ...)
+^	bl.result = ...
+^	if bl.result <> 0 then
+^		handle.messages(##RESP##,
+^			##RESU##,
+^			set.in.result(true))
+^		if bl.processingScope = BUS_ENT
+^		   or bl.processingScope = BUS_ENT_CMP then
+^			if not bl.keep.child.transaction then
+^				db.set.child.transaction(0)
+^				abort.transaction()
+^			endif
+^		endif
+^		return(bl.result)
+^	endif
+
+	#define NEW.NODE(i.NAME, i.PARENTNODE, o.NODE)
+^		RETIFNOK4(xmlNewNode(i.NAME, XML_ELEMENT, i.PARENTNODE) )
+^		o.NODE = bl.xml.result
+
+	#define ASSIGNVAL(COMP,ATTRB,ALIAS)
+^               if ##COMP##.##ATTRB##.select then
+^                       RETIFNOK(txcom.bl952sb00.get.##COMP##.##ATTRB##.Mapper(value, value.isSet))
+^						if value.isSet then
+^                    	   	RETIFNOK4(xmlNewDataElement("##ALIAS##", strip$(value),
+^							g.Node))
+^						endif
+^               endif
+	#define ASSIGNVALML(COMP,ATTRB,ALIAS)
+^               if ##COMP##.##ATTRB##.select then
+^                       RETIFNOK(txcom.bl952sb00.get.##COMP##.##ATTRB##.Mapper(value, value.isSet))
+^						if value.isSet then
+^                    	   	RETIFNOK(createMLNode(value, "##ALIAS##", g.Node))
+^						endif
+^               endif
+
+	#define CHECK_TOOLS_VERSION(response, result)
+^	| The Business Studio version used to generate this business object
+^	| requires Enterprise Server 8.4.2 or higher or Enterprise Server
+^	| 8.3 or 8.4 with solution 236710.
+^	| For that reason this define is used at the start of each method.
+^	if not txcom.bl952st00.is.business.studio.supported() then
+^		dal.set.error.message("@To use this business object, use Enterprise Server 8.4.2 or higher or install solution 236710")
+^		response = 0
+^		result = xmlNewNode("Result")
+^		handle.messages(response, result, true) | add messages to result
+^		return(DALHOOKERROR)
+^	endif
+
+	#define CHECK_TOOLS_VERSION_PUB_EVENT(response, result)
+^	| If Enterprise Server 8.3 or lower is used, the SubscribeEvent method
+^	| will fail. So the PublishEvent method can immediately return 0
+^	| (= OK), to avoid fatal errors when invoking non-existing tl code.
+^	if not txcom.bl952st00.is.business.studio.supported() then
+^		result = 0
+^		response = xmlNewNode("PublishEventResponse")
+^		return(0) | OK
+^	endif
+
+	#define MESSAGE_EXISTS(mess.code)
+^	pos(form.text$(mess.code), mess.code) = 0
+
+	#pragma used	dll otlbctdll1000
+	#pragma used	dll otxcombl952st00
+
+|**************************** Internal Functions ******************************
+
+function void make.xmlArguments.global( const xmlNode i.RequestArgument,
+					const xmlNode i.ResponseArgument,
+					const xmlNode i.ResultArgument)
+{
+	bl.RequestArgument  = i.RequestArgument
+	bl.ResponseArgument = i.ResponseArgument
+	bl.ResultArgument   = i.ResultArgument
+	|* Make request, response, result available in protected layer
+	txcom.bl952st00.set.xmlArguments(i.RequestArgument,
+		i.ResponseArgument, i.ResultArgument)
+}
+
+function boolean set.in.result(boolean i.inResult)
+{
+	on case bl.processingScope
+	case BUS_ENT:
+	case BUS_ENT_CMP:
+		|* errors must be put into response.
+		return (false)
+	endcase
+	return (i.inResult)
+}
+
+function long Handle.retrying.component(string	i.method(50),	
+					string	i.bde(50),
+					string	i.component(50),
+					ref xmlNode o.ResponseArgument,
+					ref xmlNode o.ResultArgument)
+{
+	if db.retry.hit() then
+		abort.transaction()
+	endif
+	if db.retry.hit() > db.max.retry() - 2 then	|%To be saver
+		if MESSAGE_EXISTS("tlbcts0082") then
+			dal.set.error.message("tlbcts0082", db.max.retry(), strip$(i.method), strip$(i.component))
+			|* Max number of retries (%1$d) reached in method %2$s in Component %3$s
+		else
+			dal.set.error.message("@Max number of retries ("&
+				str$(db.max.retry()) & ") reached in method " &
+				strip$(i.method) & " in Component " &
+				strip$(i.component))
+		endif
+		bl.result = DALHOOKERROR
+		handle.transactionScope(true,
+			o.ResponseArgument, o.ResultArgument,
+			i.method, i.bde, i.component)
+		return (DALHOOKERROR)
+	endif
+	return (0)
+}
+
+function convert.xml.to.text(long TNode, const string TField, ref long TextNumber)
+{
+static	long	dll.id
+static	long	func.id
+	long	ret
+	long	retval
+	
+	if func.id = 0 then
+		dll.id = load_dll("otlbctdll1000")
+		func.id = get_function(dll.id,
+				"tlbct.dll1000.xmlimage.convert.xml.to.text")
+	endif
+	if func.id = 0 then
+		ret = tlbct.dll1000.xmlimage.convert.xml.to.text(TNode, TextNumber)
+	else
+		ret = exec_function(dll.id, func.id, retval, TNode, TextNumber, true, TField)
+	endif
+}
+
+	     
+|**************************** Selection Handling ******************************
+
+function build.selectionnode.for.public.attributes(ref xmlNode io.node)
+{
+	xmlNode	sel.node
+
+	if io.node = 0 then
+		io.node = xmlNewNode(SELECTION)
+	endif
+
+	sel.node = xmlNewDataElement(SEL_ATTR,
+		"SJEquipmentInstallDismantleBOD.*" , io.node)
+}
+
+	     
+
+function extern void txcom.bl952sb00.getset.xmlArguments(
+					ref xmlNode o.RequestArgument,
+					ref xmlNode o.ResponseArgument,
+					ref xmlNode o.ResultArgument)
+{
+	DllUsage
+		This function gives other parts of the BOL the possibility
+		to read/update data from the XML objects from the public layer
+	EndDllUsage
+
+	o.RequestArgument  = bl.RequestArgument
+	o.ResponseArgument = bl.ResponseArgument
+	o.ResultArgument   = bl.ResultArgument
+}
+
+	     
+|******************************* Mapper Methods *******************************
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str50m	l.BODID_ExternalReferenceID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID(
+							l.BODID_ExternalReferenceID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID()
+	o.value = trim$(l.BODID_ExternalReferenceID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str50m	l.BODID_ExternalReferenceID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str50m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str50m", "tcmcs.str50m", "BODID_ExternalReferenceID"))
+	l.BODID_ExternalReferenceID = temp.value
+	retv = tt.align.according.domain(l.BODID_ExternalReferenceID, l.BODID_ExternalReferenceID, "tcmcs.str50m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID(
+			l.BODID_ExternalReferenceID))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UUID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.UUID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UUID(
+							l.UUID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UUID()
+	o.value = trim$(l.UUID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UUID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.UUID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "UUID"))
+	l.UUID = temp.value
+	retv = tt.align.according.domain(l.UUID, l.UUID, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UUID(
+			l.UUID))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.EquipmentID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str50m	l.EquipmentID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.EquipmentID(
+							l.EquipmentID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.EquipmentID()
+	o.value = trim$(l.EquipmentID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.EquipmentID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str50m	l.EquipmentID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str50m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str50m", "tcmcs.str50m", "EquipmentID"))
+	l.EquipmentID = temp.value
+	retv = tt.align.according.domain(l.EquipmentID, l.EquipmentID, "tcmcs.str50m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.EquipmentID(
+			l.EquipmentID))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActionCode.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str7	l.ActionCode
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ActionCode(
+							l.ActionCode))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ActionCode()
+	o.value = trim$(l.ActionCode)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ActionCode.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str7	l.ActionCode
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str7", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str7", "tcmcs.str7", "ActionCode"))
+	l.ActionCode = temp.value
+	retv = tt.align.according.domain(l.ActionCode, l.ActionCode, "tcmcs.str7")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ActionCode(
+			l.ActionCode))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ValidFromDate.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcdate	l.ValidFromDate
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ValidFromDate(
+							l.ValidFromDate))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ValidFromDate()
+	RETIFNOK(tlbct.dll1000.utc.to.string(l.ValidFromDate, o.value))		
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ValidFromDate.Mapper(			
+	const	string	i.value)				
+{
+	domain	tcdate	l.ValidFromDate
+
+	RETIFNOK(tlbct.dll1000.string.to.UTC(i.value, l.ValidFromDate))
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tcdate", "tcdate", "ValidFromDate"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ValidFromDate(
+			l.ValidFromDate))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.FunctionalLocationID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID(
+							l.FunctionalLocationID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+	o.value = trim$(l.FunctionalLocationID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.FunctionalLocationID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "FunctionalLocationID"))
+	l.FunctionalLocationID = temp.value
+	retv = tt.align.according.domain(l.FunctionalLocationID, l.FunctionalLocationID, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID(
+			l.FunctionalLocationID))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.SuperiorEquipmentID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID(
+							l.SuperiorEquipmentID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID()
+	o.value = trim$(l.SuperiorEquipmentID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.SuperiorEquipmentID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "SuperiorEquipmentID"))
+	l.SuperiorEquipmentID = temp.value
+	retv = tt.align.according.domain(l.SuperiorEquipmentID, l.SuperiorEquipmentID, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID(
+			l.SuperiorEquipmentID))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Item.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcitem	l.Item
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Item(
+							l.Item))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Item()
+	o.value = trim$(l.Item)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Item.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcitem	l.Item
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcitem", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcitem", "tcitem", "Item"))
+	l.Item = temp.value
+	retv = tt.align.according.domain(l.Item, l.Item, "tcitem")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Item(
+			l.Item))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SerialNumber.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcibd.sern	l.SerialNumber
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SerialNumber(
+							l.SerialNumber))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SerialNumber()
+	o.value = trim$(l.SerialNumber)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SerialNumber.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcibd.sern	l.SerialNumber
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcibd.sern", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcibd.sern", "tcibd.sern", "SerialNumber"))
+	l.SerialNumber = temp.value
+	retv = tt.align.according.domain(l.SerialNumber, l.SerialNumber, "tcibd.sern")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SerialNumber(
+			l.SerialNumber))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ServiceOrder.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcorno	l.ServiceOrder
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ServiceOrder(
+							l.ServiceOrder))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ServiceOrder()
+	o.value = trim$(l.ServiceOrder)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ServiceOrder.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcorno	l.ServiceOrder
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcorno", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcorno", "tcorno", "ServiceOrder"))
+	l.ServiceOrder = temp.value
+	retv = tt.align.according.domain(l.ServiceOrder, l.ServiceOrder, "tcorno")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ServiceOrder(
+			l.ServiceOrder))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActivityNumber.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcpono	l.ActivityNumber
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ActivityNumber(
+							l.ActivityNumber))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ActivityNumber()
+	o.value = str$(l.ActivityNumber)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ActivityNumber.Mapper(			
+	const	string	i.value)				
+{
+	domain	tcpono	l.ActivityNumber
+
+	l.ActivityNumber = lval(i.value)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tcpono", "tcpono", "ActivityNumber"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ActivityNumber(
+			l.ActivityNumber))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.User.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcemno	l.User
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.User(
+							l.User))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.User()
+	o.value = trim$(l.User)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.User.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcemno	l.User
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcemno", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcemno", "tcemno", "User"))
+	l.User = temp.value
+	retv = tt.align.according.domain(l.User, l.User, "tcemno")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.User(
+			l.User))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BreakdownStatus.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tscfg.pb.stat	l.BreakdownStatus
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.BreakdownStatus(
+							l.BreakdownStatus))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.BreakdownStatus()
+	o.value = rdi.etoc$("tscfg.pb.stat", etol(l.BreakdownStatus))
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.BreakdownStatus.Mapper(			
+	const	string	i.value)				
+{
+	domain	tscfg.pb.stat	l.BreakdownStatus
+
+	long enum.long
+
+	if isspace(i.value) then
+		dal.set.error.message("tlbctsb0003", "SJEquipmentInstallDismantleBOD.BreakdownStatus")
+		return(DALHOOKERROR)
+	endif
+	enum.long = rdi.ctoe("tscfg.pb.stat", strip$(i.value))
+	if enum.long < 1 then
+		dal.set.error.message("tlbctsb0002", strip$(i.value),
+			"tscfg.pb.stat")
+		return(DALHOOKERROR)
+	endif
+	l.BreakdownStatus = ltoe(enum.long)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tscfg.pb.stat", "tscfg.pb.stat", "BreakdownStatus"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.BreakdownStatus(
+			l.BreakdownStatus))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tscfg.cfst	l.VehilceStatus_Code
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.VehilceStatus_Code(
+							l.VehilceStatus_Code))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code()
+	o.value = rdi.etoc$("tscfg.cfst", etol(l.VehilceStatus_Code))
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.Mapper(			
+	const	string	i.value)				
+{
+	domain	tscfg.cfst	l.VehilceStatus_Code
+
+	long enum.long
+
+	if isspace(i.value) then
+		dal.set.error.message("tlbctsb0003", "SJEquipmentInstallDismantleBOD.VehilceStatus_Code")
+		return(DALHOOKERROR)
+	endif
+	enum.long = rdi.ctoe("tscfg.cfst", strip$(i.value))
+	if enum.long < 1 then
+		dal.set.error.message("tlbctsb0002", strip$(i.value),
+			"tscfg.cfst")
+		return(DALHOOKERROR)
+	endif
+	l.VehilceStatus_Code = ltoe(enum.long)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tscfg.cfst", "tscfg.cfst", "VehilceStatus_Code"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code(
+			l.VehilceStatus_Code))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.MovementType.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str30m	l.MovementType
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.MovementType(
+							l.MovementType))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.MovementType()
+	o.value = trim$(l.MovementType)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.MovementType.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str30m	l.MovementType
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str30m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str30m", "tcmcs.str30m", "MovementType"))
+	l.MovementType = temp.value
+	retv = tt.align.according.domain(l.MovementType, l.MovementType, "tcmcs.str30m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.MovementType(
+			l.MovementType))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.StorageLocation.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.st10m	l.StorageLocation
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.StorageLocation(
+							l.StorageLocation))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.StorageLocation()
+	o.value = trim$(l.StorageLocation)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.StorageLocation.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.st10m	l.StorageLocation
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.st10m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.st10m", "tcmcs.st10m", "StorageLocation"))
+	l.StorageLocation = temp.value
+	retv = tt.align.according.domain(l.StorageLocation, l.StorageLocation, "tcmcs.st10m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.StorageLocation(
+			l.StorageLocation))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Position.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str7	l.Position
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Position(
+							l.Position))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Position()
+	o.value = trim$(l.Position)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Position.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str7	l.Position
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str7", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str7", "tcmcs.str7", "Position"))
+	l.Position = temp.value
+	retv = tt.align.according.domain(l.Position, l.Position, "tcmcs.str7")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Position(
+			l.Position))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehiclePosition.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str25	l.VehiclePosition
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.VehiclePosition(
+							l.VehiclePosition))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.VehiclePosition()
+	o.value = trim$(l.VehiclePosition)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.VehiclePosition.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str25	l.VehiclePosition
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str25", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str25", "tcmcs.str25", "VehiclePosition"))
+	l.VehiclePosition = temp.value
+	retv = tt.align.according.domain(l.VehiclePosition, l.VehiclePosition, "tcmcs.str25")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.VehiclePosition(
+			l.VehiclePosition))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Material.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.Material
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Material(
+							l.Material))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Material()
+	o.value = trim$(l.Material)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Material.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.Material
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "Material"))
+	l.Material = temp.value
+	retv = tt.align.according.domain(l.Material, l.Material, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Material(
+			l.Material))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Lot.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str25	l.Lot
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Lot(
+							l.Lot))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Lot()
+	o.value = trim$(l.Lot)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Lot.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str25	l.Lot
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str25", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str25", "tcmcs.str25", "Lot"))
+	l.Lot = temp.value
+	retv = tt.align.according.domain(l.Lot, l.Lot, "tcmcs.str25")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Lot(
+			l.Lot))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Measure.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str25	l.Measure
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Measure(
+							l.Measure))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Measure()
+	o.value = trim$(l.Measure)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Measure.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str25	l.Measure
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str25", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str25", "tcmcs.str25", "Measure"))
+	l.Measure = temp.value
+	retv = tt.align.according.domain(l.Measure, l.Measure, "tcmcs.str25")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Measure(
+			l.Measure))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UnitCode.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.st10m	l.UnitCode
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UnitCode(
+							l.UnitCode))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UnitCode()
+	o.value = trim$(l.UnitCode)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UnitCode.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.st10m	l.UnitCode
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.st10m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.st10m", "tcmcs.st10m", "UnitCode"))
+	l.UnitCode = temp.value
+	retv = tt.align.according.domain(l.UnitCode, l.UnitCode, "tcmcs.st10m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UnitCode(
+			l.UnitCode))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Error.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcyesno	l.Error
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Error(
+							l.Error))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Error()
+	o.value = rdi.etoc$("tcyesno", etol(l.Error))
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Error.Mapper(			
+	const	string	i.value)				
+{
+	domain	tcyesno	l.Error
+
+	long enum.long
+
+	if isspace(i.value) then
+		dal.set.error.message("tlbctsb0003", "SJEquipmentInstallDismantleBOD.Error")
+		return(DALHOOKERROR)
+	endif
+	enum.long = rdi.ctoe("tcyesno", strip$(i.value))
+	if enum.long < 1 then
+		dal.set.error.message("tlbctsb0002", strip$(i.value),
+			"tcyesno")
+		return(DALHOOKERROR)
+	endif
+	l.Error = ltoe(enum.long)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tcyesno", "tcyesno", "Error"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Error(
+			l.Error))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ErrorMessage.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.ErrorMessage
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ErrorMessage(
+							l.ErrorMessage))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ErrorMessage()
+	o.value = trim$(l.ErrorMessage)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ErrorMessage.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.ErrorMessage
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "ErrorMessage"))
+	l.ErrorMessage = temp.value
+	retv = tt.align.according.domain(l.ErrorMessage, l.ErrorMessage, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ErrorMessage(
+			l.ErrorMessage))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ResultCode.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str25	l.ResultCode
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.ResultCode(
+							l.ResultCode))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.ResultCode()
+	o.value = trim$(l.ResultCode)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ResultCode.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str25	l.ResultCode
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str25", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str25", "tcmcs.str25", "ResultCode"))
+	l.ResultCode = temp.value
+	retv = tt.align.according.domain(l.ResultCode, l.ResultCode, "tcmcs.str25")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.ResultCode(
+			l.ResultCode))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SeverityCode.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.long	l.SeverityCode
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.SeverityCode(
+							l.SeverityCode))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.SeverityCode()
+	o.value = str$(l.SeverityCode)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SeverityCode.Mapper(			
+	const	string	i.value)				
+{
+	domain	tcmcs.long	l.SeverityCode
+
+	l.SeverityCode = lval(i.value)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"tcmcs.long", "tcmcs.long", "SeverityCode"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.SeverityCode(
+			l.SeverityCode))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Note.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str100m	l.Note
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.Note(
+							l.Note))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.Note()
+	o.value = trim$(l.Note)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Note.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str100m	l.Note
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str100m", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str100m", "tcmcs.str100m", "Note"))
+	l.Note = temp.value
+	retv = tt.align.according.domain(l.Note, l.Note, "tcmcs.str100m")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.Note(
+			l.Note))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UserArea.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	bolong	l.UserArea
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.UserArea(
+							l.UserArea))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.UserArea()
+	o.value = str$(l.UserArea)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UserArea.Mapper(			
+	const	string	i.value)				
+{
+	domain	bolong	l.UserArea
+
+	l.UserArea = lval(i.value)
+	RETIFNOK(tlbct.dll1000.domain.check.value(i.value,
+		"bolong", "bolong", "UserArea"))
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.UserArea(
+			l.UserArea))
+	return(0)
+}
+
+function long txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.WorkOrderID.Mapper(
+	ref	string	o.value,
+	ref	boolean	o.isSet)	
+{
+	domain	tcmcs.str25	l.WorkOrderID
+	RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD.WorkOrderID(
+							l.WorkOrderID))
+	o.isSet = txcom.bl952st00.is.set.SJEquipmentInstallDismantleBOD.WorkOrderID()
+	o.value = trim$(l.WorkOrderID)
+	return(0)
+}
+
+function long txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.WorkOrderID.Mapper(			
+	const	string	i.value)				
+{
+	string	temp.value(1024) mb
+	domain	tcmcs.str25	l.WorkOrderID
+
+	long	l, conv, retv
+	temp.value = i.value
+	retv = rdi.domain.string( "tcmcs.str25", l, conv )
+	on case conv
+	case RDI.UPPER:
+		temp.value = toupper$(temp.value)
+		break
+	case RDI.LOWER:
+		temp.value = tolower$(temp.value)
+		break
+	case RDI.NONE:
+	endcase
+	RETIFNOK(tlbct.dll1000.domain.check.value(temp.value,
+		"tcmcs.str25", "tcmcs.str25", "WorkOrderID"))
+	l.WorkOrderID = temp.value
+	retv = tt.align.according.domain(l.WorkOrderID, l.WorkOrderID, "tcmcs.str25")
+	RETIFNOK(txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.WorkOrderID(
+			l.WorkOrderID))
+	return(0)
+}
+
+	     
+|******************************* Public Methods *******************************
+
+function extern string txcom.bl952sb00.GetSchemaVersion()
+{
+       DllUsage
+              This method returns the BID Schema Version or an empty string
+              if the schema version is unknown.
+       EndDllUsage
+
+       return("1.0")
+
+}
+
+function extern string txcom.bl952sb00.GetBusinessInterfaceType()
+{
+       DllUsage
+              This method returns the type of the Business Interface as a
+              lowercase string or an empty string if the type is unknown.
+              For example, it can be used to check if the Business Object
+              is a BOD.
+       EndDllUsage
+ 
+       return("bod")
+}
+
+function extern long txcom.bl952sb00.GetPublishableEventActions()
+{
+	DllUsage
+	Desc:	Returns a list of all publishable actions
+	Return: XML structure containing all publishable verbs
+	EndDllUsage
+
+	return(txcom.bl952st00.GetPublishableEventActions())
+}
+
+function extern boolean txcom.bl952sb00.IsSplitSupported()
+{
+	DllUsage
+		This function returns true if large BODs can be split on size.
+	EndDllUsage
+	
+	return(false)
+}
+
+function extern string txcom.bl952sb00.GetTopLevelRootTable()
+{
+	DllUsage
+		This function returns the code of the root table that is mapped
+		to the top-level component.
+	EndDllUsage
+	
+	return("tscfg200")
+}
+
+	     
+
+|*************************** External Hidden Methods *******************************
+function extern long txcom.bl952sb00.SupportsReferentialIntegrity(
+					const xmlnode i.RequestArgument,
+					ref xmlnode o.ResponseArgument,
+					ref xmlnode o.ResultArgument)
+{
+	DllUsage
+	The SupportsReferentialIntegrity function returns information about
+	whether the BDE supports the CreateRef and DeleteRef methods.
+	Note that the request for this method does not contain any elements.
+	Therefore it is not required to read the RequestArgument.
+	However, to keep this function similar to the other methods, the same
+	function interface has been adopted.
+	EndDllUsage
+
+	long	ret
+	long	ControlArea
+	boolean	ReferentialIntegrityIsSupported
+
+	CHECK_TOOLS_VERSION(o.ResponseArgument, o.ResultArgument)
+	
+	|* The response consist of a ControlArea and a "supported" element which
+	|* contains either a false or a true value.
+	RETIFNOK2(createResultObject(o.ResultArgument))
+	RETIFNOK2(createResponseObject.WithoutDataArea(
+			o.ResponseArgument,
+			"SupportsReferentialIntegrity"))
+
+	|* Create a ControlArea to hold the "supported" element
+	NEW.NODE("ControlArea", o.ResponseArgument, ControlArea)
+
+	|* Determine whether referential integrity is supported by calling the
+	|* appropriate protected method.
+	ReferentialIntegrityIsSupported =
+		txcom.bl952st00.supports.referential.integrity()
+
+	|* Store the information in the "supported" element
+	ret = xmlRewriteDataElement(ControlArea,
+			"supported",
+			ReferentialIntegrityIsSupported ? "true" : "false")
+
+	|* When this point is reached, no errosrs have been encountered
+	|* and the result can be cleared.
+	ret = xmlDelete(o.ResultArgument)
+	o.ResultArgument = 0
+	return(0)	| All went well
+}
+
+|*************************** List/Show Methods *******************************
+
+function extern long txcom.bl952sb00.Show(
+					const xmlnode i.RequestArgument,
+					ref xmlnode o.ResponseArgument,
+					ref xmlnode o.ResultArgument)
+{
+	DllUsage
+		This method will show -a part- one Business Object as
+		requested in the XML Request message.
+		Data from the requested object and warnings will be placed in
+		the XML response message.
+		Errors are put in the XML result message.
+	EndDllUsage
+	xmlnode	ControlAreaNode
+	string  Value(1024)
+	string	origProcessingScope(26)
+	boolean	TagFound
+	long	retval, ret
+	long	sv.time, exec.time
+
+	CHECK_TOOLS_VERSION(o.ResponseArgument, o.ResultArgument)
+	
+	|* redirect to actual List/Show
+	|* Get prefetchConsistentSet (as prepared set) from
+	|* the ControlAreaNode Node
+	|* Select the ControlArea Node
+	ControlAreaNode = xmlFindFirst("ControlArea", i.RequestArgument)
+	Value = ""
+	RETIFNOK(getValue(ControlAreaNode, 
+				"ControlArea.LogQuery",
+				"<ControlArea>.<LogQuery>",
+				false, Value, TagFound))
+				
+	if tolower$(strip$(Value)) = "true" or strip$(Value) = "1" then
+		log.query = true
+	else
+		log.query = false
+	endif
+	Value = ""
+
+	origProcessingScope = bl.processingScope
+	sv.time = mtime()
+	retval = (txcom.bl952sb00.Show_new(
+				i.RequestArgument,
+				o.ResponseArgument,
+				o.ResultArgument))
+	exec.time = mtime() - sv.time
+	bl.processingScope = origProcessingScope
+	txcom.bl952st00.setProcessingScope(bl.processingScope)
+	Value = ""
+	RETIFNOK(getValue(ControlAreaNode, 
+				"ControlArea.ShowExecuteTime",
+				"<ControlArea>.<ShowExecuteTime>",
+				false, Value, TagFound))
+				
+	if (tolower$(strip$(Value)) = "true" or strip$(Value) = "1") and o.ResponseArgument <> 0 then
+		ret = xmlsetAttribute(o.ResponseArgument, "ExecuteTime", str$(exec.time))
+	endif
+
+	return (retval)
+}
+ 
+function xmlNode Show.getMetaDataForFilter()
+{
+	xmlNode	FilterMetaData
+	xmlNode	componentNode
+	long	duml
+	
+	FilterMetaData = xmlNewNode("MetaData", XML_ELEMENT)
+	
+	componentNode = xmlNewNode("Component", XML_ELEMENT, FilterMetaData)
+	duml = xmlSetAttribute(componentNode, "name", strip$("SJEquipmentInstallDismantleBOD"))
+	duml = xmlSetAttribute(componentNode, "parent", strip$(""))
+	SJEquipmentInstallDismantleBOD.Show.addMetaDataForFilter(componentNode)
+	
+	return(FilterMetaData)
+}
+
+function SJEquipmentInstallDismantleBOD.Show.addMetaDataForFilter(xmlNode i.componentNode)
+{
+	xmlNode	attributeNode
+	long	duml
+	
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("BODID_ExternalReferenceID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<BODID>.<ExternalReferenceID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("UUID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<UUID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("EquipmentID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<EquipmentID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ActionCode"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ActionCode>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ValidFromDate"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ValidFromDate>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.TIME"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("FunctionalLocationID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<FunctionalLocationID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("SuperiorEquipmentID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<SuperiorEquipmentID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Item"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Item>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("SerialNumber"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<SerialNumber>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ServiceOrder"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ServiceOrder>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ActivityNumber"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ActivityNumber>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.LONG"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("User"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<User>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("BreakdownStatus"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<BreakdownStatus>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.ENUM"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("VehilceStatus_Code"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<VehilceStatus>.<Code>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.ENUM"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("MovementType"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<MovementType>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("StorageLocation"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<StorageLocation>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Position"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Position>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("VehiclePosition"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<VehiclePosition>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Material"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Material>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Lot"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Lot>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Measure"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Measure>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("UnitCode"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<UnitCode>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Error"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Error>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.ENUM"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ErrorMessage"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ErrorMessage>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("ResultCode"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<ResultCode>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("SeverityCode"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<SeverityCode>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.LONG"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("Note"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<Note>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("UserArea"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<UserArea>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.LONG"))
+	attributeNode = xmlNewNode("Attribute", XML_ELEMENT, i.componentNode)
+	duml = xmlSetAttribute(attributeNode, "name", strip$("WorkOrderID"))
+	duml = xmlSetAttribute(attributeNode, "nameSearch", strip$("<WorkOrderID>"))
+	duml = xmlSetAttribute(attributeNode, "datatype", strip$("DB.STRING"))
+}
+
+function boolean must.build.selection.node(xmlnode i.selection)
+{
+	if i.selection = 0 or xmlGetFirstChild(i.selection) = 0 then
+		return(true)
+	endif
+
+	return(false)
+}
+
+  
+
+
+function extern long txcom.bl952sb00.OnProcess(
+					ref xmlNode i.RequestArgument,
+					ref xmlNode o.ResponseArgument,
+					ref xmlNode o.ResultArgument)
+{
+	DllUsage
+		This method processes OnProcess events as requested in
+		the XML Request message.
+		If success, the XML Response is filled.
+		Errors are put in the XML Result message.
+	EndDllUsage
+
+	CHECK_TOOLS_VERSION(o.ResponseArgument, o.ResultArgument)
+
+	RETIFNOK2(txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.OnProcess(
+						i.RequestArgument, o.ResponseArgument, o.ResultArgument))
+
+	handle.messages(o.ResponseArgument,
+			o.ResultArgument, false) |* put mess in response
+	return(0)
+}
+
+function extern long txcom.bl952sb00.PublishEvent(
+					ref xmlNode i.RequestArgument,
+					ref xmlNode o.ResponseArgument,
+					ref xmlNode o.ResultArgument)
+{
+	DllUsage
+		This method processes PublishEvent events as requested in
+		the XML Request message.
+		If success, the XML Response is filled.
+		Errors are put in the XML Result message.
+	EndDllUsage
+
+	CHECK_TOOLS_VERSION_PUB_EVENT(o.ResponseArgument, o.ResultArgument)
+
+	return(txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.PublishEvent(
+			i.RequestArgument, o.ResponseArgument, o.ResultArgument))
+}
+
+|------------ GetIdentifierName() -----------------------
+
+function extern long txcom.bl952sb00.GetIdentifierName(
+	ref	string	o.name)
+{
+DllUsage
+	This function must only be used by the Tools Add-On package.
+	Do not use it in hook code or other libraries.
+	Output: The identifier name (for addition of the variation ID).
+	Return value: 0 (OK) or an error value.
+EndDllUsage
+
+	o.name = "<BODID>.<ExternalReferenceID>"
+	return(0) | OK
+}
+
+|------------ GetPublicIdentifiers() for SJEquipmentInstallDismantleBOD ------------
+
+function extern long txcom.bl952sb00.SJEquipmentInstallDismantleBOD.GetPublicIdentifiers(
+		ref		long		o.externalData)
+{
+DllUsage
+	This function must only be used by the Tools Add-On package.
+	Do not use it in hook code or other libraries.
+	Precondition: internal identifiers have been set in the protected layer.
+	Return value: 0 (OK) or an error value.
+	In case of error a dal error message has been set.
+EndDllUsage
+
+#define ERR_IF(condition, component)
+^		if condition then
+^			dal.set.error.message("tlbctstgen", "PublishEvent", component, "SJEquipmentInstallDismantleBOD")
+^			|* Error occurred in Method '%1$s' on component '%2$s' of Object '%3$s'.
+^			return(DALHOOKERROR)
+^		endif
+#define ERR_IF(condition)	ERR_IF(condition, "")
+
+	long	componentNode	| component instance node
+	long	retl			| return value to be checked
+
+
+	retl = handle.output.SJEquipmentInstallDismantleBOD.identifiers(0, componentNode)
+	ERR_IF(retl <> 0)
+	o.externalData = componentNode
+	
+	return(0) | OK
+}
+
+function long handle.output.SJEquipmentInstallDismantleBOD.identifiers(
+					xmlNode i.Node,
+			ref   	xmlNode o.Node)
+{
+| i.Node is parentNode
+| o.Node is current component Node (is child of i.Node)
+	string  value(1024) mb
+	boolean	value.isSet
+	xmlNode	g.Node
+
+	| Create component node for SJEquipmentInstallDismantleBOD
+	NEW.NODE("SJEquipmentInstallDismantleBOD", i.Node, o.Node)
+
+	g.node = 0
+	value = ""
+	value.isSet = false
+	SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true
+	g.Node = createGroupNodes(o.Node, "<BODID>.<ExternalReferenceID>", "ExternalReferenceID")
+	ASSIGNVAL(SJEquipmentInstallDismantleBOD, BODID_ExternalReferenceID, ExternalReferenceID)
+	return(0)
+}
+
+
+	     
+	     
+#define	QUERY.INACTIVE		0
+#define QUERY.INIT			1
+#define QUERY.START			2
+#define	QUERY.FETCH			3
+#define QUERY.END			4
+#define QUERY.ERROR			99
+#define RETIFNOK2_LIST_NEW(...)
+^               bl.result = ...
+^               if bl.result <> 0 then
+^                       handle.messages(o.responseArgument,
+^					o.resultArgument,
+^					true)
+^                       bl.ret = xmlDelete(o.ResponseArgument)
+^                       o.ResponseArgument = 0
+^                       return(bl.result)
+^               endif
+
+#define	RETIFNOK5_LIST(...)
+^		bl.result = ...
+^		if bl.result <> 0 then
+^			return(bl.result)
+^		endif
+
+#define	RETIFNOK6_LIST(STMT, STMT_ERR)
+^		bl.result = STMT
+^		if bl.result <> 0 then
+^			STMT_ERR
+^			return(bl.result)
+^		endif
+
+
+	     
+function void InitSelection(boolean i.settrue)
+{
+	FunctionUsage
+	EndFunctionUsage
+
+	SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = i.settrue
+	SJEquipmentInstallDismantleBOD.UUID.select = i.settrue
+	SJEquipmentInstallDismantleBOD.EquipmentID.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ActionCode.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ValidFromDate.select = i.settrue
+	SJEquipmentInstallDismantleBOD.FunctionalLocationID.select = i.settrue
+	SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Item.select = i.settrue
+	SJEquipmentInstallDismantleBOD.SerialNumber.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ServiceOrder.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ActivityNumber.select = i.settrue
+	SJEquipmentInstallDismantleBOD.User.select = i.settrue
+	SJEquipmentInstallDismantleBOD.BreakdownStatus.select = i.settrue
+	SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select = i.settrue
+	SJEquipmentInstallDismantleBOD.MovementType.select = i.settrue
+	SJEquipmentInstallDismantleBOD.StorageLocation.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Position.select = i.settrue
+	SJEquipmentInstallDismantleBOD.VehiclePosition.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Material.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Lot.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Measure.select = i.settrue
+	SJEquipmentInstallDismantleBOD.UnitCode.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Error.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ErrorMessage.select = i.settrue
+	SJEquipmentInstallDismantleBOD.ResultCode.select = i.settrue
+	SJEquipmentInstallDismantleBOD.SeverityCode.select = i.settrue
+	SJEquipmentInstallDismantleBOD.Note.select = i.settrue
+	SJEquipmentInstallDismantleBOD.UserArea.select = i.settrue
+	SJEquipmentInstallDismantleBOD.WorkOrderID.select = i.settrue
+}
+
+	     
+function long SetSelectionVariable_new1(const string SelecVar)
+{
+	long	end_pos_comp
+	boolean	correct_selection
+
+	correct_selection = false
+	|* Strip component.
+	end_pos_comp = pos(SelecVar, ".")
+
+	if end_pos_comp > 0 then
+		on case SelecVar(1;end_pos_comp-1)
+		case "SJEquipmentInstallDismantleBOD":
+			SetSelectionVariable_New1_SJEquipmentInstallDismantleBOD(
+				SelecVar(end_pos_comp+1), correct_selection)
+			break
+		endcase
+	else
+		if SelecVar = "*" then
+			InitSelection(true)
+			correct_selection = true
+		endif
+	endif
+	
+	if not correct_selection then
+			dal.set.error.message("tlbctsb0042", SelecVar)
+			|* No valid selectionAttributes received
+			|* (unknown selectionAttribute received "%1$s").
+			return(DALHOOKERROR)
+	endif
+	return (0)
+}
+
+	     
+function SetSelectionVariable_New1_SJEquipmentInstallDismantleBOD(const string SelecVar,
+			ref boolean	o.correct_selection)
+{
+	
+	on case (SelecVar)
+	case "*": |* SJEquipmentInstallDismantleBOD.*
+		SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true
+		SJEquipmentInstallDismantleBOD.UUID.select = true
+		SJEquipmentInstallDismantleBOD.EquipmentID.select = true
+		SJEquipmentInstallDismantleBOD.ActionCode.select = true
+		SJEquipmentInstallDismantleBOD.ValidFromDate.select = true
+		SJEquipmentInstallDismantleBOD.FunctionalLocationID.select = true
+		SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select = true
+		SJEquipmentInstallDismantleBOD.Item.select = true
+		SJEquipmentInstallDismantleBOD.SerialNumber.select = true
+		SJEquipmentInstallDismantleBOD.ServiceOrder.select = true
+		SJEquipmentInstallDismantleBOD.ActivityNumber.select = true
+		SJEquipmentInstallDismantleBOD.User.select = true
+		SJEquipmentInstallDismantleBOD.BreakdownStatus.select = true
+		SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select = true
+		SJEquipmentInstallDismantleBOD.MovementType.select = true
+		SJEquipmentInstallDismantleBOD.StorageLocation.select = true
+		SJEquipmentInstallDismantleBOD.Position.select = true
+		SJEquipmentInstallDismantleBOD.VehiclePosition.select = true
+		SJEquipmentInstallDismantleBOD.Material.select = true
+		SJEquipmentInstallDismantleBOD.Lot.select = true
+		SJEquipmentInstallDismantleBOD.Measure.select = true
+		SJEquipmentInstallDismantleBOD.UnitCode.select = true
+		SJEquipmentInstallDismantleBOD.Error.select = true
+		SJEquipmentInstallDismantleBOD.ErrorMessage.select = true
+		SJEquipmentInstallDismantleBOD.ResultCode.select = true
+		SJEquipmentInstallDismantleBOD.SeverityCode.select = true
+		SJEquipmentInstallDismantleBOD.Note.select = true
+		SJEquipmentInstallDismantleBOD.UserArea.select = true
+		SJEquipmentInstallDismantleBOD.WorkOrderID.select = true
+		o.correct_selection = true
+		break
+	case "BODID.*":|*attr(group)
+		SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true |* LVL:2
+		o.correct_selection = true
+		break
+	case "BODID_ExternalReferenceID":|*attr(simple)
+	case "BODID.ExternalReferenceID":|*group(simple)
+		SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "UUID":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.UUID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "EquipmentID":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.EquipmentID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ActionCode":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ActionCode.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ValidFromDate":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ValidFromDate.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "FunctionalLocationID":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.FunctionalLocationID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "SuperiorEquipmentID":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "WorkOrderID":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.WorkOrderID.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Item":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Item.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "SerialNumber":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.SerialNumber.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ServiceOrder":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ServiceOrder.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ActivityNumber":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ActivityNumber.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "User":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.User.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "BreakdownStatus":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.BreakdownStatus.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "VehilceStatus.*":|*attr(group)
+		SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select = true |* LVL:2
+		o.correct_selection = true
+		break
+	case "VehilceStatus_Code":|*attr(simple)
+	case "VehilceStatus.Code":|*group(simple)
+		SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "MovementType":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.MovementType.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "StorageLocation":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.StorageLocation.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Position":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Position.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "VehiclePosition":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.VehiclePosition.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Material":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Material.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Lot":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Lot.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Measure":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Measure.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "UnitCode":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.UnitCode.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Error":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Error.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ErrorMessage":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ErrorMessage.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "ResultCode":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.ResultCode.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "SeverityCode":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.SeverityCode.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "Note":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.Note.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	case "UserArea":|*attr(simple)
+		SJEquipmentInstallDismantleBOD.UserArea.select = true |* LVL:1
+		o.correct_selection = true
+		break
+	endcase	
+}
+
+	     
+function long SetSelection_new1(xmlNode SelectionNode)
+{
+	long	ret
+	xmlNode	AttributeNode
+	string	SelectionAttribute(256)
+	boolean	postfilter
+	xmlnode filteredAttributes
+	xmlnode	filter.attribute
+
+	AttributeNode = xmlGetFirstChild(SelectionNode)
+	while AttributeNode <> 0
+		ret = xmlGetData(AttributeNode, SelectionAttribute)
+		RETIFNOK(SetSelectionVariable_new1(strip$(SelectionAttribute)))
+		AttributeNode = xmlGetRightSibling(AttributeNode)
+	endwhile
+	
+	|* Set selected for postfilter attributes
+	RETIFNOK(txcom.bl952st00.get.postfilter(postfilter))
+	if postfilter then
+		RETIFNOK(txcom.bl952st00.get.filteredAttributes(
+					filteredAttributes))
+		filter.attribute = xmlGetFirstChild(filteredAttributes)
+		while filter.attribute <> 0
+			on case xmlData$(filter.attribute)
+			case "SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID":
+				SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.UUID":
+				SJEquipmentInstallDismantleBOD.UUID.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.EquipmentID":
+				SJEquipmentInstallDismantleBOD.EquipmentID.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ActionCode":
+				SJEquipmentInstallDismantleBOD.ActionCode.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ValidFromDate":
+				SJEquipmentInstallDismantleBOD.ValidFromDate.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.FunctionalLocationID":
+				SJEquipmentInstallDismantleBOD.FunctionalLocationID.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.SuperiorEquipmentID":
+				SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Item":
+				SJEquipmentInstallDismantleBOD.Item.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.SerialNumber":
+				SJEquipmentInstallDismantleBOD.SerialNumber.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ServiceOrder":
+				SJEquipmentInstallDismantleBOD.ServiceOrder.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ActivityNumber":
+				SJEquipmentInstallDismantleBOD.ActivityNumber.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.User":
+				SJEquipmentInstallDismantleBOD.User.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.BreakdownStatus":
+				SJEquipmentInstallDismantleBOD.BreakdownStatus.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.VehilceStatus_Code":
+				SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.MovementType":
+				SJEquipmentInstallDismantleBOD.MovementType.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.StorageLocation":
+				SJEquipmentInstallDismantleBOD.StorageLocation.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Position":
+				SJEquipmentInstallDismantleBOD.Position.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.VehiclePosition":
+				SJEquipmentInstallDismantleBOD.VehiclePosition.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Material":
+				SJEquipmentInstallDismantleBOD.Material.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Lot":
+				SJEquipmentInstallDismantleBOD.Lot.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Measure":
+				SJEquipmentInstallDismantleBOD.Measure.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.UnitCode":
+				SJEquipmentInstallDismantleBOD.UnitCode.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Error":
+				SJEquipmentInstallDismantleBOD.Error.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ErrorMessage":
+				SJEquipmentInstallDismantleBOD.ErrorMessage.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.ResultCode":
+				SJEquipmentInstallDismantleBOD.ResultCode.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.SeverityCode":
+				SJEquipmentInstallDismantleBOD.SeverityCode.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.Note":
+				SJEquipmentInstallDismantleBOD.Note.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.UserArea":
+				SJEquipmentInstallDismantleBOD.UserArea.select = true
+				break
+			case "SJEquipmentInstallDismantleBOD.WorkOrderID":
+				SJEquipmentInstallDismantleBOD.WorkOrderID.select = true
+				break
+			default:			
+				break
+			endcase
+			filter.attribute = xmlGetRightSibling(filter.attribute)
+		endwhile
+	endif
+
+	return(0)
+}
+
+	     
+function long txcom.bl952sb00.Show_new(
+					const xmlnode i.RequestArgument,
+					ref xmlnode o.ResponseArgument,
+					ref xmlnode o.ResultArgument)
+{
+	xmlNode	ResponseSJEquipmentInstallDismantleBODNode
+	boolean	doFetch
+	boolean	SJEquipmentInstallDismantleBOD_cancel
+	long	bl.retval
+	long	duml
+
+	duml = 0
+	bl.current.method = "Show"
+	bl.processingScope = REQUEST
+		
+	RETIFNOK2(createResponseObject(o.ResponseArgument, "Show"))
+	RETIFNOK2(createResultObject(o.ResultArgument))
+	RETIFNOK2(selectResponseNode(o.ResponseArgument, ResponseSJEquipmentInstallDismantleBODNode))
+
+	make.xmlArguments.global(i.RequestArgument,
+				 o.ResponseArgument,
+				 o.ResultArgument)
+	txcom.bl952st00.initialize.tables()
+
+
+	doFetch = true
+	bl.result = Handle.Request.Show.SJEquipmentInstallDismantleBOD_new(i.RequestArgument, 
+				o.ResponseArgument, o.ResultArgument,
+				ResponseSJEquipmentInstallDismantleBODNode, SJEquipmentInstallDismantleBOD_cancel)
+
+	bl.retval = bl.result
+	if bl.result <> 0 then
+		|* Add used query to response.
+		add.executed.queries.to.response.Show.SJEquipmentInstallDismantleBOD(o.resultArgument, true)
+		handle.messages(o.responseArgument,
+		o.resultArgument,
+		true)
+        bl.ret = xmlDelete(o.ResponseArgument)
+        o.ResponseArgument = 0
+	else
+	 	if log.query then
+			|* Add used query to response.
+			add.executed.queries.to.response.Show.SJEquipmentInstallDismantleBOD(o.ResponseArgument, false)
+		endif
+		handle.messages(o.ResponseArgument,
+			o.ResultArgument, false) |* put mess in response
+	endif
+		RETIFNOK2_LIST_NEW(txcom.bl952st00.finalize.SJEquipmentInstallDismantleBOD.Show())
+		
+		RETIFNOK2_LIST_NEW(txcom.bl952st00.finalize.request.Show())
+
+	return(bl.retval)
+}
+
+	     
+function add.executed.queries.to.response.Show.SJEquipmentInstallDismantleBOD(xmlnode	io.response,
+					boolean		i.error)
+{
+	xmlnode	log.node
+	xmlnode mess.node
+	xmlnode	curr.node
+	long	i, ret
+	xmlnode	bnode
+	string hookname(128)
+	string filterExpression(1024)
+	boolean	postFilter
+	xmlnode	filter
+
+	if txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD() = QUERY.INACTIVE then
+		return
+	endif
+	if i.error then
+		| we cannot assume that the result is not empty or has no message details
+		if xmlGetFirstChild(io.response) = 0 then
+			mess.node = io.response
+		else
+			log.node = xmlFindFirstMatch("<>.<MessageDetails>", io.response)
+			if log.node = 0 then
+				log.node = xmlNewNode("MessageDetails", XML_ELEMENT, io.response)
+			endif
+		endif
+	else
+		log.node = xmlFindFirstMatch("<>.<InformationArea>", io.response)
+		if log.node = 0 then
+			log.node = xmlNewNode("InformationArea", XML_ELEMENT, io.response)
+		endif
+		mess.node = xmlNewNode("Message", XML_ELEMENT, log.node)
+		ret = xmlSetAttribute(mess.node, "ID", "ID000001")
+	endif
+
+	curr.node = xmlNewDataElement("messageCode", "QueryLog", mess.node)
+	curr.node = xmlNewDataElement("messageType", "Information", mess.node)
+	curr.node = xmlNewDataElement("messageText", "Executed Queries for method Show.",
+				mess.node)
+	curr.node = xmlNewDataElement("messageSource","SQL Query",
+				mess.node)
+	mess.node = xmlNewNode("MessageReference", XML_ELEMENT, mess.node)
+	curr.node = xmlNewDataElement("messageReferenceType", "logEntry", mess.node)
+	curr.node = xmlNewNode("messageReferenceInfo", XML_ELEMENT, mess.node)
+	for i = 1 to txcom.bl952st00.retrieve.table_alias.count()
+		if i = 1 then
+			mess.node = xmlNewNode("Table_Aliases",XML_ELEMENT, curr.node)
+		endif
+		bnode = xmlNewDataElement("t" & str$(i),
+			strip$(txcom.bl952st00.retrieve.table_alias(i)), mess.node)
+	endfor
+	mess.node = xmlNewNode("ComponentFilterHook", XML_ELEMENT, curr.node)
+	mess.node = xmlNewNode("Filter", XML_ELEMENT, curr.node)
+	ret = txcom.bl952st00.get.filter.expression(filterExpression)
+	bnode = xmlNewDataElement("Expression", filterExpression, mess.node)
+	mess.node = xmlNewNode("PostFilter", XML_ELEMENT, curr.node)
+	ret = txcom.bl952st00.get.postfilter(postfilter)
+	if postfilter then
+		|* for postfiltering the original filter is used
+		ret = txcom.bl952st00.get.filter(filter)
+		ret = xmlDuplicateAndAppendToChilds(mess.node, filter)
+	endif
+	ret = xmlSetAttribute(mess.node, "postfiltering", postfilter?"true":"false")
+
+	log.node = xmlNewNode("SJEquipmentInstallDismantleBOD",XML_ELEMENT, curr.node)
+
+	if txcom.bl952st00.query.on.hook.SJEquipmentInstallDismantleBOD.Show(hookname) then
+	mess.node = xmlNewDataElement("HOOK", 
+		"Query is executed in hook " & strip$(hookname), log.node)
+	else
+	|* Read and Add query.
+	mess.node = xmlNewDataElement("select", 
+		txcom.bl952st00.retrieve.select.clause.SJEquipmentInstallDismantleBOD(), log.node)
+	mess.node = xmlNewDataElement("from", 
+		txcom.bl952st00.retrieve.from.clause.SJEquipmentInstallDismantleBOD(), log.node)
+	mess.node = xmlNewDataElement("where", 
+		txcom.bl952st00.retrieve.where.clause.SJEquipmentInstallDismantleBOD(), log.node)
+	mess.node = xmlNewDataElement("orderby", 
+		txcom.bl952st00.retrieve.orderby.clause.SJEquipmentInstallDismantleBOD(), log.node)
+	for i = 1 to txcom.bl952st00.retrieve.selectbind.count.SJEquipmentInstallDismantleBOD()
+		if i = 1 then
+			mess.node = xmlNewNode("selectbind",XML_ELEMENT, log.node)
+		endif
+		bnode = xmlNewDataElement("_" & str$(i),
+			strip$(txcom.bl952st00.retrieve.selectbind.clause.SJEquipmentInstallDismantleBOD(i)), mess.node)
+	endfor
+	for i = 1 to txcom.bl952st00.retrieve.wherebind.count.SJEquipmentInstallDismantleBOD()
+		if i = 1 then
+			mess.node = xmlNewNode("wherebind",XML_ELEMENT, log.node)
+		endif
+		bnode = xmlNewDataElement("_"& str$(i),
+			strip$(txcom.bl952st00.retrieve.wherebind.clause.SJEquipmentInstallDismantleBOD(i)), mess.node)
+	endfor
+	endif
+	if txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD() = QUERY.ERROR then
+		ret = xmlsetAttribute(log.node, "Error_status", "Error")
+		return
+	endif
+	ret = xmlsetAttribute(log.node, "fetches", txcom.bl952st00.retrieve.fetch.count.SJEquipmentInstallDismantleBOD())
+	
+	|* Add sub components.
+}
+
+	     
+function long Handle.Request.Show.SJEquipmentInstallDismantleBOD_new(
+			const		xmlNode	i.RequestSJEquipmentInstallDismantleBODNode,
+			ref			xmlNode	io_Show.ResponseArgument, 
+			ref			xmlNode	io_Show.ResultArgument,
+			const		xmlNode	i.ResponseSJEquipmentInstallDismantleBODNode,
+			ref		boolean	o.cancel)
+{
+	long	ret
+	boolean	fetching
+	xmlNode	Response.SJEquipmentInstallDismantleBODNode
+	boolean	selection.present
+	xmlnode	ControlAreaNode
+	long	fetch.count
+	boolean sortingExpressionSet
+	boolean	TagFound
+	string  Value(1024)
+	xmlnode	filter
+	boolean	postfilter
+	xmlnode	metaDataForFilter
+	boolean	postfilter.valid
+
+	ret = 0
+	bl.result = 0
+	Response.SJEquipmentInstallDismantleBODNode = 0
+
+	ControlAreaNode = xmlFindFirst("ControlArea", i.RequestSJEquipmentInstallDismantleBODNode)
+	if txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD() <> QUERY.FETCH then
+		RETIFNOK5_LIST(txcom.bl952st00.initialize.request.Show())
+	endif
+	|* Get sortingExpression from the ControlAreaNode Node
+	RETIFNOK6_LIST(getValue(ControlAreaNode, 
+			"ControlArea.sortingExpression",
+			"<ControlArea>.<sortingExpression>",
+			false, Value, TagFound),
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+	if Tagfound then
+		if not isspace(Value) then
+			dal.set.error.message("tlbctsb0050")
+			|* No valid sortingExpression received
+			|* (a non-empty sortingExpression is not supported).
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show()
+			return(DALHOOKERROR)					
+		endif
+		sortingExpressionSet = true
+	else
+		sortingExpressionSet = false
+	endif
+	
+	|* Set sortingExpression to protected layer
+	RETIFNOK6_LIST(txcom.bl952st00.set.sorting.expression(sortingExpressionSet),
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+
+	|* Set filter to protected layer and determine postfiltering
+	filter = xmlFindFirst("Filter", ControlAreaNode)
+	RETIFNOK5_LIST(txcom.bl952st00.set.request.filter(filter))
+
+	|* Get list of components with parent components
+	RETIFNOK5_LIST(txcom.bl952st00.get.postfilter(postfilter))								
+	if postfilter then	
+		metaDataForFilter = Show.getMetaDataForFilter()
+	endif
+
+	CONTINUEIFNOK(Show,
+			io_Show.ResponseArgument, io_Show.ResultArgument,
+			"SJEquipmentInstallDismantleBOD", "SJEquipmentInstallDismantleBOD", false,
+			Show.handle.input.SJEquipmentInstallDismantleBOD_new(i.RequestSJEquipmentInstallDismantleBODNode,
+			io_Show.ResponseArgument, io_Show.ResultArgument,
+			selection.present))
+	if not selection.present then	|* No valid selection attributes found
+		return(0)
+	endif
+	if txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD() <> QUERY.END then
+		RETIFNOK5_LIST(txcom.bl952st00.initialize.SJEquipmentInstallDismantleBOD.Show())
+	endif
+
+	CONTINUEIFNOK(Show,
+			io_Show.ResponseArgument, io_Show.ResultArgument,
+			"SJEquipmentInstallDismantleBOD", "SJEquipmentInstallDismantleBOD", false,
+			txcom.bl952st00.initialize.set.SJEquipmentInstallDismantleBOD.Show())
+	fetching = true
+	fetch.count = 0
+	while fetching
+		RETIFNOK6_LIST(
+			txcom.bl952st00.before.execute.SJEquipmentInstallDismantleBOD.Show(o.cancel),
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+		if o.cancel then
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show()
+			return(0)
+		endif
+
+		RETIFNOK6_LIST(
+			txcom.bl952st00.execute.SJEquipmentInstallDismantleBOD.Show(),
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+
+		on case txcom.bl952st00.return.query.status.SJEquipmentInstallDismantleBOD()
+		case QUERY.FETCH:
+			RETIFNOK6_LIST(
+				Show.handle.output.SJEquipmentInstallDismantleBOD_new(0,
+				Response.SJEquipmentInstallDismantleBODNode),
+				txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+
+			RETIFNOK6_LIST(tlbct.dll1000.ApplyPostFilter(
+				postfilter,
+				filter,
+				metaDataForFilter,
+				i.ResponseSJEquipmentInstallDismantleBODNode,
+				Response.SJEquipmentInstallDismantleBODNode,
+				postfilter.valid),
+				txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+			break
+		case QUERY.END:
+			fetching = false
+			break
+		case QUERY.ERROR:
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show()
+			return (bl.result)
+		default:
+			|* Should not come here.
+			fetching = false
+			break
+		endcase
+
+		RETIFNOK6_LIST(
+			txcom.bl952st00.after.execute.SJEquipmentInstallDismantleBOD.Show(),
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+		if fetching and Response.SJEquipmentInstallDismantleBODNode <> 0 then
+			fetch.count = fetch.count + 1
+		endif
+		fetching = false
+	endwhile
+	
+		if fetch.count = 0 then
+			| No objects lefts!
+			dal.set.error.message("tlbctsb0026")
+			|* Object not found.
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show()
+			return(DALHOOKERROR)
+		endif
+		CONTINUEIFNOK(Show,
+			io_Show.ResponseArgument, io_Show.ResultArgument,
+			"SJEquipmentInstallDismantleBOD", "SJEquipmentInstallDismantleBOD", false,
+			txcom.bl952st00.finalize.set.SJEquipmentInstallDismantleBOD.Show())
+			
+	return(0)
+}
+
+	     
+function long Show.handle.input.SJEquipmentInstallDismantleBOD_new(
+		const xmlNode 	i.Node,
+		ref	  xmlNode	o.ResponseArgument,
+		ref	  xmlNode	o.resultArgument,
+		ref	  boolean	o.selected)
+{
+	string	value(1024) mb
+	boolean	value.isSet
+	boolean tagfound
+	xmlnode BuildNode
+	xmlnode FilterNode
+	xmlnode	SelectionNode
+	xmlnode ControlAreaNode
+	xmlNode	l.node
+	long	retl
+
+	l.node = 0
+	value = ""
+	value.isSet = false
+	tagfound = false
+	retl = 0
+
+	RETIFNOK(getValue(i.node, 
+		"SJEquipmentInstallDismantleBOD.BODID.ExternalReferenceID",
+		"<>.<DataArea>.<SJEquipmentInstallDismantleBOD>.<BODID>.<ExternalReferenceID>",
+		TRUE,
+		value, tagfound))
+	if tagfound then
+		RETIFNOK(txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(value))
+	endif
+
+	|* Which attributes have been selected.
+	ControlAreaNode = xmlFindFirst("ControlArea", i.Node)
+	BuildNode = xmlFindFirst("Selection", ControlAreaNode)
+	if BuildNode <> 0 then
+		|* Avoid modification of Request XML
+		BuildNode = xmlDuplicate(BuildNode)
+	endif
+	FilterNode = xmlFindFirst("Filter", ControlAreaNode)
+	if must.build.selection.node(BuildNode) then
+		build.selectionnode.for.public.attributes(BuildNode)
+	endif
+	InitSelection(false)
+	RETIFNOK2_LIST(SetSelection_new1(BuildNode))
+	retl = xmlDelete(BuildNode)
+	BuildNode = 0
+	if SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID()
+	endif
+	if SJEquipmentInstallDismantleBOD.UUID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UUID()
+	endif
+	if SJEquipmentInstallDismantleBOD.EquipmentID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.EquipmentID()
+	endif
+	if SJEquipmentInstallDismantleBOD.ActionCode.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ActionCode()
+	endif
+	if SJEquipmentInstallDismantleBOD.ValidFromDate.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ValidFromDate()
+	endif
+	if SJEquipmentInstallDismantleBOD.FunctionalLocationID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.FunctionalLocationID()
+	endif
+	if SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID()
+	endif
+	if SJEquipmentInstallDismantleBOD.Item.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Item()
+	endif
+	if SJEquipmentInstallDismantleBOD.SerialNumber.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SerialNumber()
+	endif
+	if SJEquipmentInstallDismantleBOD.ServiceOrder.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ServiceOrder()
+	endif
+	if SJEquipmentInstallDismantleBOD.ActivityNumber.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ActivityNumber()
+	endif
+	if SJEquipmentInstallDismantleBOD.User.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.User()
+	endif
+	if SJEquipmentInstallDismantleBOD.BreakdownStatus.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.BreakdownStatus()
+	endif
+	if SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.VehilceStatus_Code()
+	endif
+	if SJEquipmentInstallDismantleBOD.MovementType.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.MovementType()
+	endif
+	if SJEquipmentInstallDismantleBOD.StorageLocation.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.StorageLocation()
+	endif
+	if SJEquipmentInstallDismantleBOD.Position.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Position()
+	endif
+	if SJEquipmentInstallDismantleBOD.VehiclePosition.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.VehiclePosition()
+	endif
+	if SJEquipmentInstallDismantleBOD.Material.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Material()
+	endif
+	if SJEquipmentInstallDismantleBOD.Lot.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Lot()
+	endif
+	if SJEquipmentInstallDismantleBOD.Measure.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Measure()
+	endif
+	if SJEquipmentInstallDismantleBOD.UnitCode.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UnitCode()
+	endif
+	if SJEquipmentInstallDismantleBOD.Error.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Error()
+	endif
+	if SJEquipmentInstallDismantleBOD.ErrorMessage.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ErrorMessage()
+	endif
+	if SJEquipmentInstallDismantleBOD.ResultCode.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.ResultCode()
+	endif
+	if SJEquipmentInstallDismantleBOD.SeverityCode.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.SeverityCode()
+	endif
+	if SJEquipmentInstallDismantleBOD.Note.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.Note()
+	endif
+	if SJEquipmentInstallDismantleBOD.UserArea.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.UserArea()
+	endif
+	if SJEquipmentInstallDismantleBOD.WorkOrderID.select then
+		txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.WorkOrderID()
+	endif
+
+	o.selected = false
+		or SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select
+		or SJEquipmentInstallDismantleBOD.UUID.select
+		or SJEquipmentInstallDismantleBOD.EquipmentID.select
+		or SJEquipmentInstallDismantleBOD.ActionCode.select
+		or SJEquipmentInstallDismantleBOD.ValidFromDate.select
+		or SJEquipmentInstallDismantleBOD.FunctionalLocationID.select
+		or SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select
+		or SJEquipmentInstallDismantleBOD.Item.select
+		or SJEquipmentInstallDismantleBOD.SerialNumber.select
+		or SJEquipmentInstallDismantleBOD.ServiceOrder.select
+		or SJEquipmentInstallDismantleBOD.ActivityNumber.select
+		or SJEquipmentInstallDismantleBOD.User.select
+		or SJEquipmentInstallDismantleBOD.BreakdownStatus.select
+		or SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select
+		or SJEquipmentInstallDismantleBOD.MovementType.select
+		or SJEquipmentInstallDismantleBOD.StorageLocation.select
+		or SJEquipmentInstallDismantleBOD.Position.select
+		or SJEquipmentInstallDismantleBOD.VehiclePosition.select
+		or SJEquipmentInstallDismantleBOD.Material.select
+		or SJEquipmentInstallDismantleBOD.Lot.select
+		or SJEquipmentInstallDismantleBOD.Measure.select
+		or SJEquipmentInstallDismantleBOD.UnitCode.select
+		or SJEquipmentInstallDismantleBOD.Error.select
+		or SJEquipmentInstallDismantleBOD.ErrorMessage.select
+		or SJEquipmentInstallDismantleBOD.ResultCode.select
+		or SJEquipmentInstallDismantleBOD.SeverityCode.select
+		or SJEquipmentInstallDismantleBOD.Note.select
+		or SJEquipmentInstallDismantleBOD.UserArea.select
+		or SJEquipmentInstallDismantleBOD.WorkOrderID.select
+
+	if not o.selected then
+		return(0)
+	endif
+
+	SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select = true
+	txcom.bl952st00.select.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID()
+		
+	return(0)
+}
+
+	     
+function long Show.handle.output.SJEquipmentInstallDismantleBOD_new(
+				xmlnode	i.Node,
+			ref	xmlnode	o.Node)
+{
+	string	value(1024) mb
+	boolean	value.isSet
+	long	ret
+	long	g.node
+
+	value = ""
+	value.isSet = false
+	ret = 0
+	g.node = 0
+	NEW.NODE("SJEquipmentInstallDismantleBOD", i.Node, o.Node)
+
+	|* Reading output for group/attribute BODID_ExternalReferenceID
+	if SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<BODID>.<ExternalReferenceID>", 
+				"ExternalReferenceID"), "ExternalReferenceID", strip$(value)))
+		endif
+	endif
+	|* Attribute BODID_ExternalReferenceID handled before.
+	if SJEquipmentInstallDismantleBOD.UUID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UUID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<UUID>", 
+				"UUID"), "UUID", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.EquipmentID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.EquipmentID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<EquipmentID>", 
+				"EquipmentID"), "EquipmentID", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ActionCode.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActionCode.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ActionCode>", 
+				"ActionCode"), "ActionCode", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ValidFromDate.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ValidFromDate.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ValidFromDate>", 
+				"ValidFromDate"), "ValidFromDate", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.FunctionalLocationID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<FunctionalLocationID>", 
+				"FunctionalLocationID"), "FunctionalLocationID", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<SuperiorEquipmentID>", 
+				"SuperiorEquipmentID"), "SuperiorEquipmentID", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.WorkOrderID.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.WorkOrderID.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<WorkOrderID>", 
+				"WorkOrderID"), "WorkOrderID", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Item.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Item.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Item>", 
+				"Item"), "Item", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.SerialNumber.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SerialNumber.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<SerialNumber>", 
+				"SerialNumber"), "SerialNumber", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ServiceOrder.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ServiceOrder.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ServiceOrder>", 
+				"ServiceOrder"), "ServiceOrder", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ActivityNumber.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActivityNumber.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ActivityNumber>", 
+				"ActivityNumber"), "ActivityNumber", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.User.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.User.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<User>", 
+				"User"), "User", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.BreakdownStatus.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BreakdownStatus.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<BreakdownStatus>", 
+				"BreakdownStatus"), "BreakdownStatus", strip$(value)))
+		endif
+	endif
+	|* Reading output for group/attribute VehilceStatus_Code
+	if SJEquipmentInstallDismantleBOD.VehilceStatus_Code.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<VehilceStatus>.<Code>", 
+				"Code"), "Code", strip$(value)))
+		endif
+	endif
+	|* Attribute VehilceStatus_Code handled before.
+	if SJEquipmentInstallDismantleBOD.MovementType.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.MovementType.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<MovementType>", 
+				"MovementType"), "MovementType", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.StorageLocation.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.StorageLocation.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<StorageLocation>", 
+				"StorageLocation"), "StorageLocation", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Position.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Position.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Position>", 
+				"Position"), "Position", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.VehiclePosition.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehiclePosition.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<VehiclePosition>", 
+				"VehiclePosition"), "VehiclePosition", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Material.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Material.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Material>", 
+				"Material"), "Material", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Lot.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Lot.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Lot>", 
+				"Lot"), "Lot", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Measure.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Measure.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Measure>", 
+				"Measure"), "Measure", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.UnitCode.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UnitCode.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<UnitCode>", 
+				"UnitCode"), "UnitCode", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Error.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Error.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Error>", 
+				"Error"), "Error", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ErrorMessage.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ErrorMessage.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ErrorMessage>", 
+				"ErrorMessage"), "ErrorMessage", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.ResultCode.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ResultCode.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<ResultCode>", 
+				"ResultCode"), "ResultCode", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.SeverityCode.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SeverityCode.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<SeverityCode>", 
+				"SeverityCode"), "SeverityCode", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.Note.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Note.Mapper(value, value.isSet))
+		if value.isSet then
+			RETIFNOK4(xmlRewriteDataElement(createGroupNodes(o.Node, "<Note>", 
+				"Note"), "Note", strip$(value)))
+		endif
+	endif
+	if SJEquipmentInstallDismantleBOD.UserArea.select then
+		RETIFNOK(txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UserArea.Mapper(value, value.isSet))
+		if value.isSet and lval(strip$(value)) <> 0 then
+			g.node = createGroupNodes(o.Node, "<UserArea>", "UserArea")
+			ret = xmlDelete(xmlFindFirstMatch("<>.<UserArea>", o.Node))
+			RETIFNOK4(xmlAppendToChilds(g.node, lval(strip$(value))))
+		endif
+	endif
+	if txcom.bl952st00.must.add.SJEquipmentInstallDismantleBOD.custom.output() then
+		RETIFNOK(SJEquipmentInstallDismantleBOD.add.custom.output.if.any(o.node))
+	endif
+
+
+	return(0)
+}
+
+	     
+
+function do.not.use.this.function()
+{
+| The purpose of this function is to avoid compile warnings on unused global
+| variables and unused functions.
+
+	long	duml
+	string	dums(1)
+	string	dumsa(1,1)
+	boolean	dumb
+	boolean	dumba(1)
+	
+	if false then
+		do.not.use.this.function()
+		duml = 0
+		dums = bl.current.method
+		dumb = false
+		dumba(1) = false
+		dumsa(1,1) = ""
+		dums = emptyML
+		
+		| generate calls to all Mapper functions
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.BODID_ExternalReferenceID.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UUID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UUID.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.EquipmentID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.EquipmentID.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActionCode.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ActionCode.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ValidFromDate.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ValidFromDate.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.FunctionalLocationID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.FunctionalLocationID.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SuperiorEquipmentID.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Item.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Item.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SerialNumber.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SerialNumber.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ServiceOrder.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ServiceOrder.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ActivityNumber.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ActivityNumber.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.User.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.User.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.BreakdownStatus.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.BreakdownStatus.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.VehilceStatus_Code.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.MovementType.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.MovementType.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.StorageLocation.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.StorageLocation.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Position.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Position.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.VehiclePosition.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.VehiclePosition.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Material.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Material.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Lot.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Lot.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Measure.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Measure.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UnitCode.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UnitCode.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Error.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Error.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ErrorMessage.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ErrorMessage.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.ResultCode.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.ResultCode.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.SeverityCode.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.SeverityCode.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.Note.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.Note.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.UserArea.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.UserArea.Mapper(			
+				dums)
+		duml = txcom.bl952sb00.get.SJEquipmentInstallDismantleBOD.WorkOrderID.Mapper(
+				dums, dumb)
+		duml = txcom.bl952sb00.set.SJEquipmentInstallDismantleBOD.WorkOrderID.Mapper(			
+				dums)
+
+		| generate calls to other functions which may not be invoked
+		make.xmlArguments.global(duml, duml, duml)
+		duml = Handle.retrying.component(dums, dums, dums, duml, duml)
+		convert.xml.to.text(duml, dums, duml)
+	endif
+}
+
+	     
+|******************* customizations: extensions *******************************
+
+function extern long txcom.bl952sb00.get.component.data(
+	ref	long	o.xml)
+{
+	DllUsage
+	Desc:	Gets all components with their tables.
+	Input:	-
+	Output:	o.xml - if return value is = 0: an xml structure containing
+                        the components and tables.
+	Return:	0 (OK) or <> 0 (error)
+	EndDllUsage
+
+	long	componentNode
+	long	tableNode
+	long	duml
+
+	o.xml = xmlNewNode("ComponentsAndTables")
+	componentNode = xmlNewNode("Component", XML_ELEMENT, o.xml)
+	duml = xmlSetAttribute(componentNode, "Name", "SJEquipmentInstallDismantleBOD")
+	duml = xmlSetAttribute(componentNode, "PublicPath", "SJEquipmentInstallDismantleBOD")
+	duml = xmlSetAttribute(componentNode, "CustomDataElement", "UserArea")
+	tableNode = xmlNewNode("Table", XML_ELEMENT, componentNode)
+	duml = xmlSetAttribute(tableNode, "Name", "tscfg200")
+	duml = xmlSetAttribute(componentNode, "RootTable", "tscfg200")
+	return(0) | OK
+}
+
+function extern long txcom.bl952sb00.get.specific.component.data(
+	const	string	i.publicPath,
+	ref	long	o.xml)
+{
+	DllUsage
+	Desc:	Gets all component specific data for a component.
+	Input:	i.publicPath - the public path for the component
+	Output:	o.xml - if return value is = 0: an xml structure containing
+                        the tables for the component.
+	Return:	0 (OK) or <> -1 (error: public path unknown)
+	EndDllUsage
+
+	long	tableNode
+	long	duml
+
+	on case i.publicPath
+	case "SJEquipmentInstallDismantleBOD":
+		o.xml = xmlNewNode("Component")
+		duml = xmlSetAttribute(o.xml, "Name", "SJEquipmentInstallDismantleBOD")
+		duml = xmlSetAttribute(o.xml, "CustomDataElement", "UserArea")
+		tableNode = xmlNewNode("Table", XML_ELEMENT, o.xml)
+		duml = xmlSetAttribute(tableNode, "Name", "tscfg200")
+		duml = xmlSetAttribute(o.xml, "RootTable", "tscfg200")
+		break
+	default:
+		| Public path unknown
+		o.xml = 0
+		return(-1)
+	endcase
+	return(0) | OK
+}
+
+|******************* customizations: generated part ***************************
+
+function boolean are.all.present(long i.additional.elements, long i.customer.data)
+{
+	long	table.node
+	long	element.node
+	
+	table.node = xmlGetFirstChild(i.additional.elements)
+	while table.node <> 0
+		element.node = xmlGetFirstChild(table.node)
+		if xmlName$(table.node) = "Element" then
+			if not is.present(xmlAttribute$(table.node, "name"), i.customer.data) then
+				return(false)
+			endif
+		else
+			element.node = xmlGetFirstChild(table.node)
+			while element.node <> 0
+				if not is.present(xmlData$(element.node), i.customer.data) then
+					return(false)
+				endif
+				element.node = xmlGetRightSibling(element.node)
+			endwhile
+		endif
+		table.node = xmlGetRightSibling(table.node)
+	endwhile
+	return(true)
+}
+
+function boolean is.present(const string i.name, long i.customer.data)
+{
+	long	name.value.node
+	
+	name.value.node = xmlGetFirstChild(i.customer.data)
+	while name.value.node <> 0
+		if xmlAttribute$(xmlGetFirstChild(name.value.node), "name") = i.name then
+			return(true)
+		endif
+		name.value.node = xmlGetRightSibling(name.value.node)
+	endwhile
+	return(false)
+}
+
+function long SJEquipmentInstallDismantleBOD.add.custom.output.if.any(
+		long		i.component.node)
+{
+	long	additional.elements.xml
+	long	index.value.xml
+	long	customer.data.location.node
+	long	retl
+
+	is.outbound = true
+	additional.elements.xml = 0
+	index.value.xml = 0
+	retl = get.additional.elements(
+			"SJEquipmentInstallDismantleBOD",
+			additional.elements.xml)
+	if retl = DALHOOKERROR then
+		return(DALHOOKERROR)
+	endif
+	if retl = 0 and xmlGetFirstChild(additional.elements.xml) <> 0 then
+		customer.data.location.node = xmlFindFirstMatch("<>.<UserArea>",
+						i.component.node)
+		if customer.data.location.node <> 0 then
+			| check if all additional elements are already present in customer data
+			if are.all.present(additional.elements.xml, customer.data.location.node) then
+				retl = xmlDelete(additional.elements.xml)
+				additional.elements.xml = 0
+				return(0) | OK
+			endif
+		endif
+		RETIFNOK(txcom.bl952st00.get.SJEquipmentInstallDismantleBOD._index1(
+			index.value.xml))
+		if customer.data.location.node = 0 then
+			retl = createGroupNodes(i.component.node,
+						"<UserArea>", "")
+			customer.data.location.node = xmlFindFirstMatch("<>.<UserArea>",
+							i.component.node)
+		endif
+		if customer.data.location.node = 0 then
+			dal.set.error.message("@No user area (%s-%d)",
+					__FILE__, __LINE__)
+			return(DALHOOKERROR)
+		endif
+		RETIFNOK(add.custom.output(
+				additional.elements.xml,
+				index.value.xml,
+				customer.data.location.node))
+		if xmlGetFirstChild(customer.data.location.node) = 0 then
+			| nothing in UserArea: remove that node 
+			retl = xmlDelete(customer.data.location.node)
+			customer.data.location.node = 0
+		endif
+	endif
+
+	retl = xmlDelete(additional.elements.xml)
+	additional.elements.xml = 0
+	retl = xmlDelete(index.value.xml)
+	index.value.xml = 0
+	return(0) | OK
+}
+
+#define DALERROR_IF(cond, mesg)
+^	if cond then
+^		dal.set.error.message("@" & mesg)
+^		return(DALHOOKERROR)
+^	endif
+
+| External function to arrange custom output from On Execute Hook
+| Note: This function should be invoked dynamically to prevent a dependency cycle
+| (sb -> st-> (hook library) -> sb).
+function extern long txcom.bl952sb00.SJEquipmentInstallDismantleBOD.add.custom.output.if.any(
+	ref	long	io.user.area.node, | node <UserArea> or 0
+	...) | attributes in name-value pairs, the name must be the table column
+	     | code (e.g. tcibd001.item).
+{
+	string	table.column.name(18)
+	string	dums(1)
+	long	additional.elements.xml
+	long	index.value.xml
+	long	table.node
+	long	column.node
+	long	retl
+	long	duml
+	long	typ
+	long	i
+
+	if not exists.customization() then
+		| nothing to do
+		return(0) | OK
+	endif
+	
+	if io.user.area.node = 0 then
+		io.user.area.node = xmlNewNode("UserArea")
+		DALERROR_IF(io.user.area.node = 0, "Cannot create XML node")
+	endif
+	index.value.xml = xmlNewNode("IndexValues")
+	DALERROR_IF(index.value.xml = 0, "Cannot create XML node")
+
+	| fill IndexValues based on provided name-value pairs
+	for i = 2 to get.argc() step 2
+		table.column.name = get.string.arg(i)
+		table.node = xmlNewNode("Table", XML_ELEMENT, index.value.xml)
+		DALERROR_IF(table.node = 0, "Cannot create XML node")
+		retl = xmlSetAttribute(table.node, "name", table.column.name(1;8))
+		DALERROR_IF(retl = 0, "Cannot set XML attribute")
+		column.node = xmlNewDataElement("Column",
+			get.string.arg(i+1), table.node)
+		DALERROR_IF(column.node = 0, "Cannot create XML node")
+		retl = xmlSetAttribute(column.node, "name", strip$(table.column.name(10)))
+		DALERROR_IF(retl = 0, "Cannot set XML attribute")
+		retl = rdi.column(table.column.name, dums, duml, duml, duml, typ, duml, dums)
+		DALERROR_IF(retl <> 0, "Cannot determine domain for column " & table.column.name)
+		if typ = DB.STRING then
+			retl = xmlSetAttribute(column.node, "dataType", "DB.STRING")
+		else
+			retl = xmlSetAttribute(column.node, "dataType", typ)
+		endif
+		DALERROR_IF(retl = 0, "Cannot set XML attribute")
+	endfor
+	txcom.bl952st00.set.SJEquipmentInstallDismantleBOD.custom.index(index.value.xml)
+
+	is.outbound = true
+	retl = get.additional.elements(
+			"SJEquipmentInstallDismantleBOD",
+			additional.elements.xml)
+	txcom.bl952st00.reset.SJEquipmentInstallDismantleBOD.custom.index()
+	if retl = DALHOOKERROR then
+		retl = xmlDelete(additional.elements.xml)
+		additional.elements.xml = 0
+		retl = xmlDelete(index.value.xml)
+		index.value.xml = 0
+		return(DALHOOKERROR)
+	endif
+	if retl = 0 and xmlGetFirstChild(additional.elements.xml) <> 0 then
+		RETIFNOK(add.custom.output(
+				additional.elements.xml,
+				index.value.xml,
+				io.user.area.node))
+		if xmlGetFirstChild(io.user.area.node) = 0 then
+			| nothing in UserArea: remove that node 
+			retl = xmlDelete(io.user.area.node)
+			io.user.area.node = 0
+		endif
+	endif
+
+	retl = xmlDelete(additional.elements.xml)
+	additional.elements.xml = 0
+	retl = xmlDelete(index.value.xml)
+	index.value.xml = 0
+	return(0) | OK
+}
+
+
+long	bl.customization.dll.id
+long	bl.customization.function.id
+
+function boolean exists.customization()
+{
+	static	boolean	initialized
+	string	dll.name(15)
+	long	dll.id
+	long	function.id
+	long	retl
+	long	retval
+	
+	if not initialized then
+		bl.customization.dll.id = 0
+		| Try to load extension DLL
+		dll.id = load_dll("otlbctdll1000")
+		function.id = get_function(dll.id, "tlbct.dll1000.load.extension.dll")
+		retl = exec_function(dll.id, function.id, retval,
+				"SJEquipmentInstallDismantleBOD", true, dll.name)
+		if retl = 0 and retval = 0 then
+			bl.customization.dll.id = load_dll(dll.name)
+		endif
+		if bl.customization.dll.id > 0 then
+			bl.customization.function.id = get_function(
+					bl.customization.dll.id,
+					"get.additional.elements")
+		else
+			| load customization library
+			bl.customization.dll.id = load_dll("otxcombl952cc00", DLL_SILENT_ERR)
+			if bl.customization.dll.id > 0 then
+				bl.customization.function.id = get_function(
+					bl.customization.dll.id,
+					"txcom.bl952cc00.get.additional.elements")
+			endif
+		endif
+		initialized = true
+	endif
+	
+	return(bl.customization.dll.id > 0 and bl.customization.function.id > 0)
+}
+
+function long get.additional.elements(
+	const	string	i.component.name,
+	ref	long	o.additional.elements.xml)
+{
+	long	retl
+	long	retvalue
+	
+	| Call txcom.bl952cc00.get.additional.elements dynamically.
+	if not exists.customization() then
+		return(-1)
+	endif
+	export("is.outbound", is.outbound)
+	retl = exec_function(bl.customization.dll.id,
+			bl.customization.function.id,
+			retvalue,
+			i.component.name,
+			o.additional.elements.xml)
+	if retl <> 0 then
+		return(retl)
+	endif
+	return(retvalue)
+}
+
+function long add.custom.output(
+		long	i.additional.elements.xml,
+		long	i.index.value.xml,
+		long	i.customer.data.location.node)
+{
+	long	retl
+	long	retvalue
+	
+	| Call tlbct.dll1000.add.custom.output dynamically to avoid a fatal
+	| error if no recent version of tlbctdll1000 is used.
+	retl = exec_dll_function("otlbctdll1000",
+					"tlbct.dll1000.add.custom.output",
+					retvalue,
+					i.additional.elements.xml,
+					i.index.value.xml,
+					i.customer.data.location.node)
+	if retl <> 0 then
+		return(retl)
+	endif
+	return(retvalue)
+}
+
+#ifdef CUSTOMIZATION_LIBRARY
+|##############################################################################
+|################### Customization Library part ###############################
+|##############################################################################
+
+| Customization library for the SJEquipmentInstallDismantleBOD business object.
+| You can use this part to copy it to txcombl952cc00.
+| and use it as a starting point for the customization library construction.
+| This code is escaped with #ifdef CUSTOMIZATION_LIBRARY because it is not part
+| of this txcombl952sb00 library.
+
+|------------------- DO NOT CHANGE THIS PART ----------------------------------
+
+| Template for txcom.bl952cc00 (SJEquipmentInstallDismantleBOD)
+| Template generation date: 11-Dec-2023 12:40:59
+
+#pragma used dll "otlbctinterface"
+
+| Variable to indicate if inbound or outbound processing is applied.
+| is.outbound = true:  data is being retrieved
+| is.outbound = false: data is being modified
+extern	boolean	is.outbound
+
+#define initialize()
+^	retl = tlbctinterface.cust.initialize(o.xml)
+^	if retl <> 0 then
+^		return(retl)
+^	endif
+^	import("is.outbound", is.outbound)
+
+#define addTableField(elementName, tableCode, columnName, dataType)
+^	retl = tlbctinterface.cust.add.element(o.xml, elementName,
+^					tableCode, columnName, dataType)
+^	if retl <> 0 then
+^		return(retl)
+^	endif
+
+|Note: the macro below can only be used in ES 10.4.1 and later.
+#define addEnumTableField(elementName, tableCode, columnName, domainCode)
+^	retl = tlbctinterface.cust.add.element(o.xml, elementName,
+^					tableCode, columnName, "enum", domainCode)
+^	if retl <> 0 then
+^		return(retl)
+^	endif
+
+#define addCdfField(elementName, tableCode, cdfName, dataType)
+^	addTableField(elementName, tableCode, "cdf_" & cdfName, dataType)
+
+|Note: the macro below can only be used in ES 10.4.1 and later.
+#define addEnumCdfField(elementName, tableCode, cdfName, domainCode)
+^	addEnumTableField(elementName, tableCode, "cdf_" & cdfName, domainCode)
+
+#define addValue(elementName, description, dataType)
+^	retl = tlbctinterface.cust.add.value(o.xml, elementName, description, dataType)
+^	if retl <> 0 then
+^		return(retl)
+^	endif
+
+#define addXml(xml)
+^	retl = tlbctinterface.cust.add.xml(o.xml, xml)
+^	if retl <> 0 then
+^		return(retl)
+^	endif
+
+| Use addTableField to include data for a table field as defined in the
+| data model. This could be a customer-specific table field, or a table
+| field that exists in the standard, but is not yet used in the business object.
+| Use addCdfField to include data from a customer-defined field in the
+| business object. Customer-defined fields are maintained in the
+| Customer-Defined Fields (ttadv4194m000) session.
+| Use addValue to include data not based on a table field.
+| Use addXml to include a custom defined structure.
+|
+| The parameters to be used for addTableField and addCdfField are:
+| 1. elementName (string): the name that must be used to identify the
+|    element in the business object data XML.
+| 2. tableCode (string): the code of the table that contains the custom
+|    data to be included.
+| 3. columnName or cdfName (string): the name of the table column or
+|    customer-defined field. Note that customer-defined fields have a
+|    prefix ('cdf_') in the table column name; this prefix must NOT be
+|    included in the cdfName.
+| 4. dataType (string): the data type of the column or customer-defined
+|    field.
+|    The following data types can be used:
+|    - "String"
+|    - "Integer"
+|    - "Numeric"
+|    - "Date"
+|    - "DateOnly"
+|    - "Checkbox"
+|
+| The parameters to be used for addEnumTableField and addEnumCdfField are:
+| 1. elementName (string): the name that must be used to identify the
+|    element in the business object data XML.
+| 2. tableCode (string): the code of the table that contains the custom
+|    data to be included.
+| 3. columnName or cdfName (string): the name of the table column or
+|    customer-defined field. Note that customer-defined fields have a
+|    prefix ('cdf_') in the table column name; this prefix must NOT be
+|    included in the cdfName.
+| 4. domainCode (string): the domain code of the enum domain.
+|
+| The parameters to be used for addValue are:
+| 1. elementName (string): the name that must be used to identify the
+|    element in the business object data XML.
+| 2. description (string): the custom data to be included.
+| 3. dataType (string): the data type of the column or customer-defined
+|    field. See above for the data types that can be used.
+|
+| The parameter to be used for addXml is:
+| 1. xml (long): XML structure to be included; the complete tree is copied to
+|    the customization part (UserArea) of the outgoing message.
+|
+| Some examples:
+| addTableField("CustomDate", "ppmmm001", "cdat", "Date")
+| addCdfField("CustomNote", "ppmmm001", "note", "String")
+| addTableField("CustomAmount", "ppmmm001", "camn", "Numeric")
+| addCdfField("NumberOfDeviations", "ppmmm001", "cdev", "Integer")
+| addTableField("Checked", "ppmmm001", "cchk", "Checkbox")
+| addValue("ItemDescription", "This is the item description", "String")
+
+
+| Macros to retrieve the list of identifiers for a component
+| The argument is an outgoing XML structure 'xml' that can be used as input for
+| the macros 'getIdentifierValueFromIdentifierStructure' and
+| 'getIdentifierDataTypeFromIdentifierStructure'. Do not forget to discard the
+| XML structure using 'removeIdentifierStructure' (or delete the XML directly).
+
+#define getTableIdentifiers.SJEquipmentInstallDismantleBOD(xml)
+^	retl = tlbctinterface.cust.get.component.table.identifiers("txcom952", "SJEquipmentInstallDismantleBOD", xml)
+^	if retl <> 0 then
+^		xml = 0
+^		return(retl)
+^	endif
+
+#define getIdentifierValueFromIdentifierStructure(xml, table, column)
+^	tlbctinterface.cust.get.value.from.identifier.structure(xml, table, column)
+| This returns the value for identifier table/column as a string.
+| It returns an empty string if the identifier is not present.
+
+#define getIdentifierDataTypeFromIdentifierStructure(xml, table, column)
+^	tlbctinterface.cust.get.datatype.from.identifier.structure(xml, table, column)
+| This returns the datatype for identifier table/column.
+| It returns an empty string if the identifier is not present.
+
+#define removeIdentifierStructure(xml)
+^	retl = xmlDelete(xml)
+^	xml = 0
+| This removes a list of identifiers for a component.
+| This macro should be invoked afterwards to prevent memory leakage.
+
+|------------------- Custom implementation ------------------------------------
+
+function extern long txcom.bl952cc00.get.additional.elements(
+	const	string	i.component.path,
+	ref	long	o.xml)
+{
+	DllUsage
+	Desc:	Define the additional elements (columns) for a component.
+	Input:	i.component.path - the component path.
+	Output:	o.xml - if return value is = 0: an xml structure containing
+                        the details on custom fields (if any)
+	Return:	0 (OK) or DALHOOKERROR (one or more DAL error
+			messages are set)
+	EndDllUsage
+
+	long	retl		| return value to be checked
+
+	initialize() | do not remove this line
+
+	on case i.component.path
+	
+	case "SJEquipmentInstallDismantleBOD":
+		| Custom data element for this component is
+		| SJEquipmentInstallDismantleBOD.UserArea.
+		| Fill in your customized table fields here.
+		| You can use data from one of the following table(s):
+		|   tscfg200
+		| Custom data from the table(s) will only be used when a corresponding row
+		| exists in those tables.
+		| For example:
+		|addTableField("CustomDate", "ppmmm001", "cdat", "Date")
+		|addCdfField("SomeHeaderNotes", "ppmmm001", "cstr", "String")
+
+		break
+
+	default:
+		| Nothing
+	endcase
+
+	return(0) | OK
+}
+#endif | ifdef CUSTOMIZATION_LIBRARY
+
+	     
+|****************************| end of source |*********************************

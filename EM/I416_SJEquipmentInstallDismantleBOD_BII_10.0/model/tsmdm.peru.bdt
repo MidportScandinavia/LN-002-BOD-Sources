@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Datatype id="bdttsmdm.peru" schemaVersion="1.3.020">
+  <name>tsmdm.peru</name>
+  <type>simple</type>
+  <primitiveDatatype>string</primitiveDatatype>
+  <nativeDatatype>tsmdm.peru</nativeDatatype>
+  <dbDatatype>db.enum</dbDatatype>
+  <isTranslatable>false</isTranslatable>
+  <Facet>
+    <type>enumeration</type>
+    <value></value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>day</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>week</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>month</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>quarter</value>
+  </Facet>
+  <Facet>
+    <type>enumeration</type>
+    <value>year</value>
+  </Facet>
+</Datatype>
